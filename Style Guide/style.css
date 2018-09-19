@@ -60,26 +60,43 @@ body {
     line-height: 1.65;
 }
 #ubblue{
+    float:inherit;
     background: #005bbb;
     color: #ffffff;
     outline: 1px solid black;
 }
 #hayeswhite{
+    float:inherit;
     color: #005bbb;
     background: #ffffff;
     outline: 1px solid black;
 }
 #lasalle{
+    float:inherit;
     background: #00a69c;
     color: #ffffff;
     outline: 1px solid black;
 }
+#bpoint{
+    float:inherit;
+    background: #e4e4e4;
+    outline: 1px solid black;
+}
+#pgray{
+    float:inherit;
+    color: #ffffff;
+    background: #666666;
+    outline: 1px solid black;
+}
 #niagara{
+    float:inherit;
+    color: #ffffff;
     background: #006570;
+    outline: 1px solid black;
 }
-#cols{
+/*#cols{
     padding-left: 40px;
-}
+}*/
 footer{
     font-family: 'Lato';
     font-size: 14px;
