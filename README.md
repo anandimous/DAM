@@ -1,4 +1,4 @@
-# AML - Asset Management Library
+# DAM - DAM Asset Manager
 
 Made with :heart: by Team Bugzfeed
 
