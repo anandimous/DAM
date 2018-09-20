@@ -1,0 +1,40 @@
+/*
+CSS Directory:
+1- head
+2- body
+3- footer
+4- media
+    a- buttons
+5- imports
+*/
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+.brand_logo{
+    font-family: 'Roboto Slab', serif ;
+    font-size: 36px;
+    font-weight: 100;
+    line-height: 1.5;
+}
+
+main {
+    flex: 1 0 auto;
+}
+nav{
+    background-color: #005bbb;
+}
+.btn-large{
+    background-color: #005bbb;
+    width: 100%;
+}
+
+/*#footer{
+    background-color: #01579b;
+}*/
+/*IMPORTS*/
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700&subset=latin,latin-ext,greek-ext,greek,vietnamese,cyrillic,cyrillic-ext);
+
+@import url('https://fonts.googleapis.com/css?family=Lato');
