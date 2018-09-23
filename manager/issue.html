@@ -4,11 +4,12 @@
       <!--Import Google Icon Font-->
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-        <link type="text/css" rel="stylesheet" href="css/issue_style.css">
+      <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="../css/issue_style.css">
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        
+      <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
         <title>DAM | Issue Item</title>
     </head>
 
@@ -30,12 +31,12 @@
                 </div>
                 <div class="nav-wrapper col s9">
                   <form>
-                    <div class="input-field">
-                      <input id="search" type="search" required>
-                      <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                      <i class="material-icons">close</i>
-                    </div>
-                  </form>
+                      <div class="input-field">
+                        <input id="search" type="search" required>
+                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                        <i class="material-icons">close</i>
+                      </div>
+                    </form>
                 </div>
                 <div class="col s2">
                     <span class="flow-text">
@@ -43,7 +44,7 @@
                             <li><a href="sass.html">Dashboard</a></li>
                             <li><a href="badges.html">Log Out</a></li>
                             <!-- Dropdown Trigger 
-                            <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>-->
+                            <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>fgh-->
                         </ul>
                     </span>
                 </div>
@@ -54,26 +55,51 @@
 
     <!-- Page Layout here -->
     <div class="row ">
-        <div class="col s6 offset-s1">
-          <div class="card">
-            <div class="card-image">
-              <img src="images/sample-1.jpg">
-              <span class="card-title">Item Name</span>
-            </div>
-            <div class="card-content">
-              <p>This will contain Item Details.</p>
-            </div>
-            <div class="card-action">
+        
+  <div class="col s6 offset-s1">
+    <div class="card">
+      <div class="carousel carousel-slider" id="demo-carousel-slider">
+        <a class="carousel-item" href="#one!"><img src="../images/laptop-demo-img-1.jpg"></a>
+        <a class="carousel-item" href="#two!"><img src="../images/laptop-demo-img-2.jpg"></a>
+        <a class="carousel-item" href="#three!"><img src="../images/laptop-demo-img-3.jpg"></a>
+        <a class="carousel-item" href="#four!"><img src="../images/laptop-demo-img-4.jpg"></a>
+      </div>
+      <script>
+      $(document).ready(function(){
+        $('.carousel.carousel-slider').carousel({
+          fullWidth: true,
+          indicators: true
+        });
+      })
+      </script>
+      <div class="card-content">
+        <span class="card-title activator grey-text text-darken-4">Xiaomi Pro notebook</span>
+        <p>The latest 8th generation intel core CPU. Nvidia MX150 discrete graphic card 2GB GDDR5. Dual-channel Memory(DDR4 2400MHz).
+          Full-size backlit keyboard with 19.5mm key distance. All metal body with Magnesium alloy skeleton (It brings stronger compression resistance).</p>
+          <br>
+          <p>The graphics card(Nvida MX150) after the professional level adjustment is up 32% more than the MX150 nominal performance. Equipped with 2GB GDDR5 high-speed display, 1080p full
+            hd quality, more realistic scene rendering, more subtle light & shadow performance and more fluid big scene game versus experience.</p>
+            <br>
+            <p>Two large diameter fan, large diameter heat conduction tube, large area thermal conductivity, efficient heat dissipation system . Bandwidth increases by 80%, Dual-channel large memory.
+              Equipped with DDR4, 2400MHz high specification memory, the maximum support is 16GB. Dual channel design, bandwidth up 80%(relative to single channel).</p>
+              <br>
+              <p>The 256GB PCIe NVMe high-speed solid-state drive, with a more advanced PCIe x 4 bus interface, extend in 15.6 inch full hd screen, super narrow edge brings broad vision. Corning third
+                generation gorilla glass laminating technology. 6.52mm narrow border, 81.5% screen proportion. FHD screen, 72% NTSC color field.</p>
+              </div>
+              <!--<div class="card-action">
               <a href="#">More Info</a>
-            </div>
+            </div>-->
           </div>
         </div>
         <div class="col s4"> <!-- Note that "m8 l9" was added -->
             <div class = "row">
             <div class="card" style="background-color: #666666">
             <div class="card-content white-text">
-              <span class="card-title">Client Name</span>
-              <p>This will contain relevant client information.</p>
+              <span class="card-title">Client Details</span>
+                <p>Name: Jhon Doe</p>
+                <p>Email: jDoe@lawyercat.com</p>
+                <p>Issue Date: 9/23/18</p>
+                <p>Due Date: 9/30/18</p>
             </div>
           </div>
             </div>
@@ -90,7 +116,7 @@
         </div> 
     </div>
       <!--JavaScript at end of body for optimized loading-->
-      <script type="text/javascript" src="js/materialize.min.js"></script>
+      <script type="text/javascript" src="../js/materialize.min.js"></script>
     </body>
     <footer id="footer"class="page-footer"style="background-color: #005bbb"><!--color added inline-->
       <div class="container">
