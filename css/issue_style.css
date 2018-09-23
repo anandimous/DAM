@@ -33,6 +33,9 @@ nav{
 #search{
 height: 3rem;}
 
+#itemCard{
+    padding-top: 20px;
+}
 /*#footer{
     background-color: #01579b;
 }*/
