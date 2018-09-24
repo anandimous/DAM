@@ -3,8 +3,9 @@
 
 body {
     display: flex;
-    min-height: 100vh;
     flex-direction: column;
+    height: 100vh
+
 }
 .brand_logo{
     font-family: 'Roboto Slab', serif ;
@@ -35,15 +36,23 @@ height: 3rem;}
     height: 250px;
     width: 250px;
 }
-/*#footer{
-    background-color: #01579b;
-}*/
 
 .search {
   width: 100%;
   position: relative
 }
 
+.search-logo {
+    display: flex; 
+    align-items: center; 
+    height: 100%; 
+    width: 100%;
+}
+
+.search-bar {
+    width: 300px; 
+    margin: 0 auto;
+}
 .searchTerm {
   float: left;
   width: 100%;
@@ -76,8 +85,12 @@ height: 3rem;}
 /*Resize the wrap to see the search bar change!*/
 .wrap{
   width: 30%;
-  position: absolute;
+  /* position: absolute; */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
+/* .view_list{
+    margin-top: 35rem;
+    margin-left: 39rem;
+} */
