@@ -33,11 +33,6 @@ nav{
     background-color: #005bbb;
     width: 100%;
 }
-#search{
-  /* margin-top: 8px; */
-  /* padding-top: 20px; */
-height: 3rem;
-}
 
 .pagination li.active {
   background-color: #005bbb;
