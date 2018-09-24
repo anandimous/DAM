@@ -98,11 +98,11 @@
                     <label for="last_name">Last Name</label>
                   </div>
                   <div class="input-field col s12">
-                    <input id="email" type="email" class="validate">
+                    <input id="email" type="email" class="validate" pattern=".+@buffalo.edu">
                     <label for="email">Email</label>
-                    <span class="helper-text" data-error="Please enter a valid email address" data-success="">@buffalo.edu email only</span>
+                    <span class="helper-text" data-error="Your email address must end in: @buffalo.edu">@buffalo.edu email only</span>
                   </div>
-                  <a onclick="M.toast({html: 'You item has been reserved!'})" class="btn"><i class="material-icons right">send</i>Submit</a>
+                  <a onclick="M.toast({html: 'Your item has been reserved!'})" class="btn"><i class="material-icons right">send</i>Submit</a>
                 </div>
               </li>
             </ul>
