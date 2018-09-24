@@ -14,10 +14,6 @@ body {
     margin-left: 2rem;
 }
 
-.card-action a {
-    color: #005bbb;
-}
-
 main {
     flex: 1 0 auto;
 }
