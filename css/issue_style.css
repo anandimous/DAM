@@ -34,6 +34,11 @@ height: 3rem;}
 #itemCard{
     padding-top: 20px;
 }
+
+.image{
+    height: 250px;
+    width: 250px;
+}
 /*#footer{
     background-color: #01579b;
 }*/
