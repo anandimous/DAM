@@ -4,29 +4,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>DAM</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="../css/issue_style.css">
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/issue_style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
 <body>
-    <nav>
-        <div class="nav-wrapper blue darken-4">
-            <a href="#" class="brand-logo">DAM</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="#">Staff Login</a></li>
-            </ul>
-        </div>
-    </nav>
-    <div class="wrap">
-        <div class="search">
-            <input type="text" class="searchTerm" placeholder="What are you looking for?">
-            <button type="submit" class="searchButton">
-            <i class="fa fa-search"></i>
-            </button>
+    <div  class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper blue darken-4">
+                <a href="#" class="brand-logo">DAM</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="#">Staff Login</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div style="height: 100%;">
+        <div class="search-logo">
+            <div class="search-bar">
+                <div class="search">
+                    <input type="text" class="searchTerm" placeholder="What are you looking for?">
+                    <button type="submit" class="searchButton">
+                    <i class="fa fa-search"></i>
+                    </button>
+                </div>
+                <a class="waves-effect waves-light btn-large view_list">
+                    <span class="flow-text">Issue</span>
+                </a>
+            </div>
         </div>
     </div>
-    <a class="blue darken-4 waves-effect btn-small">View List</a>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="main.js"></script>
