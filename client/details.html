@@ -51,7 +51,7 @@
 <!--END OF NAV BAR-->
 <!-- Page Layout here -->
 <div class="row ">
-  <div class="col s7">
+  <div class="col s6 offset-s1">
     <div class="card">
       <div class="carousel carousel-slider" id="demo-carousel-slider">
         <a class="carousel-item" href="#one!"><img src="../images/laptop-demo-img-1.jpg"></a>
@@ -86,7 +86,7 @@
             </div>-->
           </div>
         </div>
-        <div class="col s5">
+        <div class="col s4">
           <div class = "row">
             <div class="card" style="background-color: #666666">
               <div class="card-content white-text">
@@ -111,8 +111,9 @@
                   <div class="input-field col s12">
                     <input id="email" type="email" class="validate">
                     <label for="email">Email</label>
+                    <span class="helper-text" data-error="Please enter a valid email address" data-success="">@buffalo.edu email only</span>
                   </div>
-                  <span class="helper-text" data-error="wrong" data-success="right">@buffalo.edu email only</span>
+                  <a onclick="M.toast({html: 'You item has been reserved!'})" class="btn"><i class="material-icons right">send</i>Submit</a>
                 </div>
               </li>
             </ul>
