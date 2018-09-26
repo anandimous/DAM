@@ -39,27 +39,28 @@ height: 3rem;}
 
 .search {
   width: 100%;
+  /* border: 2px solid black; */
   position: relative
 }
 
 .search-logo {
-    display: flex; 
-    align-items: center; 
-    height: 100%; 
+    display: flex;
+    align-items: center;
+    height: 100%;
     width: 100%;
 }
 
 .search-bar {
-    width: 300px; 
+    width: 60%;
     margin: 0 auto;
 }
 .searchTerm {
   float: left;
   width: 100%;
-  border: 3px solid #005bbb;
+  border: 5px solid #005bbb;
   padding: 5px;
   height: 20px;
-  border-radius: 5px;
+  border-radius: 2px;
   outline: none;
   color: #9DBFAF;
 }
@@ -69,7 +70,7 @@ height: 3rem;}
 }
 
 .searchButton {
-  position: absolute;  
+  position: absolute;
   right: -50px;
   width: 40px;
   height: 36px;
@@ -84,13 +85,16 @@ height: 3rem;}
 
 /*Resize the wrap to see the search bar change!*/
 .wrap{
-  width: 30%;
+  width: 40%;
   /* position: absolute; */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-/* .view_list{
-    margin-top: 35rem;
-    margin-left: 39rem;
-} */
+.view_list{
+  /* width: 10%; */
+  margin-left: 50%;
+  margin-top: 8%;
+  transform: translate(-50%, -50%);
+
+}

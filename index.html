@@ -20,17 +20,19 @@
             </div>
         </nav>
     </div>
-    <div style="height: 100%;">
+    <div style="height:100%;width:100%;">
         <div class="search-logo">
             <div class="search-bar">
                 <div class="search">
-                    <input type="text" class="searchTerm" placeholder="What are you looking for?">
+                  <form action="client/searches.html">
+                    <input type="text" class="searchTerm" placeholder="What are you looking for?" required>
                     <button type="submit" class="searchButton">
                     <i class="fa fa-search"></i>
                     </button>
+                  </form>
                 </div>
-                <a class="waves-effect waves-light btn-large view_list">
-                    <span class="flow-text">View List</span>
+                <a class="waves-effect waves-light btn-small view_list" href="client/searches.html">
+                    List of all Items
                 </a>
             </div>
         </div>
@@ -39,4 +41,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="main.js"></script>
 </body>
+<footer id="footer" class="page-footer" style="background-color: #005bbb">
+  <div class="footer-copyright">
+    <div class="container center-align">
+      &copy; 2018 Copyright Bugzfeed
+    </div>
+  </div>
+</footer>
 </html>
