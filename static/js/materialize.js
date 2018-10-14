@@ -3616,14 +3616,14 @@ $jscomp.polyfill = function (e, r, p, m) {
 
         this._makeAncestorsOverflowVisible();
 
-        // Set results on origin
+        // Set css on origin
         this.$el.css({
           position: 'absolute',
           'z-index': 1000,
           'will-change': 'left, top, width, height'
         });
 
-        // Change from width or height attribute to results
+        // Change from width or height attribute to css
         this.attrWidth = this.$el.attr('width');
         this.attrHeight = this.$el.attr('height');
         if (this.attrWidth) {
@@ -3756,7 +3756,7 @@ $jscomp.polyfill = function (e, r, p, m) {
 
         this._animateImageOut();
 
-        // Remove Caption + reset results settings on image
+        // Remove Caption + reset css settings on image
         if (this.caption !== '') {
           anim({
             targets: this.$photoCaption[0],

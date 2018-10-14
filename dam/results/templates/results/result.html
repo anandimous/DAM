@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+{% for foo in items %}
+
+    <div class="col s12 m4">
+            <div class="card">
+              <div class="card-image" style="background-image:url({% static 'img/placeholder.png' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
+                <!-- <img src="images/oculus.jpg"> -->
+                <!-- <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a> -->
+              </div>
+              <div class="card-content">
+{#                <span class="new badge red" data-badge-caption="Unavailable"></span>#}
+
+                <span class="card-title" style="color:black;">{{ foo.name }}</span>
+
+                <p>{{ foo.description }}</p>
+
+              </div>
+              <!-- Link to product page, whole card is clickable -->
+              <a class="link" href="#"></a>
+            </div>
+    </div>
+
+{% endfor %}
+
+{% endblock %}

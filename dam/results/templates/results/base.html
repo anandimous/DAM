@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/materialize.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/results_style.css' %}" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>DAM | Search Results</title>
+
+</head>
+
+<body>
+<!-- Nav Bar starts here -->
+{#      <nav>#}
+{#        <div class="nav-wrapper">#}
+{#          <div class="row">#}
+{#            <div class="col s1">#}
+{#              <a href="#" class="brand-logo">DAM</a>#}
+{#            </div>#}
+{#            <div class="col s2">#}
+{#              <ul class="right hide-on-med-and-down">#}
+{#                <!-- TODO: link to login page -->#}
+{#                <li><a href="#">Staff Login</a></li>#}
+{#              </ul>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </nav>#}
+      <!-- Nav Bar ends here -->
+        <nav>
+            <div class="nav-wrapper">
+              <a href="#" class="brand-logo">DAM</a>
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="#">Staff Login</a></li>
+              </ul>
+            </div>
+          </nav>
+
+<div class="row container">
+    {% block body %}
+
+    {% endblock %}
+</div>
+
+
+</body>
+<footer id="footer" class="page-footer" style="background-color: #005bbb"><!--color added inline-->
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">DAM Asset Management</h5>
+            <!--<p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>-->
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Home Page</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container center-align">
+          &copy; 2018 Copyright Bugzfeed
+          <!--<a class="grey-text text-lighten-4 right" href="#!">More Links</a>-->
+        </div>
+      </div>
+    </footer>
+</html>
