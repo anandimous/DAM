@@ -15,26 +15,9 @@
 </head>
 
 <body>
-<!-- Nav Bar starts here -->
-{#      <nav>#}
-{#        <div class="nav-wrapper">#}
-{#          <div class="row">#}
-{#            <div class="col s1">#}
-{#              <a href="#" class="brand-logo">DAM</a>#}
-{#            </div>#}
-{#            <div class="col s2">#}
-{#              <ul class="right hide-on-med-and-down">#}
-{#                <!-- TODO: link to login page -->#}
-{#                <li><a href="#">Staff Login</a></li>#}
-{#              </ul>#}
-{#            </div>#}
-{#          </div>#}
-{#        </div>#}
-{#      </nav>#}
-      <!-- Nav Bar ends here -->
         <nav>
             <div class="nav-wrapper">
-              <a href="#" class="brand-logo">DAM</a>
+              <a href="{% url 'showMain' %}" class="brand-logo">DAM</a>
               <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="#">Staff Login</a></li>
               </ul>
@@ -59,7 +42,7 @@
           <div class="col l4 offset-l2 s12">
             <h5 class="white-text">Links</h5>
             <ul>
-              <li><a class="grey-text text-lighten-3" href="#!">Home Page</a></li>
+              <li><a class="grey-text text-lighten-3" href="{% url 'showMain' %}">Home Page</a></li>
               <li><a class="grey-text text-lighten-3" href="#!">Contact Us</a></li>
             </ul>
           </div>

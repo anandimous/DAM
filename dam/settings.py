@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'dam.inventory',
     'dam.users',
     'dam.results',
+    'dam.index',
 ]
 
 MIDDLEWARE = [
@@ -60,6 +61,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             BASE_DIR+'/dam/results/templates/results/',
+            BASE_DIR+'/dam/index/templates/index/',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
