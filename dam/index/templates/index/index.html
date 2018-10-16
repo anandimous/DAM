@@ -1,21 +1,14 @@
 {% extends 'base.html' %}
+
 {% block body %}
+    <title>DAM</title>
+
     <br>
-    <div style="padding-top: 50%;">
-        <div class="search-logo">
-            <div class="search-bar">
-{#                <div class="search">#}
-{#                  <form action="#">#}
-{#                    <input type="text" class="searchTerm" placeholder="What are you looking for?" required>#}
-{#                    <button type="submit" class="searchButton">#}
-{#                    <i class="fa fa-search"></i>#}
-{#                    </button>#}
-{#                  </form>#}
-{#                </div>#}
-                <a class="waves-effect waves-light btn-small view_list" href="{% url 'index' %}">
-                    List of all Items
-                </a>
-            </div>
+    <div>
+        <div class="search-bar" style="text-align: center;">
+            <a style=" word-wrap: break-word " class="waves-effect waves-light btn" href="{% url 'index' %}">
+                List of all Items
+            </a>
         </div>
     </div>
     <br>
