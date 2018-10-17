@@ -133,7 +133,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-STATIC_DIRS = 'static'
-STATICFILES_DIRS = [
-    STATIC_DIRS,
-]
+
+
+
+LOGIN_URL = 'users:log-in'
+
+# TODO: Change this to a more appropriate view (once we create one).
+LOGIN_REDIRECT_URL = 'admin:index'
+
+
