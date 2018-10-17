@@ -1,10 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'inventory/base.html' %}
 {% load static %}
+{% block title %}DAM | Dashboard{% endblock %}
 {% block body %}
 
     <style>
         .prof{
-            background-image: url({% static 'img/profile.png' %});
+            background-image:url({% static 'img/profile.png' %});
             border-radius: 50%;
             display: block;
             margin:auto;
@@ -43,7 +44,7 @@
         }
     </style>
 
-    <title>DAM | Dashboard</title>
+
 
     <div class="cont">
 

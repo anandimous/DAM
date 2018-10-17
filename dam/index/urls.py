@@ -1,8 +1,7 @@
 from django.conf.urls import url
 from .views import showMain
-from ..results.views import *
+from ..inventory.views import *
 urlpatterns = [
     url(r'^$', showMain, name='showMain'),
-    url(r'^dam/results/$', index, name='index')
-
+    url(r'^dam/inventory/$', index, name='index')
 ]

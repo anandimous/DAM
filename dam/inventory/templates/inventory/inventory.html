@@ -1,7 +1,9 @@
-{% extends 'base.html' %}
+{% extends 'inventory/base.html' %}
 {% load static %}
+
+{% block title %}DAM | Search Results{% endblock %}
+
 {% block body %}
-    <title>DAM | Search Results</title>
 {% for foo in items %}
 
     <div class="col s12 m4">
@@ -15,7 +17,7 @@
 
                 <span class="card-title" style="color:black;">{{ foo.name }}</span>
 
-                <p>{{ foo.description }}</p>
+                <p>{{ foo.description|truncatechars:140 }}</p>
 
               </div>
               <!-- Link to product page, whole card is clickable -->

@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'dam.inventory',
     'dam.loans',
     'dam.users',
-    'dam.results',
     'dam.index',
     'dam.dashboard',
 ]
@@ -61,11 +60,7 @@ ROOT_URLCONF = 'dam.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            BASE_DIR+'/dam/results/templates/results/',
-            BASE_DIR+'/dam/index/templates/index/',
-            BASE_DIR+'/dam/dashboard/templates/dashboard/',
-        ],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -131,9 +126,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 STATIC_URL = '/static/'
-STATIC_DIRS = 'static'
+
 STATICFILES_DIRS = [
-    STATIC_DIRS,
+    os.path.join(BASE_DIR, 'static'),
 ]
