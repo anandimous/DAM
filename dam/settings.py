@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'dam.inventory',
+    'dam.loans',
     'dam.users',
     'dam.results',
     'dam.index',
