@@ -126,3 +126,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+LOGIN_URL = 'users:log-in'
+
+# TODO: Change this to a more appropriate view (once we create one).
+LOGIN_REDIRECT_URL = 'admin:index'
