@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'dam.users',
     'dam.results',
     'dam.index',
+    'dam.dashboard',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +64,7 @@ TEMPLATES = [
         'DIRS': [
             BASE_DIR+'/dam/results/templates/results/',
             BASE_DIR+'/dam/index/templates/index/',
+            BASE_DIR+'/dam/dashboard/templates/dashboard/',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
