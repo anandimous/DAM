@@ -1,0 +1,49 @@
+{% extends 'inventory/base.html' %}
+{% load static %}
+
+{% block title %}DAM | Search Results{% endblock %}
+
+{% block body %}
+{% for foo in items %}
+
+    <div class="col s12 m4">
+            <div class="card">
+              <div class="card-image" style="background-image:url({% static 'img/placeholder.png' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
+                <!-- <img src="images/oculus.jpg"> -->
+                <!-- <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a> -->
+              </div>
+              <div class="card-content">
+{#                <span class="new badge red" data-badge-caption="Unavailable"></span>#}
+
+                <span class="card-title" style="color:black;">{{ foo.name }}</span>
+
+                <p>{{ foo.description|truncatechars:140 }}</p>
+
+              </div>
+              <!-- Link to product page, whole card is clickable -->
+              <a class="link" href="#"></a>
+            </div>
+    </div>
+
+{% endfor %}
+
+{% endblock %}
+
+{% block foot %}
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">DAM Asset Management</h5>
+            <!--<p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>-->
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="{% url 'showMain' %}">Home Page</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+{% endblock %}

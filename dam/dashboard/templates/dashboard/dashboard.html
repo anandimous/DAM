@@ -1,0 +1,80 @@
+{% extends 'inventory/base.html' %}
+{% load static %}
+
+{% block style %}
+<style>
+        .prof{
+            background-image:url({% static 'img/profile.png' %});
+            border-radius: 50%;
+            display: block;
+            margin:auto;
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-color:lightblue;
+            height: 280px;
+            width: 280px;
+        }
+        .dashBtn{
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            background-color: #005bbb;
+            color: white;
+            width: 240px;
+            height: 40px;
+            font-size: 20px;
+            margin-top: 12px;
+        }
+        .dashBtn:hover{
+            background-color: #002f56;
+            box-shadow: 0 0 0.3px 0.3px black;
+        }
+        .cont{
+            box-shadow: 0 0 0.1px 0.1px;
+            text-align: center;
+            width: 60%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        @media only screen and (max-width: 600px) {
+            .cont {
+                width: 100%;
+            }
+        }
+    </style>
+
+{% endblock %}
+
+{% block title %}DAM | Dashboard{% endblock %}
+{% block body %}
+
+    <div class="cont">
+
+        <br>
+        <div class="prof"></div>
+        <h4>___UserName___</h4>
+        <h6>___Title?___</h6>
+        <hr>
+
+        <div>
+            <a class="dashBtn" href="#">Issue Item</a>
+        </div>
+
+        <div>
+            <a class="dashBtn" href="#">Return Item</a>
+        </div>
+
+{#Currently adding and removing via django admin#}
+{#        <div>#}
+{#            <a class="dashBtn" href="#">Add Item</a>#}
+{#        </div>#}
+{##}
+{#        <div>#}
+{#            <a class="dashBtn" href="#">Remove Item</a>#}
+{#        </div>#}
+        <br>
+    </div>
+    <br>
+
+{% endblock %}

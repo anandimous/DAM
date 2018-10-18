@@ -1,17 +1,15 @@
-{# TODO: inherit from a base template when one is created. #}
-<!DOCTYPE html>
-<html>
-<head>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Log in</title>
-  <style>
+{% extends 'inventory/base.html' %}
+
+  {% block title %}DAM | Log in{% endblock %}
+
+{% block style %}
+ <style>
     h1 {
-      text-align: center;
+        position: relative; top:-20px;
+        margin-top: 0;
+        text-align: center;
     }
-    .btn,
-    nav {
+    .btn{
       background-color: #005bbb;
     }
     .btn:focus,
@@ -34,24 +32,16 @@
       padding: 1rem;
       text-align: center;
     }
+    .log{
+        font-size: 50px;
+    }
   </style>
-</head>
+{% endblock %}
 
-<body>
-  <header>
-   <nav>
-      <div class="nav-wrapper">
-          <div class="row">
-            <div class="col s1">
-                <a href="#" class="brand-logo">DAM</a>
-            </div>
-        </div>
-      </div>
-    </nav>
-  </header>
-  <main>
-    <div class="container">
-      <h1>Log in</h1>
+{% block body %}
+
+    <div class="log">
+     <h1>Log in</h1>
 
       {% if form.errors %}
         <div class="row form-errors">
@@ -79,16 +69,18 @@
                 {{ form.password.label_tag }}
               </div>
             </div>
+            <div style="text-align: center;">
+               <button class="btn">Log in</button>
+            </div>
 
-            <button class="btn waves-effect waves-light">
-              Log in
-            </button>
           </div>
         </form>
       </div>
     </div>
-  </main>
+
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</body>
-</html>
+
+{% endblock %}
+
+
