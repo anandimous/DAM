@@ -1,13 +1,42 @@
 {% extends 'inventory/base.html' %}
 {% block title %}DAM{% endblock %}
+{% block style %}
+    <style>
+        .btn{
+
+            background-color: #005bbb;
+            font-size: 200%;
+            box-sizing: border-box;
+
+            border-spacing: 3px;
+        }
+        .btn:hover{
+            background-color: #002f56;
+            {#box-shadow: 0 0 0.3px 0.3px black;#}
+        }
+
+        h1{
+            font-size: 900% ;
+            font-family:Roboto, sans-serif;
+            font-weight: bold;
+            margin-top: 0;
+            text-align: center;
+        }
+
+    </style>
+
+{% endblock %}
 {% block body %}
-    <br>
+
+{#    <br>#}
     <div>
+    <h1>D A M</h1>
         <div class="search-bar" style="text-align: center;">
-            <a style=" word-wrap: break-word " class="waves-effect waves-light btn" href="{% url 'index' %}">
+            <a style=" word-wrap:break-word " class="btn" href="{% url 'index' %}">
                 List of all Items
             </a>
         </div>
     </div>
+
     <br>
 {% endblock %}
