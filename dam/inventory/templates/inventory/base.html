@@ -9,17 +9,32 @@
     <link rel="stylesheet" href="{% static 'css/results_style.css' %}" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+    <style>
+
+        #logo{
+
+            padding-left: 10px;
+        }
+        @media only screen and (max-width: 600px) {
+            #logo {
+                padding-left: 0;
+            }
+         }
+
+    </style>
     {% block style %}
+
     {% endblock %}
+
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>{% block title %}{% endblock %}</title>
 </head>
 
 <body>
-        <nav>
+        <nav style="margin-bottom: 0;">
             <div class="nav-wrapper">
-              <a href="{% url 'showMain' %}" class="brand-logo">DAM</a>
+              <a href="{% url 'showMain' %}" class="brand-logo" id="logo">DAM</a>
               <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="{% url 'admin:index' %}">Staff Login</a></li>
               </ul>
@@ -33,7 +48,7 @@
 </div>
 
 </body>
-<footer id="footer" class="page-footer" style="background-color: #005bbb"><!--color added inline-->
+<footer id="footer" class="page-footer" style="background-color: #005bbb; padding-top: 10px;"><!--color added inline-->
     {% block foot %}
 
     {% endblock %}

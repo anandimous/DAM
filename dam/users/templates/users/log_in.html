@@ -5,6 +5,7 @@
 {% block style %}
  <style>
     h1 {
+        font-family: Roboto, sans-serif;
         position: relative; top:-20px;
         margin-top: 0;
         text-align: center;
@@ -52,7 +53,7 @@
       {% endif %}
 
       <div class="row">
-        <form class="col s12 m6 offset-m3" method="post">
+        <form class="col s12 m6 offset-m3" method="post" onclick="{% url 'showDash' %}">
           {% csrf_token %}
 
           <div class="card-panel">
