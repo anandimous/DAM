@@ -1,0 +1,47 @@
+{% extends 'loans/base.html' %}
+{% load static %}
+
+{% block title %} Loan Item | DAM {% endblock %}
+
+{% block body %}
+<div class="row ">
+
+    <div class="col s6 offset-s1">
+        <div class="card">
+            <div class="card-image" style="background-image:url({% static 'img/placeholder.png' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
+            </div>
+            <div class="card-content">
+                <span class="card-title" style="color:black;">{{ foo.name }}</span>
+
+                <p>{{ foo.description }}</p>
+
+            </div>
+            <a class="link" href="#"></a>
+        </div>
+    </div>
+
+    <div class="col s4"> <!-- Note that "m8 l9" was added -->
+        <div class = "row">
+            <div class="card" style="background-color: #666666">
+                <div class="card-content white-text">
+                    <span class="card-title">Client Details</span>
+                    <p>Name: Jhon Doe</p>
+                    <p>Email: jDoe@lawyercat.com</p>
+                    <p>Issue Date: 9/23/18</p>
+                    <p>Due Date: 9/30/18</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <a class="waves-effect waves-light btn-large">
+                <span class="flow-text">Issue</span>
+            </a>
+        </div>
+        <div class="row">
+            <a class="waves-effect waves-light btn-large">
+                <span class="flow-text">Decline</span>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
