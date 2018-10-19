@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'dam.inventory',
     'dam.loans',
     'dam.users',
-    'dam.index',
     'dam.dashboard',
 ]
 
