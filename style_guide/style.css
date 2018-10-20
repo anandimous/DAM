@@ -1,0 +1,104 @@
+
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+/* Header */
+#header {
+    text-align: center;
+    padding: 6em 0 4em 0;
+}
+
+/*body*/
+body {
+    color: black;/*black*/
+    background-color: #ffffff;/*Hayes hall white*/
+    padding-left: 80px;
+    padding-right: 80px;
+    }
+h1{
+    font-family: 'Roboto Slab', serif;
+    font-size: 36px;
+    font-weight: 100;
+    line-height: 1.5;
+    }
+h2, h3 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 26px;
+    font-weight: 100;
+    line-height: 1.5;
+    }
+h4, h5, h6 {
+    font-family: 'Lato';
+    font-size: 18px;
+    font-weight: 200;
+    line-height: 1;
+    }
+body {
+    font-family: 'Lato';
+    font-size: 14px;
+    font-weight: 200;
+    line-height: 1.65;
+    }
+#roboto36{
+    font-family: 'Roboto Slab', serif;
+    font-size: 36px;
+    font-weight: 100;
+    line-height: 1;
+}
+#roboto20{
+    font-family: 'Roboto Slab', serif;
+    font-size: 20px;
+    font-weight: 200;
+    line-height: 1;
+
+}
+#lato{
+    font-family: 'Lato';
+    font-size: 18px;
+    font-weight: 200;
+    line-height: 1.65;
+}
+#ubblue{
+    float:inherit;
+    background: #005bbb;
+    color: #ffffff;
+    outline: 1px solid black;
+}
+#hayeswhite{
+    float:inherit;
+    color: #005bbb;
+    background: #ffffff;
+    outline: 1px solid black;
+}
+#lasalle{
+    float:inherit;
+    background: #00a69c;
+    color: #ffffff;
+    outline: 1px solid black;
+}
+#bpoint{
+    float:inherit;
+    background: #e4e4e4;
+    outline: 1px solid black;
+}
+#pgray{
+    float:inherit;
+    color: #ffffff;
+    background: #666666;
+    outline: 1px solid black;
+}
+#niagara{
+    float:inherit;
+    color: #ffffff;
+    background: #006570;
+    outline: 1px solid black;
+}
+/*#cols{
+    padding-left: 40px;
+}*/
+footer{
+    font-family: 'Lato';
+    font-size: 14px;
+    text-align: center;
+}
