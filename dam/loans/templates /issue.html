@@ -1,0 +1,30 @@
+
+
+<div class="row">
+    <ul class="collapsible" data-collapsible="expandable">
+      <li>
+        <div class="collapsible-header" style="background-color: #005bbb">Reserve</div>
+        <div class="collapsible-body">
+          <div class="input-field col s6">
+            <input id="first_name" type="text" class="validate">
+            <label for="first_name">{first_name}</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="last_name" type="text" class="validate">
+            <label for="last_name">{last_name}</label>
+          </div>
+          <div class="input-field col s12">
+            <input id="email" type="email" class="validate" pattern=".+@buffalo.edu">
+            <label for="email">{email}</label>
+            <span class="helper-text" data-error="Your email address must end in: @buffalo.edu">@buffalo.edu email only</span>
+          </div>
+          <a onclick="M.toast({html: 'Your item has been reserved!Please pick it up from Blady 19.'})" class="btn"><i class="material-icons right">send</i>Submit</a>
+        </div>
+      </li>
+    </ul>
+    <script>
+    $(document).ready(function(){
+      $('.collapsible').collapsible({accordion: true});
+    });
+    </script>
+</div>
