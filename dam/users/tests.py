@@ -52,3 +52,20 @@ class LogInTest(TestCase):
             'Please enter a correct email address and password.',
         )
         self.assertNotIn(SESSION_KEY, self.client.session)
+
+
+class LogOutTest(TestCase):
+    def test_log_out(self):
+        User.objects.create_user(
+            email='test@example.com',
+            password='password',
+        )
+        self.client.login(
+            email='test@example.com',
+            password='password',
+        )
+        self.assertIn(SESSION_KEY, self.client.session)
+        response = self.client.get('/users/log-out/')
+        self.assertNotIn(SESSION_KEY, self.client.session)
+        self.assertRedirects(response, '/users/log-in/')
+
