@@ -1,5 +1,5 @@
-from django.conf.urls import url
-from .views import index
+from django.urls import path
+from .views import reservations
 urlpatterns = [
-    url(r'^$', index, name='index')
+    path('reservations/<int:reservation_id>/', reservations, name='reservations')
 ]

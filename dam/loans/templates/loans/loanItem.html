@@ -5,18 +5,14 @@
 
 {% block body %}
 <div class="row ">
-
     <div class="col s6 offset-s1">
         <div class="card">
             <div class="card-image" style="background-image:url({% static 'img/placeholder.png' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
             </div>
             <div class="card-content">
-                <span class="card-title" style="color:black;">{{ foo.name }}</span>
-
-                <p>{{ foo.description }}</p>
-
+                <span class="card-title" style="color:black;"> {{reserved.item.name}}</span>
+                <p> {{reserved.item.description}}</p>
             </div>
-            <a class="link" href="#"></a>
         </div>
     </div>
 
@@ -25,16 +21,15 @@
             <div class="card" style="background-color: #666666">
                 <div class="card-content white-text">
                     <span class="card-title">Client Details</span>
-                    <p>Name: Jhon Doe</p>
-                    <p>Email: jDoe@lawyercat.com</p>
-                    <p>Issue Date: 9/23/18</p>
-                    <p>Due Date: 9/30/18</p>
+                    <p>Name: {{reserved.client.first_name}} {{reserved.client.last_name}}</p>
+                    <p>Email: {{reserved.client.email}}</p>
+                    <p>Reserved on: {{reserved.reserved_at}}</p>
                 </div>
             </div>
         </div>
         <div class="row">
             <a class="waves-effect waves-light btn-large">
-                <span class="flow-text">Issue</span>
+                <span class="flow-text">Approve</span>
             </a>
         </div>
         <div class="row">

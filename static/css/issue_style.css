@@ -35,52 +35,6 @@ nav{
     width: 250px;
 }
 
-.search {
-  width: 100%;
-  /* border: 2px solid black; */
-  position: relative
-}
-
-.search-logo {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-}
-
-.search-bar {
-    width: 60%;
-    margin: 0 auto;
-}
-.searchTerm {
-  float: left;
-  width: 100%;
-  border: 5px solid #005bbb;
-  padding: 5px;
-  height: 20px;
-  border-radius: 2px;
-  outline: none;
-  color: #9DBFAF;
-}
-
-.searchTerm:focus{
-  color: #005bbb;
-}
-
-.searchButton {
-  position: absolute;
-  right: -50px;
-  width: 40px;
-  height: 36px;
-  border: 1px solid #005bbb;
-  background: #005bbb;
-  text-align: center;
-  color: #fff;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 20px;
-}
-
 /*Resize the wrap to see the search bar change!*/
 .wrap{
   width: 40%;
