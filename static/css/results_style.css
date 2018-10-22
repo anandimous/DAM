@@ -55,10 +55,3 @@ height: 100%; width: 100%;
 .card:hover {
   box-shadow: 0 0 25px rgba(33,33,33,33);
 }
-/*#footer{
-    background-color: #01579b;
-}*/
-/*IMPORTS*/
-@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700&subset=latin,latin-ext,greek-ext,greek,vietnamese,cyrillic,cyrillic-ext);
-
-@import url('https://fonts.googleapis.com/css?family=Lato');

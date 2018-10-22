@@ -1,31 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700&subset=latin,latin-ext,greek-ext,greek,vietnamese,cyrillic,cyrillic-ext);
 @import url('https://fonts.googleapis.com/css?family=Lato');
 
-body {
-    display: flex;
-    flex-direction: column;
-    height: 100vh
-
-}
-.brand_logo{
-    font-family: 'Roboto Slab', serif ;
-    font-size: 36px;
-    font-weight: 100;
-    line-height: 1.5;
-    margin-left: 2rem;
-}
-
-main {
-    flex: 1 0 auto;
-}
-nav{
-    background-color: #005bbb;
-}
-.btn-large{
-    background-color: #005bbb;
-    width: 100%;
-}
-
 #itemCard{
     padding-top: 20px;
 }

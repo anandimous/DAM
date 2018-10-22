@@ -1,6 +1,6 @@
-from django.conf.urls import url
 from .views import showDash
+from django.urls import path
 
 urlpatterns = [
-    url(r'^$', showDash, name='showDash'),
+    path('', showDash, name='showDash'),
 ]
