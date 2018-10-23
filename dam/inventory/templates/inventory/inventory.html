@@ -5,7 +5,7 @@
 
 {% block body %}
     <br>
-{% for foo in items %}
+{% for item in items %}
 
     <div class="col s12 m4">
             <div class="card">
@@ -16,9 +16,9 @@
               <div class="card-content">
 {#                <span class="new badge red" data-badge-caption="Unavailable"></span>#}
 
-                <span class="card-title" style="color:black;">{{ foo.name }}</span>
+                <span class="card-title" style="color:black;">{{ item.name }}</span>
 
-                <p>{{ foo.description|truncatechars:140 }}</p>
+                <p>{{ item.description|truncatechars:140 }}</p>
 
               </div>
               <!-- Link to product page, whole card is clickable -->

@@ -131,7 +131,3 @@ STATICFILES_DIRS = [
 
 LOGIN_URL = 'users:log-in'
 LOGIN_REDIRECT_URL = 'showDash'
-
-
-# TODO: Change this to a more appropriate view (once we create one).
-LOGIN_REDIRECT_URL = 'admin:index'
