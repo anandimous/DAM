@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'dam.inventory',
     'dam.loans',
     'dam.users',
+    'dam.dashboard',
 ]
 
 MIDDLEWARE = [
@@ -124,8 +125,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 LOGIN_URL = 'users:log-in'
-
-# TODO: Change this to a more appropriate view (once we create one).
-LOGIN_REDIRECT_URL = 'admin:index'
+LOGIN_REDIRECT_URL = 'showDash'
