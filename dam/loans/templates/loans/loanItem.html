@@ -16,7 +16,15 @@
         </div>
     </div>
 
-    <div class="col s4"> <!-- Note that "m8 l9" was added -->
+
+
+<!--CONSIDER MAKING THE CLIENT DETAILS PART A FORM SUBMISSION KIND OF THING-->
+
+
+
+    <form id="loanForm" method="post" class="col s4"> <!-- Note that "m8 l9" was added -->
+        {% csrf_token %}
+        {{ form }}
         <div class = "row">
             <div class="card" style="background-color: #666666">
                 <div class="card-content white-text">
@@ -28,15 +36,13 @@
             </div>
         </div>
         <div class="row">
-            <a class="waves-effect waves-light btn-large">
-                <span class="flow-text">Approve</span>
-            </a>
+            <button type="submit" value="approve" name="approve">Approve</button>
         </div>
         <div class="row">
-            <a class="waves-effect waves-light btn-large">
-                <span class="flow-text">Decline</span>
-            </a>
+            <button type="submit" value="decline" name="decline">Decline</button>
         </div>
-    </div>
+    </form>
+
+
 </div>
 {% endblock %}
