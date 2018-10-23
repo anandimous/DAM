@@ -1,0 +1,48 @@
+{% extends 'loans/base.html' %}
+{% load static %}
+
+{% block title %} Loan Item | DAM {% endblock %}
+
+{% block body %}
+<div class="row ">
+    <div class="col s6 offset-s1">
+        <div class="card">
+            <div class="card-image" style="background-image:url({% static 'img/placeholder.png' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
+            </div>
+            <div class="card-content">
+                <span class="card-title" style="color:black;"> {{reserved.item.name}}</span>
+                <p> {{reserved.item.description}}</p>
+            </div>
+        </div>
+    </div>
+
+
+
+<!--CONSIDER MAKING THE CLIENT DETAILS PART A FORM SUBMISSION KIND OF THING-->
+
+
+
+    <form id="loanForm" method="post" class="col s4"> <!-- Note that "m8 l9" was added -->
+        {% csrf_token %}
+        {{ form }}
+        <div class = "row">
+            <div class="card" style="background-color: #666666">
+                <div class="card-content white-text">
+                    <span class="card-title">Client Details</span>
+                    <p>Name: {{reserved.client.first_name}} {{reserved.client.last_name}}</p>
+                    <p>Email: {{reserved.client.email}}</p>
+                    <p>Reserved on: {{reserved.reserved_at}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <button type="submit" value="approve" name="approve">Approve</button>
+        </div>
+        <div class="row">
+            <button type="submit" value="decline" name="decline">Decline</button>
+        </div>
+    </form>
+
+
+</div>
+{% endblock %}
