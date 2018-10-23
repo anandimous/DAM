@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('dam.users.urls')),
     path('loans/', include('dam.loans.urls')),
+    path('dashboard/', include('dam.dashboard.urls')),
 ]
