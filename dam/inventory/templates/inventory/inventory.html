@@ -5,22 +5,23 @@
 
 {% block body %}
     <br>
-{% for foo in items %}
+{% for item in items %}
 
     <div class="col s12 m4">
             <div class="card">
               <div class="card-image" style="background-image:url({% static 'img/placeholder.png' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
-                <!-- <img src="images/oculus.jpg"> -->
-                <!-- <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a> -->
               </div>
               <div class="card-content">
-                  {% if foo.objects.with_availability == available %}
-                        <p> g </p>
+{#              Checks if Item is Available or not#}
+                  {% if item.available == 0 %}
+                        <span class="new badge red" data-badge-caption="Unavailable"></span>
+                  {% else %}
+                        <span class="new badge green" data-badge-caption="Available"></span>
                   {% endif %}
 
-                <span class="card-title" style="color:black;">{{ foo.name }}</span>
+                <span class="card-title" style="color:black;">{{ item.name }}</span>
 
-                <p>{{ foo.description|truncatechars:140 }}</p>
+                <p>{{ item.description|truncatechars:140 }}</p>
 
               </div>
               <!-- Link to product page, whole card is clickable -->
