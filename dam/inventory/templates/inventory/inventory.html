@@ -11,11 +11,14 @@
             <div class="card">
               <div class="card-image" style="background-image:url({% static 'img/placeholder.png' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
                 <!-- <img src="images/oculus.jpg"> -->
-                <!-- <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a> -->
               </div>
-              <div class="card-content">
-{#                <span class="new badge red" data-badge-caption="Unavailable"></span>#}
 
+              <div class="card-content">
+                  {% if item.available > 0 %}
+                    <span class="new badge green" data-badge-caption="Available"></span>
+                    {% else %}
+                    <span class="new badge red" data-badge-caption="Unavailable"></span>
+                  {% endif %}
                 <span class="card-title" style="color:black;">{{ item.name }}</span>
 
                 <p>{{ item.description|truncatechars:140 }}</p>
@@ -40,8 +43,8 @@
           <div class="col l4 offset-l2 s12">
             <h5 class="white-text">Links</h5>
             <ul>
-              <li><a class="grey-text text-lighten-3" href="{% url 'showMain' %}">Home Page</a></li>
-              <li><a class="grey-text text-lighten-3" href="#!">Contact Us</a></li>
+              <li><a class="grey-text text-lighten-3" href="#">Home Page</a></li>
+              <li><a class="grey-text text-lighten-3" href="#">Contact Us</a></li>
             </ul>
           </div>
         </div>
