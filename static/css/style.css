@@ -89,3 +89,12 @@ footer {
     font-size: 14px;
     text-align: center;
 }
+
+.notification {
+    background-color: #005bbb;
+    border-radius: 2px;
+    color: #fff;
+    padding: 1rem;
+    margin-top: 1rem;
+    text-align: center;
+}

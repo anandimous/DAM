@@ -24,14 +24,6 @@
         input[type=password]:not(.browser-default):focus:not([readonly]) + label {
             color: #005bbb;
         }
-
-        .form-errors {
-            background-color: #900;
-            border-radius: 2px;
-            color: #fff;
-            padding: 1rem;
-            text-align: center;
-        }
     </style>
 {% endblock %}
 
@@ -40,7 +32,7 @@
         <h1>Log in</h1>
 
         {% if form.errors %}
-            <div class="row form-errors">
+            <div class="row notification" style="background-color: #900;">
                 <div class="col s12">
                     {{ form.non_field_errors|join:' ' }}
                 </div>
