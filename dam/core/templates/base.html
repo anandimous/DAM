@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}DAM{% endblock %} | DAM</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/results_style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/issue_style.css' %}" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    {% block style %}{% endblock %}
+</head>
+
+<body>
+    <nav style="margin-bottom: 0;">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo" id="logo">DAM</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'admin:logout' %}">Log Out</a></li>
+                {% else %}
+                <li><a href="{% url 'users:log-in' %}">Staff Log In</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <main class="row container" style="margin: auto;">
+        {% block body %}{% endblock %}
+    </main>
+
+    <footer id="footer" class="page-footer" style="background-color: #005bbb; padding-top: 10px;">
+        <div class="container center-align" style="padding-bottom: 10px;">
+          &copy; 2018 Copyright Bugzfeed
+        </div>
+    </footer>
+
+    <script src="{% static 'js/materialize.min.js' %}"></script>
+</body>
+</html>
