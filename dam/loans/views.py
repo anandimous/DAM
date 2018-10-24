@@ -26,3 +26,8 @@ def post(self, request):
     args = {'form': form,
                 }
     return render(request, 'loans/loanItem.html', args)
+
+def allRes(request):
+    res = ItemReservation.objects.all()
+    args = {'reserves':res}
+    return render(request, 'loans/allReservations.html', args)
