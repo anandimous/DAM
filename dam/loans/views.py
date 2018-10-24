@@ -30,4 +30,3 @@ def reservations(request, reservation_id):
         reservation.is_active = False
         reservation.save()
     return render(request, 'loans/loanItem.html', args)
-
