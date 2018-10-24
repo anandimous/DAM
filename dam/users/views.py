@@ -9,4 +9,4 @@ class LogInView(BaseLogInView):
 
 
 class LogOutView(BaseLogOutView):
-    next_page = 'users:log-in'
+    next_page = 'inventory:index'
