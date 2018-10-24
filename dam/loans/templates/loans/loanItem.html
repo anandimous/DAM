@@ -17,10 +17,6 @@
             </div>
         </div>
 
-
-        <!--CONSIDER MAKING THE CLIENT DETAILS PART A FORM SUBMISSION KIND OF THING-->
-
-
         {% if messages %}
             <ul class="messages">
                 {% for message in messages %}
@@ -38,7 +34,6 @@
                         <hr>
                         <hr>
                         <br>
-
                         <p>Client Name:</p>
                         <p>{{ reserved.client.first_name }} {{ reserved.client.last_name }}</p>
                         <hr>

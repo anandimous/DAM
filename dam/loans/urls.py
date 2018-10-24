@@ -1,6 +1,5 @@
 from django.urls import path
-from .views import reservations, allRes
+from .views import reservations
 urlpatterns = [
-    path('reservations/<int:reservation_id>/', reservations, name='reservations'),
-    path('', allRes, name='allres')
+    path('<int:reservation_id>/', reservations, name='reservations'),
 ]
