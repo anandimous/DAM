@@ -1,5 +1,4 @@
 from django.shortcuts import render
-
 from django.http import Http404
 from ..inventory import models
 from django.contrib.auth.decorators import login_required
