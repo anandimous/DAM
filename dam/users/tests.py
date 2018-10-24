@@ -29,7 +29,7 @@ class LogInTest(TestCase):
             follow=True,
         )
         self.assertIn(SESSION_KEY, self.client.session)
-        self.assertRedirects(response, '/admin/')
+        self.assertRedirects(response, '/dashboard/')
 
     def test_incorrect_email(self):
         response = self.client.post('/users/log-in/', {
