@@ -1,23 +1,22 @@
-{% extends 'inventory/base.html' %}
-{% csrf_token %}
+{% extends 'base.html' %}
+
 {% load static %}
 
 {% block style %}
-<style>
-
-        .profile{
-            background-image:url({% static 'img/profile.png' %});
+    <style>
+        .profile {
+            background-image: url({% static 'img/profile.png' %});
             border-radius: 50%;
             display: block;
-            margin:auto;
+            margin: auto;
             background-size: 100%;
             background-repeat: no-repeat;
-            background-color:lightblue;
+            background-color: lightblue;
             height: 280px;
             width: 280px;
         }
 
-        .dash_btn{
+        .dash_btn {
             margin-left: auto;
             margin-right: auto;
             display: block;
@@ -29,12 +28,12 @@
             margin-top: 12px;
         }
 
-        .dash_btn:hover{
+        .dash_btn:hover {
             background-color: #002f56;
             box-shadow: 0 0 0.3px 0.3px black;
         }
 
-        .box{
+        .box {
             box-shadow: 0 0 3px 0.1px gray;
             text-align: center;
             width: 60%;
@@ -47,26 +46,22 @@
             .box {
                 width: 100%;
             }
-            h1{
+
+            h1 {
                 font-size: 40px;
                 padding-top: 5%;
             }
-            .profile{
+
+            .profile {
                 width: 240px;
                 height: 240px;
             }
         }
-
-        h1{
-            margin-top: 2px;
-            font-family: Roboto, sans-serif;
-            text-align: center;
-        }
-</style>
+    </style>
 
 {% endblock %}
 
-{% block title %}DAM | Dashboard{% endblock %}
+{% block title %}Dashboard{% endblock %}
 {% block body %}
 
     <h1>Dashboard</h1>
@@ -90,14 +85,14 @@
             <a class="dash_btn" href="#">Return Item</a>
         </div>
 
-{#Currently adding and removing via django admin#}
+        {#Currently adding and removing via django admin#}
         <div>
             <a class="dash_btn" href={% url 'admin:index' %}>Add/Remove Item</a>
         </div>
 
-{#        <div>#}
-{#            <a class="dashBtn" href="#">Remove Item</a>#}
-{#        </div>#}
+        {#        <div>#}
+        {#            <a class="dashBtn" href="#">Remove Item</a>#}
+        {#        </div>#}
         <br>
     </div>
     <br>
