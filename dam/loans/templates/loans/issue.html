@@ -1,6 +1,96 @@
-{% extends loans/base.html %} 
-{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    {% load static %}
 
-{% block title %}DAM | Issue Item{% endblock %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/materialize.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/results_style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/issue_style.css' %}" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-{% block body %}
+    {% block style %}
+
+    {% endblock %}
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+
+  <body>
+    <nav style="margin-bottom: 0;">
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo" id="logo">DAM</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="{% url 'users:log-in' %}">Staff Login</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="row">
+      <ul class="collapsible" data-collapsible="expandable">
+        <li>
+          <div class="collapsible-header" style="background-color: #005bbb">Reserve</div>
+            <div class="collapsible-body">
+              <div class="input-field col s6">
+                <input id="first_name" type="text" class="validate">
+                <label for="first_name">{% first_name %}</label>
+              </div>
+              <div class="input-field col s6">
+                <input id="last_name" type="text" class="validate">
+                <label for="last_name">{% last_name %}</label>
+              </div>
+              <div class="input-field col s12">
+                <input id="email" type="email" class="validate" pattern=".+@buffalo.edu">
+                <label for="email">{% email %}</label>
+                <span class="helper-text" data-error="Your email address must end in: @buffalo.edu">@buffalo.edu email only</span>
+              </div>
+              <a onclick="M.toast({html: 'Your item has been reserved! You can pick it up from Baldy 19.'})" class="btn"><i class="material-icons right">send</i>Submit</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      $(document).ready(function(){
+      $('.collapsible').collapsible({accordion: true});
+    });
+    </script>
+
+
+<!--JavaScript at end of body for optimized loading-->
+<script type="text/javascript" src="../js/materialize.js"></script>
+
+</body>
+
+
+<footer id="footer" class="page-footer" style="background-color: #005bbb">
+
+  {% block foot %} 
+
+  {% endblock %} 
+
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">DAM Asset Management</h5>
+      </div>
+      <div class="col l4 offset-l2 s12">
+        <h5 class="white-text">Links</h5>
+        <ul>
+          <li><a class="grey-text text-lighten-3" href="#!">Home Page</a></li>
+          <li><a class="grey-text text-lighten-3" href="#!">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container center-align">&copy; 2018 Copyright Bugzfeed</div>
+  </div>
+</footer>
+
+
+</html>
