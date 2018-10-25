@@ -1,0 +1,86 @@
+{% extends 'inventory/base.html' %}
+{% load static %}
+
+{% block title %}DAM | Item Details{% endblock %}
+
+{% block body %}
+    <div class="col s6 offset-s1">
+        <div class="card">
+            <div class="carousel carousel-slider" id="demo-carousel-slider">
+                <a class="carousel-item" href="#one!"><img src={% static 'img/laptop-demo-img-1.jpg' %}></a>
+                <a class="carousel-item" href="#two!"><img src={% static 'img/laptop-demo-img-2.jpg' %}></a>
+                <a class="carousel-item" href="#three!"><img src={% static 'img/laptop-demo-img-3.jpg' %}></a>
+                <a class="carousel-item" href="#four!"><img src={% static 'img/laptop-demo-img-4.jpg' %}></a>
+            </div>
+            <script>
+                $(document).ready(function(){
+                    $('.carousel.carousel-slider').carousel({
+                        fullWidth: true,
+                        indicators: true
+                    });
+                })
+            </script>
+            <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">{{ item_name }}</span>
+                <p>{{ item_description }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+    <div class="col s4">
+        <div class="row">
+            <div class="card" style="background-color: #666666">
+                <div class="card-content white-text">
+                    <span class="card-title">Who May Borrow</span>
+                    <p>Current University at Buffalo faculty, staff and students may use their UB Card to borrow this item for a period of 2 weeks. It will be available for use at Baldy 19</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <ul class="collapsible" data-collapsible="expandable">
+                <li>
+                    <div class="collapsible-header" style="background-color: #e4e4e4">Reserve</div>
+                    <div class="collapsible-body">
+                        <div class="input-field col s6">
+                            <input id="first_name" type="text" class="validate">
+                            <label for="first_name">First Name</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" type="text" class="validate">
+                            <label for="last_name">Last Name</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="email" type="email" class="validate" pattern=".+@buffalo.edu">
+                            <label for="email">Email</label>
+                            <span class="helper-text" data-error="Your email address must end in: @buffalo.edu">@buffalo.edu email only</span>
+                        </div>
+                        <a onclick="M.toast({html: 'Your item has been reserved!'})" class="btn"><i class="material-icons right">send</i>Submit</a>
+                    </div>
+                </li>
+            </ul>
+            <script>
+                $(document).ready(function(){
+                    $('.collapsible').collapsible({accordion: true});
+                });
+            </script>
+        </div>
+    </div>
+    </div>
+{% endblock %}
+
+{% block foot %}
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">DAM Asset Management</h5>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="#!">Home Page</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

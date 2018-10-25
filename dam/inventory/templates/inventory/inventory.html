@@ -23,14 +23,15 @@
                     {% if item.available > 0 %}
                         <span class="new badge green" data-badge-caption="Available"></span>
                     {% else %}
-                        <span class="new badge red" data-badge-caption="Unavailable"></span>
-                    {% endif %}
-                    <span class="card-title" style="color:black;">{{ item.name }}</span>
+                    <span class="new badge red" data-badge-caption="Unavailable"></span>
+                  {% endif %}
+                <span class="card-title" style="color:black;">{{ item.name }}</span>
 
-                    <p>{{ item.description|truncatechars:140 }}</p>
-                </div>
-                <!-- Link to product page, whole card is clickable -->
-                <a class="link" href="#"></a>
+                <p>{{ item.description|truncatechars:140 }}</p>
+
+              </div>
+              <!-- Link to product page, whole card is clickable -->
+              <a class="link" href="{% url 'inventory:item-details' item.id %}"></a>
             </div>
         </div>
     {% endfor %}
