@@ -24,11 +24,19 @@
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'users:log-out' %}">Log Out</a></li>
                 {% else %}
-                <li><a href="{% url 'users:log-in' %}">Staff Log In</a></li>
+                    <li><a href="{% url 'users:log-in' %}">Staff Log In</a></li>
                 {% endif %}
             </ul>
         </div>
     </nav>
+
+    {% if messages %}
+        <div class="container">
+            {% for message in messages %}
+                <p class="notification">{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
 
     <main class="row container" style="margin: auto;">
         {% block body %}{% endblock %}
@@ -36,7 +44,7 @@
 
     <footer id="footer" class="page-footer" style="background-color: #005bbb; padding-top: 10px;">
         <div class="container center-align" style="padding-bottom: 10px;">
-          &copy; 2018 Copyright Bugzfeed
+            &copy; 2018 Copyright Bugzfeed
         </div>
     </footer>
 
