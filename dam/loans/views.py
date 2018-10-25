@@ -42,12 +42,6 @@ def allrets(request):
     args = {'returns': rets}
     return render(request, 'loans/allReturns.html', args)
 
-client= Client.objects.create {
-    first_name= form.cleaned_data['first_name']
-    last_name= form.cleaned_data['last_name']
-    email= form.cleaned_data['email']
-}
-
 def checkIfItemAvailable(request, item_id): 
     if request.method == 'POST':
         form= validForm(request.POST)
@@ -56,7 +50,12 @@ def checkIfItemAvailable(request, item_id):
                 item= Item.objects.with_availability().get(id=item_id)
             except Item.DoesNotExist:
                 raise Http404()
-            if item.available> 0:
+            if item.available > 0:
+                client= Client.objects.create {
+                    first_name= form.cleaned_data['first_name']
+                    last_name= form.cleaned_data['last_name']
+                    email= form.cleaned_data['email']
+                }
                 ItemReservation.object.create(
                     item=item,
                     client=client,
