@@ -48,6 +48,6 @@ def checkIfItemAvailable(request):
             messages.success(request, 'Your item has been reserved! You can pick it up from Baldy 19')
         else:
             messages.error(request, 'Your item was not reserved. Please go back and reserve the item again.')
-
+            
     return redirect('/results/details')
 
