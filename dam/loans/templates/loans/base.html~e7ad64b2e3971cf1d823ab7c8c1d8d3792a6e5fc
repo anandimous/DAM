@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/materialize.css' %}" type="text/css">
+
+    <link rel="stylesheet" href="{% static 'css/results_style.css' %}" type="text/css">
+
+    <link rel="stylesheet" href="{% static 'css/issue_style.css' %}" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+        <nav>
+            <div class="nav-wrapper">
+              <a href="#" class="brand-logo">DAM</a>
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="{% url 'admin:index' %}">Staff Login</a></li>
+              </ul>
+            </div>
+          </nav>
+
+<div class="row container" style="margin: auto;">
+    {% block body %}
+    {% endblock %}
+</div>
+
+</body>
+<footer id="footer" class="page-footer" style="background-color: #005bbb"><!--color added inline-->
+      <div class="footer-copyright">
+        <div class="container center-align">
+          &copy; 2018 Copyright Bugzfeed
+          <!--<a class="grey-text text-lighten-4 right" href="#!">More Links</a>-->
+        </div>
+      </div>
+    </footer>
+</html>
