@@ -1,58 +1,15 @@
-/*
-CSS Directory:
-1- head
-2- body
-3- footer
-4- media
-    a- buttons
-5- imports
-*/
-
-body {
-
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-}
-.brand_logo{
-    font-family: 'Roboto Slab', serif ;
-    font-size: 36px;
-    font-weight: 100;
-    line-height: 1.5;
+.card {
+    min-height: 480px;
 }
 
-main {
-    flex: 1 0 auto;
-}
-nav{
-    background-color: #005bbb;
-    width: 100%;
-    margin-bottom: 15px;
-}
-.btn-large{
-    background-color: #005bbb;
-    width: 100%;
+.card-image {
+    height: 300px;
 }
 
-.pagination li.active {
-  background-color: #005bbb;
+.card-title {
+    color: black;
+}
 
-}
-.link{
-  position: absolute;
-top: 0; left: 0;
-height: 100%; width: 100%;
-}
-.card{
-  min-height: 480px;
-}
-.card-image{
-  height:300px;
-}
-.card-title{
-  color: black;
-}
 .card:hover {
-  box-shadow: 0 0 25px rgba(33,33,33,33);
+    box-shadow: 0 0 25px rgba(33, 33, 33, 33);
 }
-

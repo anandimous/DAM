@@ -16,6 +16,8 @@
                   <a class="link" href="{{ reserve.pk }}"></a>
              </div>
             </div>
+        {% empty %}
+            <h1 style="text-align: center;">No Reservations</h1>
         {% endfor %}
     </div>
 {% endblock %}
