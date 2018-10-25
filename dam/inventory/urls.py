@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import *
+from .views import index, item_details
 
 app_name = 'inventory'
 
