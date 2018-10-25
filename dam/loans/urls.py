@@ -7,5 +7,5 @@ app_name = 'loans'
 urlpatterns = [
     path('<int:reservation_id>/', reservations, name='reservations'),
     path('loans', allres, name='allres'),
-    path('returnslist', allrets, name='allrets')
+    path('returns', allrets, name='allrets'),
 ]
