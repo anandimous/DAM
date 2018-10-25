@@ -52,11 +52,4 @@ class ValidateTestCases(TestCase):
         #result= ValidateTestCases()
 
     #def invalid_email(self, mock_get):
-        
-
-
-
-
-
-
-def 
+         
