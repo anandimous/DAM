@@ -22,3 +22,6 @@ class Item(models.Model):
     quantity = models.PositiveIntegerField()
 
     objects = ItemManager()
+
+    def __str__(self):
+        return self.name
