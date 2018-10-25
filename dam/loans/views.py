@@ -28,6 +28,7 @@ def reservations(request, reservation_id):
     return render(request, 'loans/loanItem.html', args)
 
 def allres(request):
-    res = ItemReservation.objects.all()
+    res = ItemReservation.objects.filter(is_active=True)
+
     args = {'reserves':res}
     return render(request, 'loans/allReservations.html', args)
