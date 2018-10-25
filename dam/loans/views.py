@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from dam.loans.models import ItemReservation, ItemLoan
 from datetime import datetime
+from django.urls import reverse
 
 @login_required
 def reservations(request, reservation_id):
@@ -22,12 +23,12 @@ def reservations(request, reservation_id):
             reservation.is_active = False
             reservation.save()
             messages.success(request, 'Loan Successful!')
-            return HttpResponseRedirect('/loans/reservations')
+            return HttpResponseRedirect(reverse('loans:allres'))
         if "Decline" in request.POST:
             messages.success(request, 'Loan Declined!')
             reservation.is_active = False
             reservation.save()
-            return HttpResponseRedirect('/loans/reservations')
+            return HttpResponseRedirect(reverse('loans:allres'))
     return render(request, 'loans/loanItem.html', args)
 
 
@@ -41,11 +42,10 @@ def returns(request, loan_id):
             'user': request.user
             }
     if request.method == "POST":
-        if "Return" in request.POST:
-            loan.returned_at = datetime.utcnow()
-            loan.save()
-            messages.success(request, 'Item Returned!')
-            return HttpResponseRedirect('/loans/loans')
+        loan.returned_at = datetime.utcnow()
+        loan.save()
+        messages.success(request, 'Item Returned!')
+        return HttpResponseRedirect(reverse('loans:allrets'))
     return render(request, 'loans/returnItem.html', args)
 
 
