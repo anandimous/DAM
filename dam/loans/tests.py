@@ -57,11 +57,14 @@ class ReservationPossibleTest(TestCase):
         item = Item.objects.with_availability().first()
         self.assertEqual(count, 2)
 
-    def test_item_reserve_redirect(self):
-        resId = ItemReservation.objects.all()
-        response = self.client.post('/loans/reservations/1', follow=True)
-        self.assertRedirects(response, '/loans/reservations/')
-
-
+    def test_reservation_active(self):
+        ItemReservation.objects.create(
+            item=self.test_item,
+            client=self.item_client,
+            is_active=True,
+        )
+        item = Item.objects.with_availability().first()
+        self.assertEqual(item.quantity, 10)
+        self.assertEqual(item.available, 9)
 
 # Create your tests here.
