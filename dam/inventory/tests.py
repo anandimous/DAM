@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from django.utils import timezone
+from django.contrib.messages.storage.fallback import FallbackStorage
+from django.contrib import messages
 
 from dam.inventory.models import Item
 from dam.loans.models import Client, ItemLoan, ItemReservation
