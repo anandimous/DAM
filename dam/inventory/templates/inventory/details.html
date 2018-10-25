@@ -31,6 +31,12 @@
                     <a class="carousel-item" href="#three!"><img src={% static 'img/raspi-demo-img-3.jpg' %}></a>
                     <a class="carousel-item" href="#four!"><img src={% static 'img/raspi-demo-img-4.jpg' %}></a>
                 {% endif %}
+                {% if item_id >= 5 %}
+                    <a class="carousel-item" href="#one!"><img src={% static 'img/placeholder.png' %}></a>
+                    <a class="carousel-item" href="#two!"><img src={% static 'img/placeholder.png' %}></a>
+                    <a class="carousel-item" href="#three!"><img src={% static 'img/placeholder.png' %}></a>
+                    <a class="carousel-item" href="#four!"><img src={% static 'img/placeholder.png' %}></a>
+                {% endif %}
             </div>
             <script>
                 $(document).ready(function(){
@@ -61,24 +67,26 @@
                     <li>
                         <div class="collapsible-header" style="background-color: #e4e4e4">Reserve</div>
                         <div class="collapsible-body">
-{#                          <form action="{% url 'loans:reserve' item_id %}" method="post">
-                            {% csrf_token %}
-                            <div class="input-field col s6">
-                                <label for="first_name">First Name</label>
-                                <input id="first_name" type="text" class="validate" name="first_name">
-                            </div>
-                            <div class="input-field col s6">
-                                <label for="last_name">Last Name</label>
-                                <input id="last_name" type="text" class="validate" name="last_name">
-                            </div>
-                            <div class="input-field col s12">
-                                <label for="email">Email</label>
-                                <input id="email" type="email" class="validate" pattern=".+@buffalo.edu" name="email">
-                                <span class="helper-text" data-error="Your email address must end in: @buffalo.edu">@buffalo.edu email only</span>
-                            </div>
-                            <button class="btn waves-effect waves-light" name="submit" type="submit">
-                                Submit<i class="material-icons right">send</i>
-                            </button>
+                            <form action="{% url 'loans:reserve' item_id %}" method="post">
+                                {% csrf_token %}
+                                {{ form.errors }}
+                                {{ form.non_field_errors }}
+                                <div class="input-field col s6">
+                                    <label for="first_name">First Name</label>
+                                    <input id="first_name" type="text" class="validate" name="first_name">
+                                </div>
+                                <div class="input-field col s6">
+                                    <label for="last_name">Last Name</label>
+                                    <input id="last_name" type="text" class="validate" name="last_name">
+                                </div>
+                                <div class="input-field col s12">
+                                    <label for="email">Email</label>
+                                    <input id="email" type="email" class="validate" pattern=".+@buffalo.edu" name="email">
+                                    <span class="helper-text" data-error="Your email address must end in: @buffalo.edu">@buffalo.edu email only</span>
+                                </div>
+                                <button class="btn waves-effect waves-light" name="submit" type="submit">
+                                    Submit<i class="material-icons right">send</i>
+                                </button>
                             </form>
                         </div>
                     </li>

@@ -30,8 +30,11 @@
             <div class="card-image"
                  style="background-image:url({% static 'img/raspi-demo-img-1.jpg' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
         {% endif %}
+        {% if item.id >= 5 %}
+            <div class="card-image"
+                 style="background-image:url({% static 'img/placeholder.png' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
+        {% endif %}
     </div>
-
     <div class="card-content">
         {% if item.available > 0 %}
             <span class="new badge green" data-badge-caption="Available"></span>

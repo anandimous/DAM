@@ -8,5 +8,5 @@ urlpatterns = [
     path('reservations/', allres, name='allres'),
     path('loans/<int:loan_id>/', returns, name='loan'),
     path('loans/', allrets, name='allrets'),
-    path('/reserve/<int:item_id>/',checkIfItemAvailable, name='reserve')
+    path('reserve/<int:item_id>/', checkIfItemAvailable, name='reserve')
 ]
