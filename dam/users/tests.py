@@ -67,5 +67,5 @@ class LogOutTest(TestCase):
         self.assertIn(SESSION_KEY, self.client.session)
         response = self.client.get('/users/log-out/')
         self.assertNotIn(SESSION_KEY, self.client.session)
-        self.assertRedirects(response, '/inventory/')
+        self.assertRedirects(response, '/')
 

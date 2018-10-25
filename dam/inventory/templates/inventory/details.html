@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}DAM | Item Details{% endblock %}
+{% block title %}Item Details{% endblock %}
 
 {% block body %}
     <div class="col s6 offset-s1">
@@ -61,7 +61,7 @@
                     <li>
                         <div class="collapsible-header" style="background-color: #e4e4e4">Reserve</div>
                         <div class="collapsible-body">
-                            <form action="{% url 'loans:reserve' item_id %}" method="post">
+{#                            <form action="{% url 'loans:reserve' item_id %}" method="post">#}
                             {% csrf_token %}
                             <div class="input-field col s6">
                                 <label for="first_name">First Name</label>
@@ -90,22 +90,5 @@
                 </script>
         </div>
     </div>
-    </div>
-{% endblock %}
-
-{% block foot %}
-    <div class="container">
-        <div class="row">
-            <div class="col l6 s12">
-                <h5 class="white-text">DAM Asset Management</h5>
-            </div>
-            <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Links</h5>
-                <ul>
-                    <li><a class="grey-text text-lighten-3" href="#!">Home Page</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Contact Us</a></li>
-                </ul>
-            </div>
-        </div>
     </div>
 {% endblock %}
