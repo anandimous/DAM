@@ -11,5 +11,5 @@ class reserveItemForm(forms.Form):
     def clean_email(self):
         email=self.cleaned_data['email']
         if not email.endswith('@buffalo.edu'):
-            raise ValidationError('Invalid email! Please use your @buffalo.edu email address to reserve items.')
+            raise forms.ValidationError('Invalid email! Please use your @buffalo.edu email address to reserve items.')
         return email
