@@ -10,3 +10,5 @@ def render(request):
         else:
             messages.error(request, 'Your item was not reserved. Please go back and reserve the item again.')
 
+    return redirect('/results/details')
+
