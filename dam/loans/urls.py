@@ -7,6 +7,6 @@ urlpatterns = [
     path('<int:reservation_id>/', reservations, name='reservations'),
     path('loans', allres, name='allres'),
     path('returns', allrets, name='allrets'),
-]   path('',checkIfItemAvailable, name='issue')
+]   path('',checkIfItemAvailable, name='issue'),
     path('/<int:item_id>/<str:first_name>/<str:last_name>/<str:email>',checkIfItemAvailable, name='issue')
 ]
