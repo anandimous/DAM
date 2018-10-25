@@ -110,3 +110,29 @@ class InventoryAvailabilityTest(TestCase):
         item = Item.objects.with_availability().first()
         self.assertEqual(item.quantity, 10)
         self.assertEqual(item.available, 8)
+
+
+class InventoryDetailsTest(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.test_item = Item.objects.create(
+            name='Name 1',
+            description='Description 1.',
+            quantity=10,
+        )
+
+    def test_view_uses_correct_template(self):
+        response = self.client.get('/details/1')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'inventory/details.html')
+
+    def test_response_on_valid_item(self):
+        response = self.client.get('/details/1')
+        self.assertEqual(response.context['item_id'], 1)
+        self.assertEqual(response.context['item_name'], 'Name 1')
+        self.assertEqual(response.context['item_description'], 'Description 1.')
+
+    def test_response_on_invalid_item(self):
+        response = self.client.get('/details/0')
+        self.assertEqual(response.status_code, 404)

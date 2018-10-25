@@ -13,25 +13,42 @@
 
     {% for item in items %}
         <div class="col s12 m4">
-            <div class="card">
-                <div class="card-image"
-                     style="background-image:url({% static 'img/placeholder.png' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
-                    <!-- <img src="images/oculus.jpg"> -->
-                </div>
+        <div class="card">
+        {% if item.id == 1 %}
+            <div class="card-image"
+                 style="background-image:url({% static 'img/laptop-demo-img-1.jpg' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
+        {% endif %}
+        {% if item.id == 2 %}
+            <div class="card-image"
+                 style="background-image:url({% static 'img/oculus-demo-img-1.jpg' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
+        {% endif %}
+        {% if item.id == 3 %}
+            <div class="card-image"
+                style="background-image:url({% static 'img/echo-demo-img-1.jpg' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
+        {% endif %}
+        {% if item.id == 4 %}
+            <div class="card-image"
+                 style="background-image:url({% static 'img/raspi-demo-img-1.jpg' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
+        {% endif %}
+        {% if item.id >= 5 %}
+            <div class="card-image"
+                 style="background-image:url({% static 'img/placeholder.png' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
+        {% endif %}
+    </div>
+    <div class="card-content">
+        {% if item.available > 0 %}
+            <span class="new badge green" data-badge-caption="Available"></span>
+        {% else %}
+            <span class="new badge red" data-badge-caption="Unavailable"></span>
+        {% endif %}
+        <span class="card-title" style="color:black;">{{ item.name }}</span>
 
-                <div class="card-content">
-                    {% if item.available > 0 %}
-                        <span class="new badge green" data-badge-caption="Available"></span>
-                    {% else %}
-                        <span class="new badge red" data-badge-caption="Unavailable"></span>
-                    {% endif %}
-                    <span class="card-title" style="color:black;">{{ item.name }}</span>
+        <p>{{ item.description|truncatechars:140 }}</p>
 
-                    <p>{{ item.description|truncatechars:140 }}</p>
-                </div>
-                <!-- Link to product page, whole card is clickable -->
-                <a class="link" href="#"></a>
-            </div>
-        </div>
+    </div>
+    <!-- Link to product page, whole card is clickable -->
+    <a class="link" href="{% url 'inventory:item-details' item.id %}"></a>
+    </div>
+    </div>
     {% endfor %}
 {% endblock %}

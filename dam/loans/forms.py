@@ -4,7 +4,6 @@ from django.core.exceptions import ValidationError
 class reserveItemForm(forms.Form):
     
     email = forms.EmailField()
-    item_id= forms.IntegerField()
     first_name = forms.CharField()
     last_name = forms.CharField()
 
