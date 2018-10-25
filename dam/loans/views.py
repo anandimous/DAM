@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from dam.loans.models import ItemReservation, ItemLoan
 from django.contrib import messages 
 from django.urls import reverse
-import forms
+from . import forms
 
 @login_required
 def reservations(request, reservation_id):
