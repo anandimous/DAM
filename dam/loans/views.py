@@ -54,7 +54,7 @@ def checkIfItemAvailable(request, item_id):
                 messages.success(request, 'Your item has been reserved! You can pick it up from Baldy 19')
                 return redirect('/details',input_id=item_id)
             else:
-                messages.error(request, 'Your item was not reserved. Please go back and reserve the item again.'
+                messages.error(request, 'Your item was not reserved. Please go back and reserve the item again.')
                 return redirect(reverse('inventory:index'))
         else:
             raise Http404()
