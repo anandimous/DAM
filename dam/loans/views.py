@@ -18,6 +18,7 @@ def reservations(request, reservation_id):
     if request.method=="POST":
         if "Approve" in request.POST:
             itemloaned = ItemLoan.objects.create(item=reservation.item, client=reservation.client, approved_by=request.user)
+
             reservation.is_active = False
             reservation.save()
             messages.success(request, 'Loan Successful!')
@@ -32,5 +33,10 @@ def reservations(request, reservation_id):
 def allres(request):
     res = ItemReservation.objects.filter(is_active=True)
 
-    args = {'reserves':res}
+    args = {'reserves': res}
     return render(request, 'loans/allReservations.html', args)
+
+def allrets(request):
+    rets = ItemLoan.objects.filter(returned_at__isnull=True)
+    args = {'returns': rets}
+    return render(request, 'loans/allReturns.html', args)
