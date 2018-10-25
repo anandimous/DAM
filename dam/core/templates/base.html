@@ -22,7 +22,8 @@
             <a href="{% url 'inventory:index' %}" class="brand-logo" id="logo">DAM</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 {% if user.is_authenticated %}
-                <li><a href="{% url 'users:log-out' %}">Log Out</a></li>
+                    <li><a href="{% url 'showDash' %}">Dashboard</a></li>
+                    <li><a href="{% url 'users:log-out' %}">Log Out</a></li>
                 {% else %}
                     <li><a href="{% url 'users:log-in' %}">Staff Log In</a></li>
                 {% endif %}
