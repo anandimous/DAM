@@ -42,7 +42,7 @@ def allrets(request):
     args = {'returns': rets}
     return render(request, 'loans/allReturns.html', args)
 
-def render(request): 
+def redirect_view(request): 
     if request.method == 'POST':
         if(Item.objects.with_availability().get(id=item_id).available() > 0 and Item.exists()):
             messages.set_level(request, messages.SUCCESS)
