@@ -3,41 +3,41 @@
 {% block title %}Log in{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h1>Log in</h1>
+    <h1>Log in</h1>
 
-        {% if form.errors %}
-            <div class="row notification" style="background-color: #900;">
-                <div class="col s12">
+    <div class="row">
+        <form class="col s12 m10 offset-m1 l8 offset-l2" method="post">
+            {% csrf_token %}
+
+            {% if form.errors %}
+                <div class="notification" style="background-color: #900; margin-bottom: 1rem;">
                     {{ form.non_field_errors|join:' ' }}
                 </div>
-            </div>
-        {% endif %}
+            {% endif %}
 
-        <div class="row">
-            <form class="col s12 m6 offset-m3" method="post">
-                {% csrf_token %}
-
-                <div class="card-panel">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            {{ form.username }}
-                            {{ form.username.label_tag }}
-                        </div>
+            <div class="card-panel">
+                <div class="row">
+                    <div class="input-field col s12">
+                        {{ form.username }}
+                        {{ form.username.label_tag }}
                     </div>
-
-                    <div class="row">
-                        <div class="input-field col s12">
-                            {{ form.password }}
-                            {{ form.password.label_tag }}
-                        </div>
-                    </div>
-
-                    <button class="btn waves-effect waves-light">
-                        Log in
-                    </button>
                 </div>
-            </form>
-        </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        {{ form.password }}
+                        {{ form.password.label_tag }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s12 center">
+                        <button class="btn-large waves-effect waves-light">
+                            Log in
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 {% endblock %}
