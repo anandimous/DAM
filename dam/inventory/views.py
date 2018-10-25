@@ -11,4 +11,4 @@ def index(request):
 def item_details(request, input_id):
     item_id = input_id
     item = models.Item.objects.get(pk=item_id)
-    return render(request, 'inventory/details.html', {'item_name': item.name, 'item_description': item.description})
+    return render(request, 'inventory/details.html', {'item_id': item_id, 'item_name': item.name, 'item_description': item.description})

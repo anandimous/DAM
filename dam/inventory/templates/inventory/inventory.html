@@ -14,8 +14,23 @@
     {% for item in items %}
         <div class="col s12 m4">
             <div class="card">
-                <div class="card-image"
-                     style="background-image:url({% static 'img/placeholder.png' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
+                {% if item.id == 1 %}
+                    <div class="card-image"
+                     style="background-image:url({% static 'img/laptop-demo-img-1.jpg' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
+                {% endif %}
+                {% if item.id == 2 %}
+                    <div class="card-image"
+                     style="background-image:url({% static 'img/oculus-demo-img-1.jpg' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
+                {% endif %}
+                {% if item.id == 3 %}
+                    <div class="card-image"
+                     style="background-image:url({% static 'img/echo-demo-img-1.jpg' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
+                {% endif %}
+                {% if item.id == 4 %}
+                    <div class="card-image"
+                     style="background-image:url({% static 'img/raspi-demo-img-1.jpg' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
+                {% endif %}
+
                     <!-- <img src="images/oculus.jpg"> -->
                 </div>
 

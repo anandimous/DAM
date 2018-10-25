@@ -1,4 +1,4 @@
-{% extends 'inventory/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block title %}DAM | Item Details{% endblock %}
@@ -7,10 +7,30 @@
     <div class="col s6 offset-s1">
         <div class="card">
             <div class="carousel carousel-slider" id="demo-carousel-slider">
-                <a class="carousel-item" href="#one!"><img src={% static 'img/laptop-demo-img-1.jpg' %}></a>
-                <a class="carousel-item" href="#two!"><img src={% static 'img/laptop-demo-img-2.jpg' %}></a>
-                <a class="carousel-item" href="#three!"><img src={% static 'img/laptop-demo-img-3.jpg' %}></a>
-                <a class="carousel-item" href="#four!"><img src={% static 'img/laptop-demo-img-4.jpg' %}></a>
+                {% if item_id == 1 %}
+                    <a class="carousel-item" href="#one!"><img src={% static 'img/laptop-demo-img-1.jpg' %}></a>
+                    <a class="carousel-item" href="#two!"><img src={% static 'img/laptop-demo-img-2.jpg' %}></a>
+                    <a class="carousel-item" href="#three!"><img src={% static 'img/laptop-demo-img-3.jpg' %}></a>
+                    <a class="carousel-item" href="#four!"><img src={% static 'img/laptop-demo-img-4.jpg' %}></a>
+                {% endif %}
+                {% if item_id == 2 %}
+                    <a class="carousel-item" href="#one!"><img src={% static 'img/oculus-demo-img-1.jpg' %}></a>
+                    <a class="carousel-item" href="#two!"><img src={% static 'img/oculus-demo-img-2.jpg' %}></a>
+                    <a class="carousel-item" href="#three!"><img src={% static 'img/oculus-demo-img-3.jpg' %}></a>
+                    <a class="carousel-item" href="#four!"><img src={% static 'img/oculus-demo-img-4.jpg' %}></a>
+                {% endif %}
+                {% if item_id == 3 %}
+                    <a class="carousel-item" href="#one!"><img src={% static 'img/echo-demo-img-1.jpg' %}></a>
+                    <a class="carousel-item" href="#two!"><img src={% static 'img/echo-demo-img-2.jpg' %}></a>
+                    <a class="carousel-item" href="#three!"><img src={% static 'img/echo-demo-img-3.jpg' %}></a>
+                    <a class="carousel-item" href="#four!"><img src={% static 'img/echo-demo-img-4.jpg' %}></a>
+                {% endif %}
+                {% if item_id == 4 %}
+                    <a class="carousel-item" href="#one!"><img src={% static 'img/raspi-demo-img-1.jpg' %}></a>
+                    <a class="carousel-item" href="#two!"><img src={% static 'img/raspi-demo-img-2.jpg' %}></a>
+                    <a class="carousel-item" href="#three!"><img src={% static 'img/raspi-demo-img-3.jpg' %}></a>
+                    <a class="carousel-item" href="#four!"><img src={% static 'img/raspi-demo-img-4.jpg' %}></a>
+                {% endif %}
             </div>
             <script>
                 $(document).ready(function(){
