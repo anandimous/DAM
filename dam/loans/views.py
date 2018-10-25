@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib import messages 
 
 # Create your views here.
-def render(request): 
+def redirect_view(request): 
     if request.method == 'POST':
         if(Item.objects.with_availability().get(id=item_id).available() > 0 and Item.exists()):
             messages.set_level(request, messages.SUCCESS)
