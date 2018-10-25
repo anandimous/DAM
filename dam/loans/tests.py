@@ -1,32 +1,31 @@
 from django.test import TestCase
-from django.test import Client 
 
 # Create your tests here.
 
 class ValidateTestCases(TestCase):
 
     def test_details(self):
-        response= self.client.post('/inventory/details/2')
+        response= self.client.post('/loans/reserve/2')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['email'],'mhertz@buffalo.edu')
     
     def test_invalid_email(self):
-        response= self.client.post('/inventory/details/1')
+        response= self.client.post('/loans/reserve/1')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['email'],'mhertz@buf.aalo.edu')
 
     def test_negative_id(self):
-        response= self.client.post('/inventory/details/2')
+        response= self.client.post('/loans/reserve/2')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['id'],'-2')
 
     def test_zero_id(self):
-        response= self.client.post('/inventory/details/1')
+        response= self.client.post('/loans/reserve/1')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['id'],'0')
 
     def test_negative_id(self):
-        response= self.client.post('/inventory/details/3')
+        response= self.client.post('/loans/reserve/3')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['id'],'-2')
 
