@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% block title %}Returns{% endblock %}
 {% block body %}
     <div style="padding-top: 50px;">
         {% for loan in returns %}
@@ -13,9 +14,11 @@
                     <p>Approved at: {{ loan.approved_at }}</p>
                   </div>
                   <!-- Link to product page, whole card is clickable -->
-                  <a class="link" href="{{ reserve.pk }}"></a>
+                  <a class="link" href="{{ loan.pk }}"></a>
              </div>
             </div>
+        {% empty %}
+            <h1 style="text-align: center;">No Loans</h1>
         {% endfor %}
     </div>
 {% endblock %}

@@ -1,11 +1,12 @@
 from django.urls import path
-from .views import reservations, allres, allrets
+from .views import reservations,returns, allres, allrets
 
 
 app_name = 'loans'
 
 urlpatterns = [
-    path('<int:reservation_id>/', reservations, name='reservations'),
-    path('loans', allres, name='allres'),
-    path('returns', allrets, name='allrets'),
+    path('reservations/<int:reservation_id>/', reservations, name='reservation'),
+    path('reservations/', allres, name='allres'),
+    path('loans/<int:loan_id>/', returns, name='loan'),
+    path('loans/', allrets, name='allrets'),
 ]
