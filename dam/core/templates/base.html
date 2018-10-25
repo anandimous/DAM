@@ -19,7 +19,7 @@
 <body>
     <nav style="margin-bottom: 0;">
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo" id="logo">DAM</a>
+            <a href="{% url 'inventory:index' %}" class="brand-logo" id="logo">DAM</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'users:log-out' %}">Log Out</a></li>
