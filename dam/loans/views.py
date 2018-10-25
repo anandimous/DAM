@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from ..inventory import models
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -21,10 +21,12 @@ def reservations(request, reservation_id):
             reservation.is_active = False
             reservation.save()
             messages.success(request, 'Loan Successful!')
+            return HttpResponseRedirect('/loans/loanslist')
         if "Decline" in request.POST:
             messages.success(request, 'Loan Declined!')
-        reservation.is_active = False
-        reservation.save()
+            reservation.is_active = False
+            reservation.save()
+            return HttpResponseRedirect('/loans/loanslist')
     return render(request, 'loans/loanItem.html', args)
 
 def allres(request):
