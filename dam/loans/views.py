@@ -24,9 +24,9 @@ def reservations(request, reservation_id):
             return HttpResponseRedirect('/loans/loanslist')
         if "Decline" in request.POST:
             messages.success(request, 'Loan Declined!')
+            reservation.is_active = False
+            reservation.save()
             return HttpResponseRedirect('/loans/loanslist')
-        reservation.is_active = False
-        reservation.save()
     return render(request, 'loans/loanItem.html', args)
 
 def allres(request):
