@@ -2,31 +2,6 @@
 
 {% block title %}Log in{% endblock %}
 
-{% block style %}
-    <style>
-        .btn,
-        nav {
-            background-color: #005bbb;
-        }
-
-        .btn:focus,
-        .btn:hover {
-            background-color: #002f56;
-        }
-
-        input[type=email]:not(.browser-default):focus:not([readonly]),
-        input[type=password]:not(.browser-default):focus:not([readonly]) {
-            border-bottom-color: #005bbb;
-            box-shadow: 0 1px 0 0 #005bbb;
-        }
-
-        input[type=email]:not(.browser-default):focus:not([readonly]) + label,
-        input[type=password]:not(.browser-default):focus:not([readonly]) + label {
-            color: #005bbb;
-        }
-    </style>
-{% endblock %}
-
 {% block body %}
     <div class="container">
         <h1>Log in</h1>

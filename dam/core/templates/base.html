@@ -7,9 +7,8 @@
 
     <title>{% block title %}DAM{% endblock %} | DAM</title>
 
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'css/results_style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/issue_style.css' %}" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -17,7 +16,7 @@
 </head>
 
 <body>
-    <nav style="margin-bottom: 0;">
+    <nav>
         <div class="nav-wrapper">
             <a href="{% url 'inventory:index' %}" class="brand-logo" id="logo">DAM</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
