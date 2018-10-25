@@ -8,7 +8,7 @@
                     <span class="card-title" style="color:black;">{{ loan.item.name }}</span>
                     <p>Email: {{ loan.client.email }}</p>
                     <p>Name: {{ loan.client.first_name|add:" "|add:loan.client.last_name}}</p>
-                    <p>Reserved on: {{ loan.reserved_at }}</p>
+                    <p>Reserved at: {{ loan.reserved_at }}</p>
                     <p>Approved by: {{ loan.approved_by }}</p>
                     <p>Approved at: {{ loan.approved_at }}</p>
                   </div>
