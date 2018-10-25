@@ -67,4 +67,5 @@ class ReservationPossibleTest(TestCase):
         self.assertEqual(item.quantity, 10)
         self.assertEqual(item.available, 9)
 
+
 # Create your tests here.
