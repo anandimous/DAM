@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import reservations, allres, allrets
+
+from .views import reservations, allres, allrets, checkIfItemAvailable
 
 app_name = 'loans'
 
