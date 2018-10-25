@@ -4,7 +4,7 @@ from ..inventory import models
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from dam.loans.models import ItemReservation, ItemLoan
-from datetime import datetime
+from django.utils import timezone
 from django.urls import reverse
 
 @login_required
@@ -42,7 +42,7 @@ def returns(request, loan_id):
             'user': request.user
             }
     if request.method == "POST":
-        loan.returned_at = datetime.utcnow()
+        loan.returned_at = timezone.now()
         loan.save()
         messages.success(request, 'Item Returned!')
         return HttpResponseRedirect(reverse('loans:allrets'))
