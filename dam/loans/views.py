@@ -2,10 +2,11 @@ from django.shortcuts import render
 from django.http import Http404, HttpResponseRedirect
 from ..inventory import models
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from dam.loans.models import ItemReservation, ItemLoan
-from django.utils import timezone
+from dam.loans.models import ItemReservation, ItemLoan, Client
+from django.contrib import messages 
 from django.urls import reverse
+from dam.core import forms
+from django.utils import timezone
 
 @login_required
 def reservations(request, reservation_id):
@@ -60,3 +61,32 @@ def allrets(request):
     rets = ItemLoan.objects.filter(returned_at__isnull=True)
     args = {'returns': rets}
     return render(request, 'loans/allReturns.html', args)
+
+def checkIfItemAvailable(request, item_id): 
+    if request.method == 'POST':
+        form= validForm(request.POST)
+        if form.is_valid():
+            try: 
+                item= Item.objects.with_availability().get(id=item_id)
+            except Item.DoesNotExist:
+                raise Http404()
+            if item.available > 0:
+                client= Client.objects.create {
+                    first_name= form.cleaned_data['first_name']
+                    last_name= form.cleaned_data['last_name']
+                    email= form.cleaned_data['email']
+                }
+                ItemReservation.object.create(
+                    item=item,
+                    client=client,
+                )
+                messages.success(request, 'Your item has been reserved! You can pick it up from Baldy 19')
+                return redirect('/details',input_id=item_id)
+            else:
+                messages.error(request, 'Your item was not reserved. Please go back and reserve the item again.')
+                return redirect(reverse('inventory:index'))
+        else:
+            raise Http404()
+
+
+
