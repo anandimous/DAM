@@ -32,11 +32,6 @@ class ValidateTestCases(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['id'],'-2')
 
-    def negative_id(self):
-        response= self.client.get('/client/details/(id=item_id)')
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['id'],'-2')
-
 
 
 
