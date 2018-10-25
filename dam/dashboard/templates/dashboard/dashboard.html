@@ -16,45 +16,25 @@
             width: 280px;
         }
 
-        .dash_btn {
-            margin-left: auto;
-            margin-right: auto;
-            display: block;
-            background-color: #005bbb;
-            color: white;
-            width: 240px;
-            height: 40px;
-            font-size: 20px;
-            margin-top: 12px;
+        .card .card-content .card-title {
+            margin: 8px 0 0;
         }
 
-        .dash_btn:hover {
-            background-color: #002f56;
-            box-shadow: 0 0 0.3px 0.3px black;
+        .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
+            color: #005bbb;
+            line-height: 2.5;
+            margin: 0 12px;
+            white-space: nowrap;
         }
-
-        .box {
-            box-shadow: 0 0 3px 0.1px gray;
-            text-align: center;
-            width: 60%;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
+        .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating):focus,
+        .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating):hover {
+            color: #002f56;
         }
 
         @media only screen and (max-width: 600px) {
-            .box {
-                width: 100%;
-            }
-
-            h1 {
-                font-size: 40px;
-                padding-top: 5%;
-            }
-
             .profile {
-                width: 240px;
-                height: 240px;
+                width: 220px;
+                height: 220px;
             }
         }
     </style>
@@ -62,39 +42,24 @@
 {% endblock %}
 
 {% block title %}Dashboard{% endblock %}
+
 {% block body %}
-
     <h1>Dashboard</h1>
-    <div class="box">
 
-        <br>
+    <div class="row">
+        <div class="col s12 m10 offset-m1 l8 offset-l2">
+            <div class="card" style="text-align: center;">
+                <div class="card-content">
+                    <div class="profile"></div>
+                    <span class="card-title">{{ user.get_full_name }}</span>
+                </div>
 
-        <div class="profile"></div>
-
-
-        <h4>{{ user.get_full_name }}</h4>
-
-
-        <hr>
-
-        <div>
-            <a class="dash_btn" href="{% url 'loans:allres' %}">Reserve Item List</a>
+                <div class="card-action dashboard-links">
+                    <a href="{% url 'loans:allres' %}">Reserve Item List</a>
+                    <a href="{% url 'loans:allrets' %}">Return Item List</a>
+                    <a href="{% url 'admin:index' %}">Add/Remove Item</a>
+                </div>
+            </div>
         </div>
-
-        <div>
-            <a class="dash_btn" href="{% url 'loans:allrets' %}">Return Item List</a>
-        </div>
-
-        {#Currently adding and removing via django admin#}
-        <div>
-            <a class="dash_btn" href={% url 'admin:index' %}>Add/Remove Item</a>
-        </div>
-
-        {#        <div>#}
-        {#            <a class="dashBtn" href="#">Remove Item</a>#}
-        {#        </div>#}
-        <br>
     </div>
-    <br>
-
 {% endblock %}
