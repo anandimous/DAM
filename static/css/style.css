@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+body {
+    background-color: #ffffff;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Lato';
+    font-size: 14px;
+    font-weight: 200;
+    line-height: 1.65;
+    min-height: 100vh;
+}
+
+nav {
+    background-color: #005bbb;
+    width: 100%;
+}
+
+.brand_logo {
+    font-family: 'Roboto Slab', serif;
+    font-size: 36px;
+    font-weight: 100;
+    line-height: 1.5;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+h1 {
+    font-family: Roboto, sans-serif;
+    text-align: center;
+}
+
+h2, h3 {
+    font-weight: 100;
+    line-height: 1.5;
+}
+
+h4, h5, h6 {
+    font-family: 'Lato';
+    font-weight: 200;
+    line-height: 1;
+}
+
+.btn,
+.btn-large,
+.btn-small {
+    background-color: #005bbb;
+}
+
+.btn:focus,
+.btn:hover,
+.btn-large:focus,
+.btn-large:hover,
+.btn-small:focus,
+.btn-small:hover {
+    background-color: #002f56;
+}
+
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]) {
+    border-bottom-color: #005bbb;
+    box-shadow: 0 1px 0 0 #005bbb;
+}
+
+input[type=email]:not(.browser-default):focus:not([readonly]) + label,
+input[type=password]:not(.browser-default):focus:not([readonly]) + label {
+    color: #005bbb;
+}
+
+.pagination li.active {
+    background-color: #005bbb;
+}
+
+.link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#lato {
+    font-family: 'Lato';
+    font-size: 18px;
+    font-weight: 200;
+    line-height: 1.65;
+}
+
+#ubblue {
+    background: #005bbb;
+    color: #ffffff;
+    outline: 1px solid black;
+}
+
+#hayeswhite {
+    color: #005bbb;
+    background: #ffffff;
+    outline: 1px solid black;
+}
+
+#lasalle {
+    background: #00a69c;
+    color: #ffffff;
+    outline: 1px solid black;
+}
+
+#niagara {
+    background: #006570;
+}
+
+#cols {
+    padding-left: 40px;
+}
+
+footer {
+    font-family: 'Lato';
+    font-size: 14px;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.notification {
+    background-color: #005bbb;
+    border-radius: 2px;
+    color: #fff;
+    padding: 1rem;
+    margin-top: 1rem;
+    text-align: center;
+}

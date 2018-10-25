@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}DAM{% endblock %} | DAM</title>
+
+    <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/issue_style.css' %}" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    {% block style %}{% endblock %}
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="{% url 'inventory:index' %}" class="brand-logo" id="logo">DAM</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'showDash' %}">Dashboard</a></li>
+                    <li><a href="{% url 'users:log-out' %}">Log Out</a></li>
+                {% else %}
+                    <li><a href="{% url 'users:log-in' %}">Staff Log In</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    {% if messages %}
+        <div class="container">
+            {% for message in messages %}
+                <p class="notification">{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <main class="row container" style="margin: auto;">
+        {% block body %}{% endblock %}
+    </main>
+
+    <footer id="footer" class="page-footer" style="background-color: #005bbb; padding-top: 10px;">
+        <div class="container center-align" style="padding-bottom: 10px;">
+            &copy; 2018 Copyright Bugzfeed
+        </div>
+    </footer>
+
+    <script src="{% static 'js/materialize.min.js' %}"></script>
+</body>
+</html>

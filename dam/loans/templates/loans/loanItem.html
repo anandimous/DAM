@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Loan Item {% endblock %}
+
+{% block body %}
+
+    <div class="row" style="padding-top: 50px;">
+        <div class="col s12 l8">
+            <div class="card">
+                <div class="card-image"
+                     style="background-image:url({% static 'img/placeholder.png' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
+                </div>
+                <div class="card-content">
+                    <span class="card-title" style="color:black;"> {{ reserved.item.name }}</span>
+                    <p> {{ reserved.item.description }}</p>
+                </div>
+            </div>
+        </div>
+
+        <form method="post" class="col s12 l4">
+            {% csrf_token %}
+            <div class="row">
+                <div class="card" style="background-color: #666666">
+                    <div class="card-content white-text">
+                        <h2 class="card-title" style="color: #ffffff;">Client Details</h2>
+                        <hr>
+                        <hr>
+                        <br>
+                        <p>Client Name:</p>
+                        <p>{{ reserved.client.first_name }} {{ reserved.client.last_name }}</p>
+                        <hr>
+                        <br>
+                        <p>Email: </p>
+                        <p>{{ reserved.client.email }}</p>
+                        <hr>
+                        <br>
+                        <p>Reserved on: </p>
+                        <p>{{ reserved.reserved_at }}</p>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col offset-s1">
+                    <input class="btn-large" type="submit" value="Approve" name="Approve">
+                </div>
+                <div class="col">
+                    <input class="btn-large" type="submit" value="Decline" name="Decline">
+                </div>
+
+            </div>
+        </form>
+    </div>
+{% endblock %}

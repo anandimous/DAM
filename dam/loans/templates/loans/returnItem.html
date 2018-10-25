@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Return Item {% endblock %}
+
+{% block body %}
+
+    <div class="row" style="padding-top: 50px;">
+        <div class="col s12 l8">
+            <div class="card">
+                <div class="card-image"
+                     style="background-image:url({% static 'img/placeholder.png' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
+                </div>
+                <div class="card-content">
+                    <span class="card-title" style="color:black;"> {{ loan.item.name }}</span>
+                    <p> {{ loan.item.description }}</p>
+                </div>
+            </div>
+        </div>
+
+        <form method="post" class="col s12 l4">
+            {% csrf_token %}
+            <div class="row">
+                <div class="card" style="background-color: #666666">
+                    <div class="card-content white-text">
+                        <h2 class="card-title" style="color: #ffffff;">Loan Details</h2>
+                        <hr>
+                        <hr>
+                        <br>
+                        <p>Client Name:</p>
+                        <p>{{ loan.client.first_name }} {{ loan.client.last_name }}</p>
+                        <br>
+                        <p>Email: </p>
+                        <p>{{ loan.client.email }}</p>
+                        <br>
+                        <p>Item Name:</p>
+                        <p>{{ loan.item.name }}</p>
+                        <br>
+                        <p>Approved by: </p>
+                        <p>{{ loan.approved_by }}</p>
+                        <br>
+                        <p>Approved at: </p>
+                        <p>{{ loan.approved_at }}</p>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col offset-s4 offset-l3 l6">
+                    <input class="btn-large" type="submit" value="Return">
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

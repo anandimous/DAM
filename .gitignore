@@ -6,6 +6,7 @@
 *.exe
 *.o
 *.so
+__pycache__
 
 # Packages #
 ############
@@ -25,6 +26,7 @@
 *.log
 *.sql
 *.sqlite
+*.sqlite3
 
 # OS generated files #
 ######################
@@ -35,3 +37,6 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# django #
+.idea/

@@ -1,0 +1,15 @@
+.card {
+    min-height: 480px;
+}
+
+.card-image {
+    height: 300px;
+}
+
+.card-title {
+    color: black;
+}
+
+.card:hover {
+    box-shadow: 0 0 25px rgba(33, 33, 33, 33);
+}
