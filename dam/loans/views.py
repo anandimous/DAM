@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import Http404, HttpResponseRedirect
 from ..inventory import models
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
 from dam.loans.models import ItemReservation, ItemLoan
 from django.contrib import messages 
 from django.urls import reverse
