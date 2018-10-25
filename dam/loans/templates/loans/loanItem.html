@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %} Loan Item | DAM {% endblock %}
+{% block title %} Loan Item {% endblock %}
 
 {% block body %}
-    <div class="row ">
-        <div class="col s6 offset-s1">
+
+    <div class="row" style="padding-top: 50px;">
+        <div class="col s12 l8">
             <div class="card">
                 <div class="card-image"
                      style="background-image:url({% static 'img/placeholder.png' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
@@ -25,7 +26,7 @@
             </ul>
         {% endif %}
 
-        <form method="post" class="col s4"> <!-- Note that "m8 l9" was added -->
+        <form method="post" class="col s12 l4"> <!-- Note that "m8 l9" was added -->
             {% csrf_token %}
             <div class="row">
                 <div class="card" style="background-color: #666666">
@@ -49,11 +50,11 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col offset-s2">
-                    <input type="submit" value="Approve" name="Approve">
+                <div class="col offset-s1">
+                    <input class="btn-large" type="submit" value="Approve" name="Approve">
                 </div>
                 <div class="col">
-                    <input type="submit" value="Decline" name="Decline">
+                    <input class="btn-large" type="submit" value="Decline" name="Decline">
                 </div>
 
             </div>
