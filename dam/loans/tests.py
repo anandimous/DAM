@@ -8,27 +8,27 @@ class ValidateTestCases(TestCase):
         self.client= Client()
 
     def test_details(self):
-        response= self.client.get('/client/details/(id=item_id)')
+        response= self.client.get('/client/details/2')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['email'],'mhertz@buffalo.edu')
     
-    def invalid_email(self):
-        response= self.client.get('/client/details/(id=item_id)')
+    def test_invalid_email(self):
+        response= self.client.get('/client/details/1')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['email'],'mhertz@buf.aalo.edu')
 
-    def negative_id(self):
-        response= self.client.get('/client/details/(id=item_id)')
+    def test_negative_id(self):
+        response= self.client.get('/client/details/2')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['id'],'-2')
 
-    def zero_id(self):
-        response= self.client.get('/client/details/(id=item_id)')
+    def test_zero_id(self):
+        response= self.client.get('/client/details/(1')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['id'],'0')
 
-    def negative_id(self):
-        response= self.client.get('/client/details/(id=item_id)')
+    def test_negative_id(self):
+        response= self.client.get('/client/details/3')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['id'],'-2')
 
