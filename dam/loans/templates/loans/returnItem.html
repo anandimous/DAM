@@ -4,9 +4,7 @@
 {% block title %} Return Item {% endblock %}
 
 {% block body %}
-
-    <div class="row" style="padding-top: 50px;">
-        <div class="col s12 l8">
+     <div class="col s12 l8">
             <div class="card">
                 <div class="card-image"
                      style="background-image:url({% static 'img/placeholder.png' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
@@ -17,7 +15,6 @@
                 </div>
             </div>
         </div>
-
         <form method="post" class="col s12 l4">
             {% csrf_token %}
             <div class="row">
@@ -51,5 +48,4 @@
                 </div>
             </div>
         </form>
-    </div>
 {% endblock %}

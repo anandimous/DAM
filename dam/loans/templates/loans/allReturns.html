@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}Returns{% endblock %}
 {% block body %}
-    <div>
         {% if returns %}
             <h1>Loans</h1>
             {% for loan in returns %}
@@ -20,7 +19,7 @@
                 </div>
             {% endfor %}
         {% else %}
-            <h1 style="text-align: center;">No Loans</h1>
+            <h1>Loans</h1>
+            <h1>No Loans</h1>
         {% endif %}
-    </div>
 {% endblock %}

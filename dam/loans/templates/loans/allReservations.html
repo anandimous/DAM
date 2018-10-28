@@ -2,7 +2,6 @@
 {% block title %} Reservations {% endblock %}
 
 {% block body %}
-    <div>
         {% if reserves %}
             <h1>Reservations</h1>
             {% for reserve in reserves %}
@@ -19,7 +18,6 @@
                 </div>
             {% endfor %}
         {% else %}
-            <h1 style="text-align: center;">No Reservations</h1>
+            <h1>No Reservations</h1>
         {% endif %}
-    </div>
 {% endblock %}
