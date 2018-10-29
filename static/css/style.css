@@ -1,11 +1,20 @@
 @import url('https://fonts.googleapis.com/css?family=Lato');
 
+:root {
+    --black: #000; /* Bulls Black */
+    --blue: #005bbb; /* UB Blue */
+    --blue-dark: #002f56; /* Harriman Blue */
+    --green: #427d10; /* not in the UB palette */
+    --red: #900; /* Capen Brick */
+    --white: #fff; /* Hayes Hall White */
+}
+
 body {
-    background-color: #ffffff;
-    color: black;
+    background-color: var(--white);
+    color: var(--black);
     display: flex;
     flex-direction: column;
-    font-family: 'Lato';
+    font-family: Lato, Roboto, "Lucida Grande", Verdana, Arial, sans-serif;
     font-size: 14px;
     font-weight: 200;
     line-height: 1.65;
@@ -13,7 +22,7 @@ body {
 }
 
 nav {
-    background-color: #005bbb;
+    background-color: var(--blue);
     width: 100%;
 }
 
@@ -33,12 +42,15 @@ h1 {
     text-align: center;
 }
 
-h2, h3 {
+h2,
+h3 {
     font-weight: 100;
     line-height: 1.5;
 }
 
-h4, h5, h6 {
+h4,
+h5,
+h6 {
     font-family: 'Lato';
     font-weight: 200;
     line-height: 1;
@@ -47,7 +59,7 @@ h4, h5, h6 {
 .btn,
 .btn-large,
 .btn-small {
-    background-color: #005bbb;
+    background-color: var(--blue);
 }
 
 .btn:focus,
@@ -56,22 +68,22 @@ h4, h5, h6 {
 .btn-large:hover,
 .btn-small:focus,
 .btn-small:hover {
-    background-color: #002f56;
+    background-color: var(--blue-dark);
 }
 
 input[type=email]:not(.browser-default):focus:not([readonly]),
 input[type=password]:not(.browser-default):focus:not([readonly]) {
-    border-bottom-color: #005bbb;
-    box-shadow: 0 1px 0 0 #005bbb;
+    border-bottom-color: var(--blue);
+    box-shadow: 0 1px 0 0 var(--blue);
 }
 
 input[type=email]:not(.browser-default):focus:not([readonly]) + label,
 input[type=password]:not(.browser-default):focus:not([readonly]) + label {
-    color: #005bbb;
+    color: var(--blue);
 }
 
 .pagination li.active {
-    background-color: #005bbb;
+    background-color: var(--blue);
 }
 
 .link {
@@ -82,50 +94,20 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label {
     width: 100%;
 }
 
-#lato {
-    font-family: 'Lato';
-    font-size: 18px;
-    font-weight: 200;
-    line-height: 1.65;
-}
-
-#ubblue {
-    background: #005bbb;
-    color: #ffffff;
-    outline: 1px solid black;
-}
-
-#hayeswhite {
-    color: #005bbb;
-    background: #ffffff;
-    outline: 1px solid black;
-}
-
-#lasalle {
-    background: #00a69c;
-    color: #ffffff;
-    outline: 1px solid black;
-}
-
-#niagara {
-    background: #006570;
-}
-
 #cols {
     padding-left: 40px;
 }
 
 footer {
-    font-family: 'Lato';
     font-size: 14px;
     margin-top: 2rem;
     text-align: center;
 }
 
 .notification {
-    background-color: #005bbb;
+    background-color: var(--blue);
     border-radius: 2px;
-    color: #fff;
+    color: var(--white);
     padding: 1rem;
     margin-top: 1rem;
     text-align: center;
