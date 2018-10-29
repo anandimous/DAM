@@ -4,7 +4,19 @@
 {% block title %}Item Details{% endblock %}
 
 {% block body %}
-    <div class="col s6 offset-s1">
+
+    <style>
+    @media only screen and (max-width: 768px) {
+        #cardprofile {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+    </style>
+    
+    <h1> Reserve {{ item_name }} </h1>
+
+    <div id="cardprofile" class="col s12 l8">
         <div class="card">
             <div class="carousel carousel-slider" id="demo-carousel-slider">
                 {% if item_id == 1 %}
@@ -52,10 +64,9 @@
             </div>
         </div>
     </div>
-    <div class="row">
-    <div class="col s4">
+    <div class="col s12 l4">
         <div class="row">
-            <div class="card" style="background-color: #666666">
+            <div class="card" style="background-color: #666666;">
                 <div class="card-content white-text">
                     <span class="card-title">Who May Borrow</span>
                     <p>Current University at Buffalo faculty, staff and students may use their UB Card to borrow this item for a period of 2 weeks. It will be available for use at Baldy 19</p>
@@ -65,21 +76,21 @@
         <div class="row">
                 <ul class="collapsible" data-collapsible="expandable">
                     <li>
-                        <div class="collapsible-header" style="background-color: #e4e4e4">Reserve</div>
+                        <div class="collapsible-header" style="background-color: #e4e4e4;">Reserve</div>
                         <div class="collapsible-body">
                             <form action="{% url 'loans:reserve' item_id %}" method="post">
                                 {% csrf_token %}
                                 {{ form.errors }}
                                 {{ form.non_field_errors }}
-                                <div class="input-field col s6">
+                                <div class="input-field col s12 l6">
                                     <label for="first_name">First Name</label>
                                     <input id="first_name" type="text" class="validate" name="first_name">
                                 </div>
-                                <div class="input-field col s6">
+                                <div class="input-field col s12 l6">
                                     <label for="last_name">Last Name</label>
                                     <input id="last_name" type="text" class="validate" name="last_name">
                                 </div>
-                                <div class="input-field col s12">
+                                <div class="input-field col s12 l12">
                                     <label for="email">Email</label>
                                     <input id="email" type="email" class="validate" pattern=".+@buffalo.edu" name="email">
                                     <span class="helper-text" data-error="Your email address must end in: @buffalo.edu">@buffalo.edu email only</span>
@@ -97,6 +108,5 @@
                     });
                 </script>
         </div>
-    </div>
     </div>
 {% endblock %}
