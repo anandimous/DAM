@@ -118,3 +118,10 @@ footer {
 .notification.success {
     background-color: var(--green);
 }
+
+span.badge.new.green {
+    background-color: var(--green) !important; /* important to override Materialize's important */
+}
+span.badge.new.red {
+    background-color: var(--red) !important; /* important to override Materialize's important */
+}
