@@ -33,7 +33,9 @@
     {% if messages %}
         <div class="container">
             {% for message in messages %}
-                <p class="notification">{{ message }}</p>
+                <p class="notification{% if message.tags %} {{ message.tags }}{% endif %}">
+                    {{ message }}
+                </p>
             {% endfor %}
         </div>
     {% endif %}
