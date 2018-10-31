@@ -14,6 +14,7 @@
 {% endblock %}
 {% block body %}
 
+
     <h1> {{ item_name }} Details </h1>
 
     <div id="cardprofile" class="col s12 l8">
@@ -70,13 +71,15 @@
                 <div class="card-content white-text">
                     <span class="card-title">Who May Borrow</span>
                     <p>Current University at Buffalo faculty, staff and students may use their UB Card to borrow this item for a period of 2 weeks. It will be available for use at Baldy 19</p>
+
                 </div>
             </div>
-        </div>
-        <div class="row">
+            <div class="row">
                 <ul class="collapsible" data-collapsible="expandable">
                     <li>
-                        <div class="collapsible-header" style="background-color: #e4e4e4;">Reserve</div>
+
+                        <div class="collapsible-header" style="background-color: #e4e4e4">Reserve <i style="text-align: right;" class="material-icons">expand_more</i></div>
+
                         <div class="collapsible-body">
                             <form action="{% url 'loans:reserve' item_id %}" method="post">
                                 {% csrf_token %}
@@ -107,6 +110,9 @@
                         $('.collapsible').collapsible({accordion: true});
                     });
                 </script>
+            </div>
         </div>
+
     </div>
+
 {% endblock %}

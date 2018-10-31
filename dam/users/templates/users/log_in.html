@@ -10,7 +10,7 @@
             {% csrf_token %}
 
             {% if form.errors %}
-                <div class="notification" style="background-color: #900; margin-bottom: 1rem;">
+                <div class="notification error">
                     {{ form.non_field_errors|join:' ' }}
                 </div>
             {% endif %}
