@@ -2,19 +2,19 @@
 {% load static %}
 
 {% block title %}Item Details{% endblock %}
-
-{% block body %}
-
-    <style>
+{% block style %}
+<style>
     @media only screen and (max-width: 768px) {
         #cardprofile {
             padding-left: 0;
             padding-right: 0;
         }
     }
-    </style>
+</style>
+{% endblock %}
+{% block body %}
 
-    <h1> Reserve {{ item_name }} </h1>
+    <h1> {{ item_name }} Details </h1>
 
     <div id="cardprofile" class="col s12 l8">
         <div class="card">
