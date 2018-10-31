@@ -64,7 +64,7 @@
             <div class="row">
                 <ul class="collapsible" data-collapsible="expandable">
                     <li>
-                        <div class="collapsible-header" style="background-color: #e4e4e4">Reserve</div>
+                        <div class="collapsible-header" style="background-color: #e4e4e4">Reserve <i style="text-align: right;" class="material-icons">expand_more</i></div>
                         <div class="collapsible-body">
                             <form action="{% url 'loans:reserve' item_id %}" method="post">
                                 {% csrf_token %}

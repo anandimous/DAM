@@ -1,5 +1,6 @@
 .card {
-    min-height: 480px;
+    overflow: hidden;
+    height: 480px;
 }
 
 .card-image {
