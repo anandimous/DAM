@@ -9,9 +9,9 @@
         <form class="col s12 m10 offset-m1 l8 offset-l2" method="post">
             {% csrf_token %}
 
-            {% if form.errors %}
+            {% if form_errors %}
                 <div class="notification error">
-                    {{ form.non_field_errors|join:' ' }}
+                    {{ form_errors }}
                 </div>
             {% endif %}
 
