@@ -87,15 +87,15 @@
                                 {{ form.non_field_errors }}
                                 <div class="input-field col s12 l6">
                                     <label for="first_name">First Name</label>
-                                    <input id="first_name" type="text" class="validate" name="first_name">
+                                    <input id="first_name" type="text" class="validate" name="first_name" required>
                                 </div>
                                 <div class="input-field col s12 l6">
                                     <label for="last_name">Last Name</label>
-                                    <input id="last_name" type="text" class="validate" name="last_name">
+                                    <input id="last_name" type="text" class="validate" name="last_name" required>
                                 </div>
                                 <div class="input-field col s12 l12">
                                     <label for="email">Email</label>
-                                    <input id="email" type="email" class="validate" pattern=".+@buffalo.edu" name="email">
+                                    <input id="email" type="email" class="validate" pattern=".+@buffalo.edu" name="email" required>
                                     <span class="helper-text" data-error="Your email address must end in: @buffalo.edu">@buffalo.edu email only</span>
                                 </div>
                                 <button class="btn waves-effect waves-light" name="submit" type="submit">
