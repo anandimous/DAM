@@ -31,6 +31,17 @@ class LogInTest(TestCase):
         self.assertIn(SESSION_KEY, self.client.session)
         self.assertRedirects(response, '/dashboard/')
 
+    def test_invalid_email(self):
+        response = self.client.post('/users/log-in/', {
+            'email': 'a@b.c',
+            'password': 'password',
+        })
+        self.assertContains(
+            response,
+            'Enter a valid email address.',
+        )
+        self.assertNotIn(SESSION_KEY, self.client.session)
+
     def test_incorrect_email(self):
         response = self.client.post('/users/log-in/', {
             'email': 'fail@example.com',
