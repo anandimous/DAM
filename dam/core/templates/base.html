@@ -19,7 +19,8 @@
     <nav>
         <div class="nav-wrapper">
             <a href="{% url 'inventory:index' %}" class="brand-logo" id="logo">DAM</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'showDash' %}">Dashboard</a></li>
                     <li><a href="{% url 'users:log-out' %}">Log Out</a></li>
@@ -30,6 +31,16 @@
         </div>
     </nav>
 
+    <ul class="sidenav" id="mobile-demo">
+    <br>
+          {% if user.is_authenticated %}
+              <li><a href="{% url 'showDash' %}">Dashboard</a></li>
+              <li><a href="{% url 'users:log-out' %}">Log Out</a></li>
+        {% else %}
+              <li><a href="{% url 'users:log-in' %}">Staff Log In</a></li>
+        {% endif %}
+    </ul>
+    
     {% if messages %}
         <div class="container">
             {% for message in messages %}
@@ -51,5 +62,10 @@
     </footer>
 
     <script src="{% static 'js/materialize.min.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+        $('.sidenav').sidenav();
+        });
+    </script>
 </body>
 </html>

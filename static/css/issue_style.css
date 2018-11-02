@@ -4,10 +4,11 @@
 #logo{
     padding-left: 10px;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
     #logo {
         padding-left: 0;
     }
+
 }
 #itemCard{
     padding-top: 20px;
