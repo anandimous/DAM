@@ -138,4 +138,5 @@ LOGIN_REDIRECT_URL = 'showDash'
 
 # Heroku: Update database configuration from $DATABASE_URL.
 db_from_env = dj-database-url.config(conn_max_age=500)
+
 DATABASES['default'].update(db_from_env)
