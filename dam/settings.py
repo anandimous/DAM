@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'dam.loans',
     'dam.users',
     'dam.dashboard',
+    'dam.search',
 ]
 
 MIDDLEWARE = [
