@@ -1,0 +1,133 @@
+<title>DAM</title>
+{% load static %}
+{# {% extends 'base.html' %}#}
+
+<!DOCTYPE html>
+{#https://www.calazan.com/adding-basic-search-to-your-django-site/#}
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DAM</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/DAM.bmp' %}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/issue_style.css' %}" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <style>
+        body{
+            background-color: #005bbb ;
+            height: 100%;
+            width: 100%;
+        }
+        #searchBox{
+            background-color:  #ffffff;
+        }
+        #searchBox:focus{
+             border-bottom: 1px solid white;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        }
+
+        nav{
+            box-shadow: 0 0 0 0;
+        }
+        #imageDAM{
+            margin-top: 5%;
+            margin-bottom: 5%;
+            height: 30%;
+            width: auto;
+        }
+        .search{
+            width:80%;
+            margin-left: 10%;
+            display: block;
+            margin-bottom: 0;
+        }
+        .searchBtn{
+            background-color:  #006570;
+            text-align: center;
+            height:8%;
+            position: relative;
+            display: inline-block;
+            margin: 10px;
+            font-size: 1rem;
+
+        }
+        .searchDiv{
+            text-align: center;
+            display: block;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper">
+{#            <a href="{% url 'inventory:index' %}" class="brand-logo" id="logo">DAM</a>#}
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'showDash' %}">Dashboard</a></li>
+                    <li><a href="{% url 'users:log-out' %}">Log Out</a></li>
+                {% else %}
+                    <li><a href="{% url 'users:log-in' %}">Staff Log In</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <ul class="sidenav" id="mobile-demo">
+    <br>
+          {% if user.is_authenticated %}
+              <li><a href="{% url 'showDash' %}">Dashboard</a></li>
+              <li><a href="{% url 'users:log-out' %}">Log Out</a></li>
+        {% else %}
+              <li><a href="{% url 'users:log-in' %}">Staff Log In</a></li>
+        {% endif %}
+    </ul>
+    <div style="height: 100%; width: 100%">
+{#        <div class="imageDAM"></div>#}
+        <img src="{% static 'img/DAM1.png' %}" class="center-block" id="imageDAM">
+{#        <div class="search-logo" >#}
+{#            <div class="search-bar">#}
+                <div class="search">
+                    <form method="GET" id="searchForm" action="{% url 'inventory:search' %}"  accept-charset="utf-8">
+
+                        <input class="searchField" id="searchBox" name="q" type="text" placeholder=" Search" value="{{request.GET.q}}">
+                        <div class="searchDiv row">
+                            <button class="waves-effect waves-light btn-small searchBtn col l2 offset-l4 s8 offset-s2" type="submit">
+                                <i class="material-icons" style=" position: relative; top: 4px">search</i> Search
+                            </button>
+                            <a class="waves-effect waves-light btn-small searchBtn col l2 s8 offset-s2" href="{% url 'inventory:index' %}" style="position: relative">
+                                <p style="margin: 0; position: absolute; top: 50%; left: 50%; margin-right: -50%; transform: translate(-50%, -50%)">View all Items</p>
+                            </a>
+
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+{#        </div>#}
+{#    </div>#}
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+<footer id="footer" class="page-footer" style="background-color: #005bbb">
+  <div class="footer-copyright" style="background-color: #005bbb">
+    <div class="container center-align">
+      &copy; 2018 Copyright Bugzfeed
+    </div>
+  </div>
+</footer>
+<script src="{% static 'js/materialize.min.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+        $('.sidenav').sidenav();
+        });
+    </script>
+</html>
