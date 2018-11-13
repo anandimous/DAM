@@ -14,6 +14,7 @@ def search(request):
     args = {
         'items':results
     }
+
     return render(request, template, args)
 
 def item_details(request, item_id):
