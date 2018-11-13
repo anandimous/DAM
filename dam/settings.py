@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '9*!(b$mr22e0wpxorjk97l=q4628%j
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 
-ALLOWED_HOSTS = ['sleepy-journey-79954.herokuapp.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['dam-442.herokuapp.com', '127.0.0.1', 'localhost']
 
 
 
