@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/issue_style.css' %}" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/DAM.bmp' %}"/>
     <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
     {% block style %}{% endblock %}
 </head>
@@ -18,7 +19,8 @@
 <body>
     <nav>
         <div class="nav-wrapper">
-            <a href="{% url 'inventory:index' %}" class="brand-logo" id="logo">DAM</a>
+            {% block logo %}<a href="{% url 'inventory:search' %}" class="brand-logo" id="logo">DAM</a> {% endblock %}
+
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 {% if user.is_authenticated %}
@@ -51,7 +53,7 @@
         </div>
     {% endif %}
 
-    <main class="row container" style="margin: auto; padding-top: 50px;">
+    <main class="row container" style="margin: auto;">
         {% block body %}{% endblock %}
     </main>
 

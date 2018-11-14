@@ -34,3 +34,22 @@
   transform: translate(-50%, -50%);
 
 }
+::placeholder{
+    color: darkgray;
+}
+
+#searchBox{
+    background-color:  lightblue;
+    border-bottom: 1px solid lightgrey;
+    padding-left: 1rem;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;
+}
+#searchBox:hover{
+    box-shadow: 0 0 2px rgba(33, 33, 33, 33);
+}
+#searchBox:focus{
+    /*border-bottom: 2px solid red;*/
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
