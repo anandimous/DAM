@@ -7,6 +7,8 @@
     --green: #427d10; /* not in the UB palette */
     --red: #900; /* Capen Brick */
     --white: #fff; /* Hayes Hall White */
+    --grey: #e4e4e4; /* Baird point */
+    --pgrey: #666;
 }
 
 body {
