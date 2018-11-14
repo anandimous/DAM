@@ -29,6 +29,7 @@ ALLOWED_HOSTS = ['dam-442.herokuapp.com', '127.0.0.1', 'localhost']
 
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
