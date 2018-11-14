@@ -4,19 +4,11 @@ from django.db.models import Q
 
 
 def search(request):
-    template = 'inventory/inventory.html'
     items = models.Item.objects.with_availability()
-    args = {'items': items}
-
     query = request.GET.get('q')
-    if query == None:
-        return render(request, template, args)
-    else:
-        results = items.filter(Q(name__icontains = query) | Q(description__icontains = query))
-        args = {
-            'items':results
-        }
-    return render(request, template, args)
+    if query is not None:
+        items = items.filter(Q(name__icontains=query) | Q(description__icontains=query))
+    return render(request, 'inventory/inventory.html', {'items': items})
 
 def item_details(request, item_id):
     item = get_object_or_404(models.Item, pk=item_id)
