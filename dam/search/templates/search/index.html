@@ -1,8 +1,8 @@
-<title>DAM</title>
 {% extends 'base.html' %}
 {% load static %}
-
-<!DOCTYPE html>
+    {% block T %}
+        <title>DAM</title>
+    {% endblock %}
     {% block style %}
     <style>
         body{
@@ -28,7 +28,6 @@
         .searchBtn{
             background-color:  #006570;
             text-align: center;
-            height:4%;
             position: relative;
             display: inline-block;
             margin: 10px;

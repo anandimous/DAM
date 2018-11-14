@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{% block title %}{% endblock %} | DAM</title>
+    {% block T %}<title>{% block title %}{% endblock %} | DAM</title>{% endblock %}
 
     <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
@@ -19,7 +19,7 @@
 <body>
     <nav>
         <div class="nav-wrapper">
-            {% block logo %}<a href="{% url 'inventory:search' %}" class="brand-logo" id="logo">DAM</a> {% endblock %}
+            {% block logo %}<a href="{% url 'index' %}" class="brand-logo" id="logo">DAM</a> {% endblock %}
 
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">

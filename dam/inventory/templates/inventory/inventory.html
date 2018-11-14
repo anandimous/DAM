@@ -13,20 +13,6 @@
     .searchBtn:hover{
         box-shadow: 0 0 5px rgba(33, 33, 33, 33);
     }
-    {#.sticky {#}
-    {#    position: fixed;#}
-    {#    top: 1em;#}
-    {#    width: 68%;#}
-    {#    z-index: 1000;#}
-    {# }#}
-    {#@media screen and (max-width:768px)  {#}
-    {#    .sticky {#}
-    {#        position: fixed;#}
-    {#        top: 1em;#}
-    {#        width: 90%;#}
-    {#        z-index: 1000;#}
-    {#    }#}
-    {# }#}
     </style>
 {% endblock %}
 
@@ -66,19 +52,4 @@
     {% empty %}
         <h6 style="text-align: center;margin-top: 5rem;">No Items found.</h6>
     {% endfor %}
-{#    <script>#}
-{#        window.onscroll = function() {myFunction()};#}
-{#    // Get the navbar#}
-{#        var searchbar = document.getElementById("searchRect");#}
-{#    // Get the offset position of the navbar#}
-{#        var sticky = searchbar.offsetTop;#}
-{#    // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position#}
-{#        function myFunction() {#}
-{#            if (window.pageYOffset >= sticky) {#}
-{#                searchbar.classList.add("sticky")#}
-{#            } else {#}
-{#                searchbar.classList.remove("sticky");#}
-{#            }#}
-{#        }#}
-{#    </script>#}
 {% endblock %}

@@ -5,5 +5,5 @@ app_name = 'inventory'
 
 urlpatterns = [
     path('', search, name='search'),
-    path('details/<int:item_id>', item_details, name='item-details')
+    path('details/<int:item_id>', item_details, name='item-details'),
 ]
