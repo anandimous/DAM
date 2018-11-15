@@ -1,5 +1,10 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm as BaseAuthenticationForm
+from django.contrib.auth.forms import (
+    AuthenticationForm as BaseAuthenticationForm,
+    UserCreationForm as BaseUserCreationForm,
+)
+
+from .models import User
 
 
 class AuthenticationForm(BaseAuthenticationForm):
@@ -17,3 +22,9 @@ class AuthenticationForm(BaseAuthenticationForm):
         if field_name == 'username':
             field_name = 'email'
         return super().add_prefix(field_name)
+
+
+class UserCreationForm(BaseUserCreationForm):
+    class Meta:
+        model = User
+        fields = ('email', 'first_name', 'last_name')

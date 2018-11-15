@@ -1,6 +1,9 @@
+from django.contrib.auth import login
 from django.contrib.auth.views import LoginView as BaseLogInView, LogoutView as BaseLogOutView
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
 
-from .forms import AuthenticationForm
+from .forms import AuthenticationForm, UserCreationForm
 
 
 class FormErrorsContextMixin:
@@ -22,3 +25,18 @@ class LogInView(FormErrorsContextMixin, BaseLogInView):
 
 class LogOutView(BaseLogOutView):
     next_page = 'inventory:index'
+
+
+class CreateAccountView(FormErrorsContextMixin, CreateView):
+    template_name = 'users/create_account.html'
+    form_class = UserCreationForm
+    success_url = reverse_lazy('showDash')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+
+        # Automatically log the user in.
+        login(self.request, self.object)
+
+        return response
+
