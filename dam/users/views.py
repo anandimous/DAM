@@ -3,10 +3,7 @@ from django.contrib.auth.views import LoginView as BaseLogInView, LogoutView as 
 from .forms import AuthenticationForm
 
 
-class LogInView(BaseLogInView):
-    template_name = 'users/log_in.html'
-    form_class = AuthenticationForm
-
+class FormErrorsContextMixin:
     def get_context_data(self, **kwargs):
         form = kwargs.get('form')
         form_errors = []
@@ -16,6 +13,11 @@ class LogInView(BaseLogInView):
                     form_errors.extend(error.messages)
         form_errors_str = '. '.join(form_errors)
         return super().get_context_data(**kwargs, form_errors=form_errors_str)
+
+
+class LogInView(FormErrorsContextMixin, BaseLogInView):
+    template_name = 'users/log_in.html'
+    form_class = AuthenticationForm
 
 
 class LogOutView(BaseLogOutView):
