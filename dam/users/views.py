@@ -11,7 +11,7 @@ class FormErrorsContextMixin:
             for error_list in form.errors.as_data().values():
                 for error in error_list:
                     form_errors.extend(error.messages)
-        form_errors_str = '. '.join(form_errors)
+        form_errors_str = ' '.join(form_errors)
         return super().get_context_data(**kwargs, form_errors=form_errors_str)
 
 
