@@ -8,7 +8,6 @@
     #logo {
         padding-left: 0;
     }
-
 }
 #itemCard{
     padding-top: 20px;
@@ -30,10 +29,9 @@
   margin-left: 50%;
   margin-top: 8%;
   transform: translate(-50%, -50%);
-
 }
 ::placeholder{
-    color: white;
+    color: black;
 }
 
 #searchBox{

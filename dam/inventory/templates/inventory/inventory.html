@@ -21,8 +21,8 @@
     <div class="search">
         <form method="GET" id="searchForm" action="{% url 'inventory:search' %}"  accept-charset="utf-8">
             <div class="row" id="searchRect" style="margin: 0 0 0 0; height: 3em">
-            <input class="searchField col l11 s11" id="searchBox" name="q" type="text" placeholder=" Search by Name or Description" value="{{request.GET.q}}" style="height: inherit; ">
-                <button class="waves-effect waves-light btn-small searchBtn col l1 s1" type="submit" value="Search" style="padding: 0 0 0 0; height: inherit">
+            <input class="searchField col l11 s11" id="searchBox" name="q" type="text" placeholder=" Search by Name or Description" value="{{request.GET.q}}" style="height: inherit; " title="Please fill out this field.">
+                <button class="waves-effect waves-light btn-small searchBtn col l1 s1" type="submit" value="Search" style="padding: 0 0 0 0; height: inherit" title="Search">
                     <i class="material-icons" style=" vertical-align: middle">search</i>
                 </button>
             </div>
