@@ -1,12 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 from ..inventory import models
+from django.db.models import Q
 
 
-def index(request):
+def search(request):
     items = models.Item.objects.with_availability()
-    args={'items': items}
-    return render(request, 'inventory/inventory.html', args)
-
+    query = request.GET.get('q')
+    if query is not None:
+        items = items.filter(Q(name__icontains=query) | Q(description__icontains=query))
+    return render(request, 'inventory/inventory.html', {'items': items})
 
 def item_details(request, item_id):
     item = get_object_or_404(models.Item, pk=item_id)

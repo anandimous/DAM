@@ -5,12 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{% block title %}DAM{% endblock %} | DAM</title>
+    {% block Full_title %}<title>{% block title %}{% endblock %} | DAM</title>{% endblock %}
 
     <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/issue_style.css' %}" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/DAM.bmp' %}"/>
     <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
     {% block style %}{% endblock %}
 </head>
@@ -18,14 +19,15 @@
 <body>
     <nav>
         <div class="nav-wrapper">
-            <a href="{% url 'inventory:index' %}" class="brand-logo" id="logo">DAM</a>
+            {% block logo %}<a href="{% url 'index' %}" class="brand-logo" id="logo" title="Home">DAM</a> {% endblock %}
+
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'showDash' %}">Dashboard</a></li>
-                    <li><a href="{% url 'users:log-out' %}">Log Out</a></li>
+                    <li><a href="{% url 'showDash' %}" title="Dashboard">Dashboard</a></li>
+                    <li><a href="{% url 'users:log-out' %}" title="Log Out">Log Out</a></li>
                 {% else %}
-                    <li><a href="{% url 'users:log-in' %}">Staff Log In</a></li>
+                    <li><a href="{% url 'users:log-in' %}" title="Log In">Staff Log In</a></li>
                 {% endif %}
             </ul>
         </div>
@@ -34,10 +36,10 @@
     <ul class="sidenav" id="mobile-demo">
     <br>
           {% if user.is_authenticated %}
-              <li><a href="{% url 'showDash' %}">Dashboard</a></li>
-              <li><a href="{% url 'users:log-out' %}">Log Out</a></li>
+              <li><a href="{% url 'showDash' %}" title="Dashboard">Dashboard</a></li>
+              <li><a href="{% url 'users:log-out' %}" title="Log Out">Log Out</a></li>
         {% else %}
-              <li><a href="{% url 'users:log-in' %}">Staff Log In</a></li>
+              <li><a href="{% url 'users:log-in' %}" title="Log In">Staff Log In</a></li>
         {% endif %}
     </ul>
     
@@ -51,7 +53,7 @@
         </div>
     {% endif %}
 
-    <main class="row container" style="margin: auto; padding-top: 50px;">
+    <main class="row container" style="margin: auto;">
         {% block body %}{% endblock %}
     </main>
 
