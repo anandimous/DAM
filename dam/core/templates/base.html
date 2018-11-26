@@ -24,22 +24,24 @@
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'showDash' %}" title="Dashboard">Dashboard</a></li>
-                    <li><a href="{% url 'users:log-out' %}" title="Log Out">Log Out</a></li>
+                    <li><a href="{% url 'showDash' %}">Dashboard</a></li>
+                    <li><a href="{% url 'users:log-out' %}">Log out</a></li>
                 {% else %}
-                    <li><a href="{% url 'users:log-in' %}" title="Log In">Staff Log In</a></li>
+                    <li><a href="{% url 'users:log-in' %}">Log in</a></li>
+                    <li><a href="{% url 'users:create-account' %}">Create account</a></li>
                 {% endif %}
             </ul>
         </div>
     </nav>
 
     <ul class="sidenav" id="mobile-demo">
-    <br>
-          {% if user.is_authenticated %}
-              <li><a href="{% url 'showDash' %}" title="Dashboard">Dashboard</a></li>
-              <li><a href="{% url 'users:log-out' %}" title="Log Out">Log Out</a></li>
+        <br>
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'showDash' %}">Dashboard</a></li>
+            <li><a href="{% url 'users:log-out' %}">Log out</a></li>
         {% else %}
-              <li><a href="{% url 'users:log-in' %}" title="Log In">Staff Log In</a></li>
+            <li><a href="{% url 'users:log-in' %}">Log in</a></li>
+            <li><a href="{% url 'users:create-account' %}">Create account</a></li>
         {% endif %}
     </ul>
     
