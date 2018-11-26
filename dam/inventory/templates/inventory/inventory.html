@@ -6,35 +6,34 @@
 
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/results_style.css' %}">
+    <style>
+    .searchBtn{
+        box-shadow: 0 0 0 0;
+    }
+    .searchBtn:hover{
+        box-shadow: 0 0 5px rgba(33, 33, 33, 33);
+    }
+    </style>
 {% endblock %}
 
 {% block body %}
     <h1>Inventory</h1>
-
+    <div class="search">
+        <form method="GET" id="searchForm" action="{% url 'inventory:search' %}"  accept-charset="utf-8">
+            <div class="row" id="searchRect" style="margin: 0 0 0 0; height: 3em">
+            <input class="searchField col l11 s11" id="searchBox" name="q" type="text" placeholder=" Search by Name or Description" value="{{request.GET.q}}" style="height: inherit; " title="Please fill out this field.">
+                <button class="waves-effect waves-light btn-small searchBtn col l1 s1" type="submit" value="Search" style="padding: 0 0 0 0; height: inherit" title="Search">
+                    <i class="material-icons" style=" vertical-align: middle">search</i>
+                </button>
+            </div>
+        </form>
+    </div>
     {% for item in items %}
         <div class="col s12 m6 l4">
         <div class="card">
-        {% if item.id == 1 %}
-            <div class="card-image"
-                 style="background-image:url({% static 'img/laptop-demo-img-1.jpg' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
-        {% endif %}
-        {% if item.id == 2 %}
-            <div class="card-image"
-                 style="background-image:url({% static 'img/oculus-demo-img-1.jpg' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
-        {% endif %}
-        {% if item.id == 3 %}
-            <div class="card-image"
-                style="background-image:url({% static 'img/echo-demo-img-1.jpg' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
-        {% endif %}
-        {% if item.id == 4 %}
-            <div class="card-image"
-                 style="background-image:url({% static 'img/raspi-demo-img-1.jpg' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
-        {% endif %}
-        {% if item.id >= 5 %}
             <div class="card-image"
                  style="background-image:url({% static 'img/placeholder.png' %});background-size:80%;background-repeat: no-repeat;background-position:center;">
-        {% endif %}
-    </div>
+            </div>
     <div class="card-content">
         {% if item.available > 0 %}
             <span class="new badge green" data-badge-caption="Available"></span>
@@ -50,5 +49,7 @@
     <a class="link" href="{% url 'inventory:item-details' item.id %}"></a>
     </div>
     </div>
+    {% empty %}
+        <h6 style="text-align: center;margin-top: 5rem;">No Items found.</h6>
     {% endfor %}
 {% endblock %}

@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+    {% block Full_title %}
+        <title>DAM</title>
+    {% endblock %}
+    {% block style %}
+    <style>
+        body{
+            background-color: #005bbb ;
+            height: 100%;
+            width: 100%;
+        }
+        nav{
+            box-shadow: 0 0 0 0;
+        }
+        #imageDAM{
+            margin-top: 5%;
+            margin-bottom: 5%;
+            height: auto;
+            width: 30%;
+        }
+        @media only screen and (max-width: 768px) {
+            #imageDAM{
+                margin-top:30%;
+                width: 70%;
+            }
+        }
+        .search{
+            width:100%;
+            margin-left: 0;
+            display: block;
+            margin-bottom: 0;
+        }
+        .searchBtn{
+            background-color:  green;
+            text-align: center;
+            position: relative;
+            height: 3rem;
+            display: inline-block;
+            margin: 10px;
+            font-size: 100%;
+            overflow: hidden;
+        }
+        .searchBtn:active{
+            background-color:  #006570;
+        }
+        .searchDiv{
+            text-align: center;
+            display: block;
+            margin-bottom: 0;
+        }
+        .searchBlock{
+            width: 100%;
+            margin-top: 12%;
+        }
+    </style>
+    {% endblock %}
+{% block body %}
+
+{% block logo %}{% endblock %}
+    <div class ="searchBlock">
+        <img src="{% static 'img/DAM1.png' %}" alt="DAM" class="center-block" id="imageDAM">
+        <div class="search">
+            <form method="GET" id="searchForm" action="{% url 'inventory:search' %}"  accept-charset="utf-8">
+                <input class="searchField" id="searchBox" name="q" type="text" placeholder=" Search by Name or Description" value="{{request.GET.q}}" required style="background-color:var(--white);" >
+                <div class="searchDiv row">
+                    <button class="waves-effect waves-light btn-small searchBtn col l2 m3 offset-l4 offset-m3  s8 offset-s2" type="submit" value="Search" title="Search">
+                        <i class="material-icons" style="vertical-align: middle">search</i> <span>Search</span>
+                    </button>
+                    <a class="waves-effect waves-light btn-small searchBtn col l2 m3 s8 offset-s2" href="{% url 'inventory:search' %}" title="View all Items">
+                        <p style="margin: 0; position: absolute; top: 50%; left: 50%; margin-right: -50%; transform: translate(-50%, -50%)">View all Items</p>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{#    Prevent Empty Search without unpleaseant "Please Fill In" thingy#}
+    <script>
+        document.addEventListener('invalid', (function () {
+            return function (e) {
+                e.preventDefault();
+                document.getElementById("searchBox").focus();
+            };
+        })(), true);
+    </script>
+{% endblock %}
