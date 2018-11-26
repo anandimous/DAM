@@ -56,7 +56,7 @@ def allres(request):
     args = {'reserves': res}
     return render(request, 'loans/allReservations.html', args)
 
-
+@login_required
 def allrets(request):
     rets = ItemLoan.objects.filter(returned_at__isnull=True)
     args = {'returns': rets}
