@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.urls import reverse
 from django.utils import timezone
 import dam.loans.forms as reserve_form
+from django.db.models import Q
 
 @login_required
 def reservations(request, reservation_id):
@@ -52,9 +53,10 @@ def returns(request, loan_id):
 
 def allres(request):
     res = ItemReservation.objects.filter(is_active=True)
-
-    args = {'reserves': res}
-    return render(request, 'loans/allReservations.html', args)
+    query = request.GET.get('q')
+    if query is not None:
+        res = res.filter(Q(item__name__icontains=query) | Q(item__description__icontains=query) | Q(client__first_name__icontains=query) | Q(client__last_name__icontains=query) | Q(client__email__icontains=query))
+    return render(request, 'loans/allReservations.html', {'reserves': res})
 
 
 def allrets(request):
