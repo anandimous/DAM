@@ -24,7 +24,7 @@ class LogInView(FormErrorsContextMixin, BaseLogInView):
 
 
 class LogOutView(BaseLogOutView):
-    next_page = 'inventory:index'
+    next_page = 'index'
 
 
 class CreateAccountView(FormErrorsContextMixin, CreateView):
