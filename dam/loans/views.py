@@ -49,7 +49,7 @@ def returns(request, loan_id):
         return HttpResponseRedirect(reverse('loans:allrets'))
     return render(request, 'loans/returnItem.html', args)
 
-
+@login_required
 def allres(request):
     res = ItemReservation.objects.filter(is_active=True)
 
