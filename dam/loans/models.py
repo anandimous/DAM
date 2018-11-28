@@ -7,11 +7,16 @@ class Client(models.Model):
     email = models.EmailField(max_length=255, blank=True)
     first_name = models.CharField(max_length=50, blank=True)
     last_name = models.CharField(max_length=50, blank=True)
+    user = models.ForeignKey('users.User', models.CASCADE, blank=True, null=True)
 
     def get_email_address(self):
+        if self.user:
+            return self.user.email
         return self.email
 
     def get_full_name(self):
+        if self.user:
+            return self.user.get_full_name()
         return '{} {}'.format(self.first_name, self.last_name)
 
 
