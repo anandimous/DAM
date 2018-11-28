@@ -82,7 +82,7 @@ def checkIfItemAvailable(request, item_id):
                     client=client,
                 )
                 messages.success(request, 'Your item has been reserved! You can pick it up from Baldy 19')
-                return redirect('/details/' + str(item_id))
+                return redirect('/inventory/details/' + str(item_id))
             else:
                 messages.error(request, 'Your item was not reserved. Please go back and reserve the item again.')
                 return redirect(reverse('inventory:index'))
