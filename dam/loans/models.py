@@ -8,6 +8,12 @@ class Client(models.Model):
     first_name = models.CharField(max_length=50, blank=True)
     last_name = models.CharField(max_length=50, blank=True)
 
+    def get_email_address(self):
+        return self.email
+
+    def get_full_name(self):
+        return '{} {}'.format(self.first_name, self.last_name)
+
 
 class ItemReservation(models.Model):
     item = models.ForeignKey('inventory.Item', models.CASCADE)
