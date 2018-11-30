@@ -16,7 +16,7 @@ class DashboardTest(TestCase):
         self.assertRedirects(response, '/users/log-in/?next=/dashboard/')
 
     def test_authenticated_can_access(self):
-        self.client.login('test@example.com', 'password')
+        self.client.login(username='test@example.com', password='password')
         response = self.client.get('/dashboard/')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Dashboard')
