@@ -99,7 +99,7 @@ class ValidateTestCases(TestCase):
 
 
 class ClientTest(TestCase):
-    def test_get_email_address(self):
+    def test_get_email_address_direct(self):
         client = Client.objects.create(
             first_name='First',
             last_name='Last',
@@ -107,10 +107,28 @@ class ClientTest(TestCase):
         )
         self.assertEqual(client.get_email_address(), 'first.last@example.com')
 
-    def test_get_full_name(self):
+    def test_get_email_address_indirect(self):
+        user = User.objects.create(
+            first_name='First',
+            last_name='Last',
+            email='first.last@example.com',
+        )
+        client = Client.objects.create(user=user)
+        self.assertEqual(client.get_email_address(), 'first.last@example.com')
+
+    def test_get_full_name_direct(self):
         client = Client.objects.create(
             first_name='First',
             last_name='Last',
             email='first.last@example.com',
         )
+        self.assertEqual(client.get_full_name(), 'First Last')
+
+    def test_get_full_name_indirect(self):
+        user = User.objects.create(
+            first_name='First',
+            last_name='Last',
+            email='first.last@example.com',
+        )
+        client = Client.objects.create(user=user)
         self.assertEqual(client.get_full_name(), 'First Last')
