@@ -43,59 +43,58 @@
                 <div class="card-content">
                     <span class="card-title">{{ user.get_full_name }}</span>
                 </div>
-
-                <div class="card-action dashboard-links">
-                    <a href="{% url 'loans:allres' %}">Reserve Item List</a>
-                    <a href="{% url 'loans:allrets' %}">Return Item List</a>
-                    <a href="{% url 'admin:inventory_item_changelist' %}">Add/Remove Item</a>
-                </div>
+                {% if user.is_staff %}
+                    <div class="card-action dashboard-links">
+                        <a href="{% url 'loans:allres' %}">Reserve Item List</a>
+                        <a href="{% url 'loans:allrets' %}">Return Item List</a>
+                        <a href="{% url 'admin:inventory_item_changelist' %}">Add/Remove Item</a>
+                    </div>
+                {% endif %}
             </div>
         </div>
         <div class="col l8 m6 s12">
             <div class="row card" id="clients">
                 <h5 style="color: #ffffff;text-align: center; padding-top: 2%; margin-top: 0px;">Your Reservations</h5>
-            <div class="card-content">
-                {% if reserves %}
-                    {% for reserve in reserves %}
-                        {% if user.first_name.capitalize == reserve.client.first_name.capitalize %}
-                            {% if user.last_name.capitalize == reserve.client.last_name.capitalize %}
-                                <div class="card" style="min-height: 20%; ">
-                                    <div class="card-content">
-                                        <span class="card-title" style="color:black;">{{ reserve.item.name }}</span>
-                                        <p>Reserved at: {{ reserve.reserved_at }}</p>
+                <div class="card-content">
+                    {% if reserves %}
+                        {% for reserve in reserves %}
+                            {% if user.first_name.capitalize == reserve.client.first_name.capitalize %}
+                                {% if user.last_name.capitalize == reserve.client.last_name.capitalize %}
+                                    <div class="card" style="min-height: 20%; ">
+                                        <div class="card-content">
+                                            <span class="card-title" style="color:black;">{{ reserve.item.name }}</span>
+                                            <p>Reserved at: {{ reserve.reserved_at }}</p>
+                                        </div>
                                     </div>
-                                </div>
+                                {% endif %}
                             {% endif %}
-                        {% endif %}
-                    {% endfor %}
-                {% else %}
-                    <p style="color: #ffffff;text-align: center; font-size: large">No active reservations right now</p>
-                {% endif %}
-            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p style="color: #ffffff;text-align: center; font-size: large">No active reservations right now</p>
+                    {% endif %}
+                </div>
             </div>
             <div class="row card" id="clients">
                 <h5 class="card-title" style="color: #ffffff; text-align: center;  padding-top: 2%">Your Loans</h5>
                 <div class="card-content">
                     {% if returns %}
-                    {% for loan in returns %}
-                        {% if user.first_name.capitalize == loan.client.first_name.capitalize %}
-                            {% if user.last_name.capitalize == loan.client.last_name.capitalize %}
-                                <div class="card" style="min-height: 20%;">
-                                    <div class="card-content">
-                                        <span class="card-title" style="color:black;">{{ loan.item.name }}</span>
-                                        <p>Approved at: {{ loan.approved_at }}</p>
-                                        <p>Due at: </p>
+                        {% for loan in returns %}
+                            {% if user.first_name.capitalize == loan.client.first_name.capitalize %}
+                                {% if user.last_name.capitalize == loan.client.last_name.capitalize %}
+                                    <div class="card" style="min-height: 20%;">
+                                        <div class="card-content">
+                                            <span class="card-title" style="color:black;">{{ loan.item.name }}</span>
+                                            <p>Approved at: {{ loan.approved_at }}</p>
+                                        </div>
                                     </div>
-                                </div>
+                                {% endif %}
                             {% endif %}
-                        {% endif %}
-                    {% endfor %}
-                {% else %}
-                    <p style="color: #ffffff;text-align: center; font-size: large">No active Loans right now</p>
-                {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <p style="color: #ffffff;text-align: center; font-size: large">No active Loans right now</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
-
 {% endblock %}
