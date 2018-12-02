@@ -8,6 +8,7 @@ from django.urls import reverse
 from django.utils import timezone
 import dam.loans.forms as reserve_form
 
+
 @login_required
 def reservations(request, reservation_id):
     try:
@@ -19,7 +20,7 @@ def reservations(request, reservation_id):
             }
     if request.method == "POST":
         if "Approve" in request.POST:
-            itemloaned = ItemLoan.objects.create(item=reservation.item, client=reservation.client, approved_by=request.user)
+            ItemLoan.objects.create(item=reservation.item, client=reservation.client, approved_by=request.user)
 
             reservation.is_active = False
             reservation.save()
@@ -49,12 +50,14 @@ def returns(request, loan_id):
         return HttpResponseRedirect(reverse('loans:allrets'))
     return render(request, 'loans/returnItem.html', args)
 
+
 @login_required
 def allres(request):
     res = ItemReservation.objects.filter(is_active=True)
 
     args = {'reserves': res}
     return render(request, 'loans/allReservations.html', args)
+
 
 @login_required
 def allrets(request):
@@ -70,24 +73,21 @@ def checkIfItemAvailable(request, item_id):
             try: 
                 item = Item.objects.with_availability().get(id=item_id)
             except Item.DoesNotExist:
-                raise Http404('The selected item is not available')
+                raise Http404('The selected item is not available.')
             if item.available > 0:
                 client = Client.objects.create(
-                    first_name = form.cleaned_data['first_name'],
-                    last_name= form.cleaned_data['last_name'],
-                    email= form.cleaned_data['email']
+                    first_name=form.cleaned_data['first_name'],
+                    last_name=form.cleaned_data['last_name'],
+                    email=form.cleaned_data['email'],
                 )
                 ItemReservation.objects.create(
                     item=item,
                     client=client,
                 )
-                messages.success(request, 'Your item has been reserved! You can pick it up from Baldy 19')
-                return redirect('/inventory/details/' + str(item_id))
+                messages.success(request, 'The item has been reserved! You can pick it up from Baldy 19.')
+                return redirect(reverse('inventory:item-details', kwargs={'item_id': item.id}))
             else:
-                messages.error(request, 'Your item was not reserved. Please go back and reserve the item again.')
-                return redirect(reverse('inventory:index'))
+                messages.error(request, 'The item you tried to reserve is not available.')
+                return redirect(reverse('inventory:item-details', kwargs={'item_id': item.id}))
         else:
             raise Http404('Form input is invalid')
-
-
-
