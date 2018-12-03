@@ -62,7 +62,13 @@ def allrets(request):
     rets = ItemLoan.objects.filter(returned_at__isnull=True)
     query = request.GET.get('q')
     if query is not None:
-        rets = rets.filter(Q(item__name__icontains=query) | Q(item__description__icontains=query) | Q(client__first_name__icontains=query) | Q(client__last_name__icontains=query) | Q(client__email__icontains=query))
+        rets = rets.filter(
+            Q(item__name__icontains=query)
+            | Q(item__description__icontains=query)
+            | Q(client__first_name__icontains=query)
+            | Q(client__last_name__icontains=query)
+            | Q(client__email__icontains=query)
+        )
     return render(request, 'loans/allReturns.html', {'returns': rets})
 
 def checkIfItemAvailable(request, item_id): 
