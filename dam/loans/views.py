@@ -1,12 +1,13 @@
-from django.shortcuts import render, redirect
-from django.http import Http404, HttpResponseRedirect
-from ..inventory.models import Item
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from dam.loans.models import ItemReservation, ItemLoan, Client
-from django.contrib import messages 
+from django.http import Http404, HttpResponseRedirect
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils import timezone
-import dam.loans.forms as reserve_form
+
+from dam.inventory.models import Item
+from dam.loans import forms
+from dam.loans.models import ItemReservation, ItemLoan, Client
 
 @login_required
 def reservations(request, reservation_id):
@@ -65,7 +66,7 @@ def allrets(request):
 
 def checkIfItemAvailable(request, item_id): 
     if request.method == 'POST':
-        form = reserve_form.reserveItemForm(request.POST)
+        form = forms.reserveItemForm(request.POST)
         if form.is_valid():
             try: 
                 item = Item.objects.with_availability().get(id=item_id)
