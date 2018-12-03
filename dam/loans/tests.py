@@ -1,10 +1,12 @@
+from datetime import datetime
+
 from django.contrib.auth import get_user_model
 from django.test import TestCase
-from datetime import datetime
+
 from dam.inventory.models import Item
 from dam.loans.models import Client, ItemLoan, ItemReservation
-from dam.loans.views import reservations
-#timezone instead of datetime
+
+
 User = get_user_model()
 
 
@@ -68,37 +70,89 @@ class ReservationPossibleTest(TestCase):
         self.assertEqual(item.available, 9)
 
 
-# Create your tests here.
+class ReserveItemTests(TestCase):
 
-class ValidateTestCases(TestCase):
+    def test_invalid_item(self):
+        response = self.client.post(
+            '/loans/reserve/1/',
+            {
+                'email': 'example@buffalo.edu',
+                'first_name': 'First',
+                'last_name': 'Last',
+            },
+            follow=True,
+        )
 
-    def test_details(self):
-        response= self.client.post('/loans/reserve/2')
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['email'],'mhertz@buffalo.edu')
-    
+        self.assertEqual(response.status_code, 404)
+
+    def test_valid_and_available(self):
+        # Create item to be reserved.
+        Item.objects.create(id=2, quantity=2)
+
+        # Reserve the item.
+        response = self.client.post(
+            '/loans/reserve/2/',
+            {
+                'email': 'example@buffalo.edu',
+                'first_name': 'First',
+                'last_name': 'Last',
+            },
+            follow=True,
+        )
+
+        # Verify that the correct data was stored.
+        self.assertEqual(ItemReservation.objects.count(), 1)
+        reservation = ItemReservation.objects.first()
+        self.assertEqual(reservation.item_id, 2)
+        self.assertEqual(reservation.client, Client(id=1))
+        self.assertTrue(reservation.is_active)
+
+        # Verify that the user got the expected behavior.
+        self.assertRedirects(response, '/inventory/details/2/')
+        self.assertContains(response, 'The item has been reserved!')
+
+    def test_valid_and_unavailable(self):
+        # Create item to be reserved.
+        Item.objects.create(id=2, quantity=0)
+
+        # Reserve the item.
+        response = self.client.post(
+            '/loans/reserve/2/',
+            {
+                'email': 'example@buffalo.edu',
+                'first_name': 'First',
+                'last_name': 'Last',
+            },
+            follow=True,
+        )
+
+        # Verify that the reservation was not created.
+        self.assertEqual(ItemReservation.objects.count(), 0)
+
+        # Verify that the user got the expected behavior.
+        self.assertRedirects(response, '/inventory/details/2/')
+        self.assertContains(response, 'The item you tried to reserve is not available.')
+
     def test_invalid_email(self):
-        response= self.client.post('/loans/reserve/1')
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['email'],'mhertz@buf.aalo.edu')
+        # Create item to be reserved.
+        Item.objects.create(id=2, quantity=2)
 
-    def test_negative_id(self):
-        response= self.client.post('/loans/reserve/2')
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['id'],'-2')
+        # Reserve the item.
+        response = self.client.post(
+            '/loans/reserve/2/',
+            {
+                'email': 'example@invalid.edu',
+                'first_name': 'First',
+                'last_name': 'Last',
+            },
+            follow=True,
+        )
 
-    def test_zero_id(self):
-        response= self.client.post('/loans/reserve/1')
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['id'],'0')
-
-    def test_negative_id(self):
-        response= self.client.post('/loans/reserve/3')
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['id'],'-2')
+        # Verify that the reservation was not created.
+        self.assertEqual(ItemReservation.objects.count(), 0)
 
 
-class ClientTest(TestCase):
+class ClientTests(TestCase):
     def test_get_email_address_direct(self):
         client = Client.objects.create(
             first_name='First',
