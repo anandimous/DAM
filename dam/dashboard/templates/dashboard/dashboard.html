@@ -30,6 +30,7 @@
                 width: 220px;
                 height: 220px;
             }
+
         }
     </style>
 
@@ -46,7 +47,6 @@
                 <div class="card-content">
                     <span class="card-title">{{ user.get_full_name }}</span>
                 </div>
-
                 {% if user.is_staff %}
                 <div class="card-action dashboard-links">
                     {% if perms.loans.view_itemreservation %}<a href="{% url 'loans:allres' %}">Reserve Item List</a>{% endif %}
@@ -93,4 +93,5 @@
             </div>
         </div>
     </div>
+
 {% endblock %}
