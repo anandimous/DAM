@@ -27,11 +27,11 @@
                         <hr>
                         <br>
                         <p>Client Name:</p>
-                        <p>{{ reserved.client.first_name }} {{ reserved.client.last_name }}</p>
+                        <p>{{ reserved.client.get_full_name }}</p>
                         <hr>
                         <br>
                         <p>Email: </p>
-                        <p>{{ reserved.client.email }}</p>
+                        <p>{{ reserved.client.get_email_address }}</p>
                         <hr>
                         <br>
                         <p>Reserved on: </p>

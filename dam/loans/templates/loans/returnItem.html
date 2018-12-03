@@ -25,10 +25,10 @@
                         <hr>
                         <br>
                         <p>Client Name:</p>
-                        <p>{{ loan.client.first_name }} {{ loan.client.last_name }}</p>
+                        <p>{{ loan.client.get_full_name }}</p>
                         <br>
                         <p>Email: </p>
-                        <p>{{ loan.client.email }}</p>
+                        <p>{{ loan.client.get_email_address }}</p>
                         <br>
                         <p>Item Name:</p>
                         <p>{{ loan.item.name }}</p>

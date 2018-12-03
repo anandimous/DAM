@@ -50,14 +50,14 @@ def returns(request, loan_id):
         return HttpResponseRedirect(reverse('loans:allrets'))
     return render(request, 'loans/returnItem.html', args)
 
-
+@login_required
 def allres(request):
     res = ItemReservation.objects.filter(is_active=True)
 
     args = {'reserves': res}
     return render(request, 'loans/allReservations.html', args)
 
-
+@login_required
 def allrets(request):
     rets = ItemLoan.objects.filter(returned_at__isnull=True)
     query = request.GET.get('q')
@@ -90,7 +90,7 @@ def checkIfItemAvailable(request, item_id):
                     client=client,
                 )
                 messages.success(request, 'Your item has been reserved! You can pick it up from Baldy 19')
-                return redirect('/details/' + str(item_id))
+                return redirect('/inventory/details/' + str(item_id))
             else:
                 messages.error(request, 'Your item was not reserved. Please go back and reserve the item again.')
                 return redirect(reverse('inventory:index'))
