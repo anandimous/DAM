@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import permission_required
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -9,7 +9,8 @@ from dam.inventory.models import Item
 from dam.loans import forms
 from dam.loans.models import ItemReservation, ItemLoan, Client
 
-@login_required
+
+@permission_required('loans.change_itemreservation')
 def reservations(request, reservation_id):
     try:
         reservation = ItemReservation.objects.get(id=reservation_id, is_active=True)
@@ -34,7 +35,7 @@ def reservations(request, reservation_id):
     return render(request, 'loans/loanItem.html', args)
 
 
-@login_required
+@permission_required('loans.change_itemloan')
 def returns(request, loan_id):
     try:
         loan = ItemLoan.objects.get(id=loan_id, returned_at__isnull=True)
@@ -50,14 +51,16 @@ def returns(request, loan_id):
         return HttpResponseRedirect(reverse('loans:allrets'))
     return render(request, 'loans/returnItem.html', args)
 
-@login_required
+
+@permission_required('loans.view_itemreservation')
 def allres(request):
     res = ItemReservation.objects.filter(is_active=True)
 
     args = {'reserves': res}
     return render(request, 'loans/allReservations.html', args)
 
-@login_required
+
+@permission_required('loans.view_itemloan')
 def allrets(request):
     rets = ItemLoan.objects.filter(returned_at__isnull=True)
     args = {'returns': rets}
