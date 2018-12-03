@@ -1,7 +1,8 @@
 from django.test import TestCase
 from dam.users.models import User
 
-class dashboardTest(TestCase):
+
+class DashboardTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         User.objects.create_user(
@@ -12,17 +13,10 @@ class dashboardTest(TestCase):
 
     def test_page_login_required(self):
         response = self.client.get('/dashboard/')
-        self.assertEquals(response.status_code, 302)
+        self.assertRedirects(response, '/users/log-in/?next=/dashboard/')
 
-    def test_correct_login_redirect(self):
-        self.client.post(
-            '/users/log-in/',
-            {
-                'email': 'test@example.com',
-                'password': 'password',
-            },
-            follow=True,
-        )
+    def test_authenticated_can_access(self):
+        self.client.login(username='test@example.com', password='password')
         response = self.client.get('/dashboard/')
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Dashboard')
