@@ -53,9 +53,16 @@ def returns(request, loan_id):
 @login_required
 def allres(request):
     res = ItemReservation.objects.filter(is_active=True)
-
-    args = {'reserves': res}
-    return render(request, 'loans/allReservations.html', args)
+    query = request.GET.get('q')
+    if query is not None:
+        res = res.filter(
+            Q(item__name__icontains=query)
+            | Q(item__description__icontains=query)
+            | Q(client__first_name__icontains=query)
+            | Q(client__last_name__icontains=query)
+            | Q(client__email__icontains=query)
+        )
+    return render(request, 'loans/allReservations.html', {'reserves': res})
 
 @login_required
 def allrets(request):
