@@ -4,18 +4,6 @@
 
 {% block style %}
     <style>
-        .profile {
-            background-image: url({% static 'img/profile.png' %});
-            border-radius: 50%;
-            display: block;
-            margin: auto;
-            background-size: 100%;
-            background-repeat: no-repeat;
-            background-color: lightblue;
-            height: 280px;
-            width: 280px;
-        }
-
         .card .card-content .card-title {
             margin: 8px 0 0;
         }
@@ -30,12 +18,19 @@
         .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating):hover {
             color: #002f56;
         }
-
+        #clients{
+            background-color: var(--pgrey);
+        }
+        img {
+          max-width: 70%;
+          max-height: 70%;
+        }
         @media only screen and (max-width: 600px) {
             .profile {
                 width: 220px;
                 height: 220px;
             }
+
         }
     </style>
 
@@ -45,15 +40,13 @@
 
 {% block body %}
     <h1>Dashboard</h1>
-
-    <div class="row">
-        <div class="col s12 m10 offset-m1 l8 offset-l2">
+    <div class = "row">
+        <div class="col l4 m6 s12">
             <div class="card" style="text-align: center;">
+                <img src="{% static 'img/profile.png' %}" alt="Profile" style="padding-top: 20px">
                 <div class="card-content">
-                    <div class="profile"></div>
                     <span class="card-title">{{ user.get_full_name }}</span>
                 </div>
-
                 {% if user.is_staff %}
                 <div class="card-action dashboard-links">
                     {% if perms.loans.view_itemreservation %}<a href="{% url 'loans:allres' %}">Reserve Item List</a>{% endif %}
@@ -63,5 +56,42 @@
                 {% endif %}
             </div>
         </div>
+        <div class="col l8 m6 s12">
+            <div class="row card" id="clients">
+                <h5 style="color: #ffffff;text-align: center; padding-top: 2%; margin-top: 0px;">Your Reservations</h5>
+                <div class="card-content">
+                    {% if reserves %}
+                        {% for reserve in reserves %}
+                                    <div class="card" style="min-height: 20%; ">
+                                        <div class="card-content">
+                                            <span class="card-title" style="color:black;">{{ reserve.item.name }}</span>
+                                            <p>Reserved at: {{ reserve.reserved_at }}</p>
+                                        </div>
+                                    </div>
+                        {% endfor %}
+                    {% else %}
+                        <p style="color: #ffffff;text-align: center; font-size: large">No active reservations right now</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row card" id="clients">
+                <h5 class="card-title" style="color: #ffffff; text-align: center;  padding-top: 2%">Your Loans</h5>
+                <div class="card-content">
+                    {% if returns %}
+                        {% for loan in returns %}
+                                    <div class="card" style="min-height: 20%;">
+                                        <div class="card-content">
+                                            <span class="card-title" style="color:black;">{{ loan.item.name }}</span>
+                                            <p>Approved at: {{ loan.approved_at }}</p>
+                                        </div>
+                                    </div>
+                        {% endfor %}
+                    {% else %}
+                        <p style="color: #ffffff;text-align: center; font-size: large">No active Loans right now</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
     </div>
+
 {% endblock %}
