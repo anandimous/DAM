@@ -90,11 +90,14 @@ def checkIfItemAvailable(request, item_id):
             except Item.DoesNotExist:
                 raise Http404('The selected item is not available.')
             if item.available > 0:
-                client = Client.objects.create(
-                    first_name=form.cleaned_data['first_name'],
-                    last_name=form.cleaned_data['last_name'],
-                    email=form.cleaned_data['email'],
-                )
+                if request.user.is_authenticated:
+                    client = Client.objects.create(user=request.user)
+                else:
+                    client = Client.objects.create(
+                        first_name=form.cleaned_data['first_name'],
+                        last_name=form.cleaned_data['last_name'],
+                        email=form.cleaned_data['email']
+                    )
                 ItemReservation.objects.create(
                     item=item,
                     client=client,
