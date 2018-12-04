@@ -7,6 +7,8 @@ from django.contrib import messages
 from django.urls import reverse
 from django.utils import timezone
 import dam.loans.forms as reserve_form
+from django.db.models import Q
+
 
 @login_required
 def reservations(request, reservation_id):
@@ -19,7 +21,7 @@ def reservations(request, reservation_id):
             }
     if request.method == "POST":
         if "Approve" in request.POST:
-            itemloaned = ItemLoan.objects.create(item=reservation.item, client=reservation.client, approved_by=request.user)
+            ItemLoan.objects.create(item=reservation.item, client=reservation.client, approved_by=request.user)
 
             reservation.is_active = False
             reservation.save()
@@ -49,19 +51,35 @@ def returns(request, loan_id):
         return HttpResponseRedirect(reverse('loans:allrets'))
     return render(request, 'loans/returnItem.html', args)
 
+
 @login_required
 def allres(request):
     res = ItemReservation.objects.filter(is_active=True)
+    query = request.GET.get('q')
+    if query is not None:
+        res = res.filter(
+            Q(item__name__icontains=query)
+            | Q(item__description__icontains=query)
+            | Q(client__first_name__icontains=query)
+            | Q(client__last_name__icontains=query)
+            | Q(client__email__icontains=query)
+        )
+    return render(request, 'loans/allReservations.html', {'reserves': res})
 
-    args = {'reserves': res}
-    return render(request, 'loans/allReservations.html', args)
 
 @login_required
 def allrets(request):
     rets = ItemLoan.objects.filter(returned_at__isnull=True)
-    args = {'returns': rets}
-    return render(request, 'loans/allReturns.html', args)
-
+    query = request.GET.get('q')
+    if query is not None:
+        rets = rets.filter(
+            Q(item__name__icontains=query)
+            | Q(item__description__icontains=query)
+            | Q(client__first_name__icontains=query)
+            | Q(client__last_name__icontains=query)
+            | Q(client__email__icontains=query)
+        )
+    return render(request, 'loans/allReturns.html', {'returns': rets})
 
 def checkIfItemAvailable(request, item_id): 
     if request.method == 'POST':
@@ -70,7 +88,7 @@ def checkIfItemAvailable(request, item_id):
             try: 
                 item = Item.objects.with_availability().get(id=item_id)
             except Item.DoesNotExist:
-                raise Http404('The selected item is not available')
+                raise Http404('The selected item is not available.')
             if item.available > 0:
                 if request.user.is_authenticated:
                     client = Client.objects.create(user=request.user)
@@ -84,13 +102,10 @@ def checkIfItemAvailable(request, item_id):
                     item=item,
                     client=client,
                 )
-                messages.success(request, 'Your item has been reserved! You can pick it up from Baldy 19')
-                return redirect('/inventory/details/' + str(item_id))
+                messages.success(request, 'The item has been reserved! You can pick it up from Baldy 19.')
+                return redirect(reverse('inventory:item-details', kwargs={'item_id': item.id}))
             else:
-                messages.error(request, 'Your item was not reserved. Please go back and reserve the item again.')
-                return redirect(reverse('inventory:index'))
+                messages.error(request, 'The item you tried to reserve is not available.')
+                return redirect(reverse('inventory:item-details', kwargs={'item_id': item.id}))
         else:
             raise Http404('Form input is invalid')
-
-
-
