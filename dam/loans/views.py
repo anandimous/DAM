@@ -1,41 +1,42 @@
-from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth.decorators import permission_required
+from django.db.models import Q
 from django.http import Http404, HttpResponseRedirect
-from ..inventory.models import Item
-from django.contrib.auth.decorators import login_required
-from dam.loans.models import ItemReservation, ItemLoan, Client
-from django.contrib import messages 
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils import timezone
-import dam.loans.forms as reserve_form
-from django.db.models import Q
+
+from dam.inventory.models import Item
+from dam.loans import forms
+from dam.loans.models import ItemReservation, ItemLoan, Client
 
 
-@login_required
+@permission_required('loans.change_itemreservation')
 def reservations(request, reservation_id):
     try:
         reservation = ItemReservation.objects.get(id=reservation_id, is_active=True)
     except ItemReservation.DoesNotExist:
         raise Http404('Reservation Not Possible!')
-    args = {'reserved': reservation,
-            'user': request.user
-            }
+
     if request.method == "POST":
         if "Approve" in request.POST:
             ItemLoan.objects.create(item=reservation.item, client=reservation.client, approved_by=request.user)
-
             reservation.is_active = False
             reservation.save()
             messages.success(request, 'Loan Successful!')
             return HttpResponseRedirect(reverse('loans:allres'))
         if "Decline" in request.POST:
-            messages.success(request, 'Loan Declined!')
             reservation.is_active = False
             reservation.save()
+            messages.success(request, 'Loan Declined!')
             return HttpResponseRedirect(reverse('loans:allres'))
-    return render(request, 'loans/loanItem.html', args)
+    return render(request, 'loans/loanItem.html', {
+        'reserved': reservation,
+        'user': request.user,
+    })
 
 
-@login_required
+@permission_required('loans.change_itemloan')
 def returns(request, loan_id):
     try:
         loan = ItemLoan.objects.get(id=loan_id, returned_at__isnull=True)
@@ -52,7 +53,7 @@ def returns(request, loan_id):
     return render(request, 'loans/returnItem.html', args)
 
 
-@login_required
+@permission_required('loans.view_itemreservation')
 def allres(request):
     res = ItemReservation.objects.filter(is_active=True)
     query = request.GET.get('q')
@@ -67,7 +68,7 @@ def allres(request):
     return render(request, 'loans/allReservations.html', {'reserves': res})
 
 
-@login_required
+@permission_required('loans.view_itemloan')
 def allrets(request):
     rets = ItemLoan.objects.filter(returned_at__isnull=True)
     query = request.GET.get('q')
@@ -81,9 +82,10 @@ def allrets(request):
         )
     return render(request, 'loans/allReturns.html', {'returns': rets})
 
+  
 def checkIfItemAvailable(request, item_id): 
     if request.method == 'POST':
-        form = reserve_form.reserveItemForm(request.POST)
+        form = forms.reserveItemForm(request.POST)
         if form.is_valid():
             try: 
                 item = Item.objects.with_availability().get(id=item_id)
