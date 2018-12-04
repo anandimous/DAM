@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.db.models import Q
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -82,8 +82,9 @@ def allrets(request):
         )
     return render(request, 'loans/allReturns.html', {'returns': rets})
 
-  
-def checkIfItemAvailable(request, item_id): 
+
+@login_required
+def checkIfItemAvailable(request, item_id):
     if request.method == 'POST':
         form = forms.reserveItemForm(request.POST)
         if form.is_valid():

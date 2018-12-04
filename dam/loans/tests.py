@@ -72,7 +72,29 @@ class ReservationPossibleTest(TestCase):
 
 class ReserveItemTests(TestCase):
 
+    @classmethod
+    def setUpTestData(cls):
+        User.objects.create_user(
+            email='example@buffalo.edu',
+            password='password',
+        )
+
+    def test_anonymous_user(self):
+        response = self.client.post(
+            '/loans/reserve/1/',
+            {
+                'email': 'example@buffalo.edu',
+                'first_name': 'First',
+                'last_name': 'Last',
+            },
+            follow=True,
+        )
+
+        self.assertRedirects(response, '/users/log-in/?next=/loans/reserve/1/')
+
     def test_invalid_item(self):
+        self.client.login(username='example@buffalo.edu', password='password')
+
         response = self.client.post(
             '/loans/reserve/1/',
             {
@@ -86,6 +108,8 @@ class ReserveItemTests(TestCase):
         self.assertEqual(response.status_code, 404)
 
     def test_valid_and_available(self):
+        self.client.login(username='example@buffalo.edu', password='password')
+
         # Create item to be reserved.
         Item.objects.create(id=2, quantity=2)
 
@@ -112,6 +136,8 @@ class ReserveItemTests(TestCase):
         self.assertContains(response, 'The item has been reserved!')
 
     def test_valid_and_unavailable(self):
+        self.client.login(username='example@buffalo.edu', password='password')
+
         # Create item to be reserved.
         Item.objects.create(id=2, quantity=0)
 
@@ -134,6 +160,8 @@ class ReserveItemTests(TestCase):
         self.assertContains(response, 'The item you tried to reserve is not available.')
 
     def test_invalid_email(self):
+        self.client.login(username='example@buffalo.edu', password='password')
+
         # Create item to be reserved.
         Item.objects.create(id=2, quantity=2)
 
