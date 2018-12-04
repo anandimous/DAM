@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import permission_required
+from django.db.models import Q
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -16,23 +17,23 @@ def reservations(request, reservation_id):
         reservation = ItemReservation.objects.get(id=reservation_id, is_active=True)
     except ItemReservation.DoesNotExist:
         raise Http404('Reservation Not Possible!')
-    args = {'reserved': reservation,
-            'user': request.user
-            }
+
     if request.method == "POST":
         if "Approve" in request.POST:
-            itemloaned = ItemLoan.objects.create(item=reservation.item, client=reservation.client, approved_by=request.user)
-
+            ItemLoan.objects.create(item=reservation.item, client=reservation.client, approved_by=request.user)
             reservation.is_active = False
             reservation.save()
             messages.success(request, 'Loan Successful!')
             return HttpResponseRedirect(reverse('loans:allres'))
         if "Decline" in request.POST:
-            messages.success(request, 'Loan Declined!')
             reservation.is_active = False
             reservation.save()
+            messages.success(request, 'Loan Declined!')
             return HttpResponseRedirect(reverse('loans:allres'))
-    return render(request, 'loans/loanItem.html', args)
+    return render(request, 'loans/loanItem.html', {
+        'reserved': reservation,
+        'user': request.user,
+    })
 
 
 @permission_required('loans.change_itemloan')
@@ -55,18 +56,33 @@ def returns(request, loan_id):
 @permission_required('loans.view_itemreservation')
 def allres(request):
     res = ItemReservation.objects.filter(is_active=True)
-
-    args = {'reserves': res}
-    return render(request, 'loans/allReservations.html', args)
+    query = request.GET.get('q')
+    if query is not None:
+        res = res.filter(
+            Q(item__name__icontains=query)
+            | Q(item__description__icontains=query)
+            | Q(client__first_name__icontains=query)
+            | Q(client__last_name__icontains=query)
+            | Q(client__email__icontains=query)
+        )
+    return render(request, 'loans/allReservations.html', {'reserves': res})
 
 
 @permission_required('loans.view_itemloan')
 def allrets(request):
     rets = ItemLoan.objects.filter(returned_at__isnull=True)
-    args = {'returns': rets}
-    return render(request, 'loans/allReturns.html', args)
+    query = request.GET.get('q')
+    if query is not None:
+        rets = rets.filter(
+            Q(item__name__icontains=query)
+            | Q(item__description__icontains=query)
+            | Q(client__first_name__icontains=query)
+            | Q(client__last_name__icontains=query)
+            | Q(client__email__icontains=query)
+        )
+    return render(request, 'loans/allReturns.html', {'returns': rets})
 
-
+  
 def checkIfItemAvailable(request, item_id): 
     if request.method == 'POST':
         form = forms.reserveItemForm(request.POST)
@@ -74,24 +90,24 @@ def checkIfItemAvailable(request, item_id):
             try: 
                 item = Item.objects.with_availability().get(id=item_id)
             except Item.DoesNotExist:
-                raise Http404('The selected item is not available')
+                raise Http404('The selected item is not available.')
             if item.available > 0:
-                client = Client.objects.create(
-                    first_name = form.cleaned_data['first_name'],
-                    last_name= form.cleaned_data['last_name'],
-                    email= form.cleaned_data['email']
-                )
+                if request.user.is_authenticated:
+                    client = Client.objects.create(user=request.user)
+                else:
+                    client = Client.objects.create(
+                        first_name=form.cleaned_data['first_name'],
+                        last_name=form.cleaned_data['last_name'],
+                        email=form.cleaned_data['email']
+                    )
                 ItemReservation.objects.create(
                     item=item,
                     client=client,
                 )
-                messages.success(request, 'Your item has been reserved! You can pick it up from Baldy 19')
-                return redirect('/inventory/details/' + str(item_id))
+                messages.success(request, 'The item has been reserved! You can pick it up from Baldy 19.')
+                return redirect(reverse('inventory:item-details', kwargs={'item_id': item.id}))
             else:
-                messages.error(request, 'Your item was not reserved. Please go back and reserve the item again.')
-                return redirect(reverse('inventory:index'))
+                messages.error(request, 'The item you tried to reserve is not available.')
+                return redirect(reverse('inventory:item-details', kwargs={'item_id': item.id}))
         else:
             raise Http404('Form input is invalid')
-
-
-
