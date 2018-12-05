@@ -129,9 +129,7 @@ class InventoryDetailsTest(TestCase):
 
     def test_response_on_valid_item(self):
         response = self.client.get('/inventory/details/1/')
-        self.assertEqual(response.context['item_id'], 1)
-        self.assertEqual(response.context['item_name'], 'Name 1')
-        self.assertEqual(response.context['item_description'], 'Description 1.')
+        self.assertEqual(response.context['item'], self.test_item)
 
     def test_response_on_invalid_item(self):
         response = self.client.get('/inventory/details/0/')
