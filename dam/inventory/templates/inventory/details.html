@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
+
 {% load static %}
 
 {% block title %}Item Details{% endblock %}
+
 {% block style %}
 <style>
     @media only screen and (max-width: 992px) {
@@ -12,9 +14,8 @@
     }
 </style>
 {% endblock %}
+
 {% block body %}
-
-
     <h1> {{ item_name }} Details </h1>
 
     <div id="cardprofile" class="col s12 l8">
@@ -71,15 +72,14 @@
                 <div class="card-content white-text">
                     <span class="card-title">Who May Borrow</span>
                     <p>Current University at Buffalo faculty, staff and students may use their UB Card to borrow this item for a period of 2 weeks. It will be available for use at Baldy 19</p>
-
                 </div>
             </div>
-                <ul class="collapsible" data-collapsible="expandable">
-                    <li>
+            <ul class="collapsible" data-collapsible="expandable">
+                <li>
+                    <div class="collapsible-header" style="background-color: #e4e4e4">Reserve <i style="text-align: right;" class="material-icons">expand_more</i></div>
 
-                        <div class="collapsible-header" style="background-color: #e4e4e4">Reserve <i style="text-align: right;" class="material-icons">expand_more</i></div>
-
-                        <div class="collapsible-body">
+                    <div class="collapsible-body">
+                        {% if user.is_authenticated %}
                             <form action="{% url 'loans:reserve' item_id %}" method="post">
                                 {% csrf_token %}
                                 {{ form.errors }}
@@ -101,15 +101,17 @@
                                     Submit<i class="material-icons right">send</i>
                                 </button>
                             </form>
-                        </div>
-                    </li>
-                </ul>
-                <script>
-                    $(document).ready(function(){
-                        $('.collapsible').collapsible({accordion: true});
-                    });
-                </script>
-            </div>
+                        {% else %}
+                            <p>You must <a href="{% url 'users:log-in' %}?next={{request.path}}">log in</a> to reserve this item</p>
+                        {% endif %}
+                    </div>
+                </li>
+            </ul>
+            <script>
+                $(document).ready(function(){
+                    $('.collapsible').collapsible({accordion: true});
+                });
+            </script>
         </div>
-
+    </div>
 {% endblock %}

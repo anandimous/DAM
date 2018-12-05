@@ -123,16 +123,27 @@ class InventoryDetailsTest(TestCase):
         )
 
     def test_view_uses_correct_template(self):
-        response = self.client.get('/details/1')
+        response = self.client.get('/inventory/details/1/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'inventory/details.html')
 
     def test_response_on_valid_item(self):
-        response = self.client.get('/details/1')
+        response = self.client.get('/inventory/details/1/')
         self.assertEqual(response.context['item_id'], 1)
         self.assertEqual(response.context['item_name'], 'Name 1')
         self.assertEqual(response.context['item_description'], 'Description 1.')
 
     def test_response_on_invalid_item(self):
-        response = self.client.get('/details/0')
+        response = self.client.get('/inventory/details/0/')
         self.assertEqual(response.status_code, 404)
+
+    def test_authenticated_user_can_reserve(self):
+        User.objects.create_user(email='example@buffalo.edu', password='password')
+        self.client.login(username='example@buffalo.edu', password='password')
+
+        response = self.client.get('/inventory/details/1/')
+        self.assertNotContains(response, 'You must <a href="/users/log-in/?next=/inventory/details/1/">log in</a>')
+
+    def test_anonymous_user_cannot_reserve(self):
+        response = self.client.get('/inventory/details/1/')
+        self.assertContains(response, 'You must <a href="/users/log-in/?next=/inventory/details/1/">log in</a>')
