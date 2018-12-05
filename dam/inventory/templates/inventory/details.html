@@ -16,36 +16,36 @@
 {% endblock %}
 
 {% block body %}
-    <h1> {{ item_name }} Details </h1>
+    <h1> {{ item.name }} Details </h1>
 
     <div id="cardprofile" class="col s12 l8">
         <div class="card">
             <div class="carousel carousel-slider" id="demo-carousel-slider">
-                {% if item_id == 1 %}
+                {% if item.id == 1 %}
                     <a class="carousel-item" href="#one!"><img src={% static 'img/laptop-demo-img-1.jpg' %}></a>
                     <a class="carousel-item" href="#two!"><img src={% static 'img/laptop-demo-img-2.jpg' %}></a>
                     <a class="carousel-item" href="#three!"><img src={% static 'img/laptop-demo-img-3.jpg' %}></a>
                     <a class="carousel-item" href="#four!"><img src={% static 'img/laptop-demo-img-4.jpg' %}></a>
                 {% endif %}
-                {% if item_id == 2 %}
+                {% if item.id == 2 %}
                     <a class="carousel-item" href="#one!"><img src={% static 'img/oculus-demo-img-1.jpg' %}></a>
                     <a class="carousel-item" href="#two!"><img src={% static 'img/oculus-demo-img-2.jpg' %}></a>
                     <a class="carousel-item" href="#three!"><img src={% static 'img/oculus-demo-img-3.jpg' %}></a>
                     <a class="carousel-item" href="#four!"><img src={% static 'img/oculus-demo-img-4.jpg' %}></a>
                 {% endif %}
-                {% if item_id == 3 %}
+                {% if item.id == 3 %}
                     <a class="carousel-item" href="#one!"><img src={% static 'img/echo-demo-img-1.jpg' %}></a>
                     <a class="carousel-item" href="#two!"><img src={% static 'img/echo-demo-img-2.jpg' %}></a>
                     <a class="carousel-item" href="#three!"><img src={% static 'img/echo-demo-img-3.jpg' %}></a>
                     <a class="carousel-item" href="#four!"><img src={% static 'img/echo-demo-img-4.jpg' %}></a>
                 {% endif %}
-                {% if item_id == 4 %}
+                {% if item.id == 4 %}
                     <a class="carousel-item" href="#one!"><img src={% static 'img/raspi-demo-img-1.jpg' %}></a>
                     <a class="carousel-item" href="#two!"><img src={% static 'img/raspi-demo-img-2.jpg' %}></a>
                     <a class="carousel-item" href="#three!"><img src={% static 'img/raspi-demo-img-3.jpg' %}></a>
                     <a class="carousel-item" href="#four!"><img src={% static 'img/raspi-demo-img-4.jpg' %}></a>
                 {% endif %}
-                {% if item_id >= 5 %}
+                {% if item.id >= 5 %}
                     <a class="carousel-item" href="#one!"><img src={% static 'img/placeholder.png' %}></a>
                     <a class="carousel-item" href="#two!"><img src={% static 'img/placeholder.png' %}></a>
                     <a class="carousel-item" href="#three!"><img src={% static 'img/placeholder.png' %}></a>
@@ -61,8 +61,8 @@
                 })
             </script>
             <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">{{ item_name }}</span>
-                <p>{{ item_description | linebreaksbr }}</p>
+                <span class="card-title activator grey-text text-darken-4">{{ item.name }}</span>
+                <p>{{ item.description | linebreaksbr }}</p>
             </div>
         </div>
     </div>
@@ -76,29 +76,17 @@
             </div>
             <ul class="collapsible" data-collapsible="expandable">
                 <li>
-                    <div class="collapsible-header" style="background-color: #e4e4e4">Reserve <i style="text-align: right;" class="material-icons">expand_more</i></div>
+                    <div class="collapsible-header" style="background-color: #e4e4e4">Want this item? <i style="text-align: right;" class="material-icons">expand_more</i></div>
 
                     <div class="collapsible-body">
-                        {% if user.is_authenticated %}
-                            <form action="{% url 'loans:reserve' item_id %}" method="post">
+                        {% if not item.available %}
+                            <p>This item is currently unavailable</p>
+                        {% elif user.is_authenticated %}
+                            <form action="{% url 'loans:reserve' item.id %}" method="post">
                                 {% csrf_token %}
-                                {{ form.errors }}
-                                {{ form.non_field_errors }}
-                                <div class="input-field col s12 l6">
-                                    <label for="first_name">First Name</label>
-                                    <input id="first_name" type="text" class="validate" name="first_name" required>
-                                </div>
-                                <div class="input-field col s12 l6">
-                                    <label for="last_name">Last Name</label>
-                                    <input id="last_name" type="text" class="validate" name="last_name" required>
-                                </div>
-                                <div class="input-field col s12 l12">
-                                    <label for="email">Email</label>
-                                    <input id="email" type="email" class="validate" pattern=".+@buffalo.edu" name="email" required>
-                                    <span class="helper-text" data-error="Your email address must end in: @buffalo.edu">@buffalo.edu email only</span>
-                                </div>
+
                                 <button class="btn waves-effect waves-light" name="submit" type="submit">
-                                    Submit<i class="material-icons right">send</i>
+                                    Reserve <i class="material-icons right">send</i>
                                 </button>
                             </form>
                         {% else %}

@@ -7,7 +7,6 @@ from django.urls import reverse
 from django.utils import timezone
 
 from dam.inventory.models import Item
-from dam.loans import forms
 from dam.loans.models import ItemReservation, ItemLoan, Client
 
 
@@ -84,31 +83,21 @@ def allrets(request):
 
 
 @login_required
-def checkIfItemAvailable(request, item_id):
+def reserve_item(request, item_id):
     if request.method == 'POST':
-        form = forms.reserveItemForm(request.POST)
-        if form.is_valid():
-            try: 
-                item = Item.objects.with_availability().get(id=item_id)
-            except Item.DoesNotExist:
-                raise Http404('The selected item is not available.')
-            if item.available > 0:
-                if request.user.is_authenticated:
-                    client = Client.objects.create(user=request.user)
-                else:
-                    client = Client.objects.create(
-                        first_name=form.cleaned_data['first_name'],
-                        last_name=form.cleaned_data['last_name'],
-                        email=form.cleaned_data['email']
-                    )
-                ItemReservation.objects.create(
-                    item=item,
-                    client=client,
-                )
-                messages.success(request, 'The item has been reserved! You can pick it up from Baldy 19.')
-                return redirect(reverse('inventory:item-details', kwargs={'item_id': item.id}))
-            else:
-                messages.error(request, 'The item you tried to reserve is not available.')
-                return redirect(reverse('inventory:item-details', kwargs={'item_id': item.id}))
+        try:
+            item = Item.objects.with_availability().get(id=item_id)
+        except Item.DoesNotExist:
+            raise Http404('The selected item is not available.')
+
+        if item.available > 0:
+            client = Client.objects.create(user=request.user)
+            ItemReservation.objects.create(
+                item=item,
+                client=client,
+            )
+            messages.success(request, 'The item has been reserved! You can pick it up from Baldy 19.')
+            return redirect(reverse('inventory:item-details', kwargs={'item_id': item.id}))
         else:
-            raise Http404('Form input is invalid')
+            messages.error(request, 'The item you tried to reserve is not available.')
+            return redirect(reverse('inventory:item-details', kwargs={'item_id': item.id}))
