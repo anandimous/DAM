@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.db import models
-
+from datetime import datetime, timedelta, timezone
 
 class Client(models.Model):
     """A client is someone who will be reserving or checking out items."""
@@ -32,4 +32,6 @@ class ItemLoan(models.Model):
     client = models.ForeignKey(Client, models.CASCADE)
     approved_at = models.DateTimeField(auto_now_add=True)
     approved_by = models.ForeignKey(settings.AUTH_USER_MODEL, models.CASCADE)
+    due_at = models.DateTimeField(default= timezone.now()+loan_duration)
+
     returned_at = models.DateTimeField(null=True)  # NULL means not returned.

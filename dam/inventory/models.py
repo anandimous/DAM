@@ -20,6 +20,7 @@ class Item(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
     quantity = models.PositiveIntegerField()
+    loan_duration = models.DurationField()
 
     objects = ItemManager()
 

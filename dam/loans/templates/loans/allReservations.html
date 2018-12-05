@@ -22,6 +22,7 @@
                             <p>Email: {{ reserve.client.email }}</p>
                             <p>Name: {{ reserve.client.first_name|add:" "|add:reserve.client.last_name}}</p>
                             <p>Reserved on: {{ reserve.reserved_at }}</p>
+                            <p>Due on: {{ reserve.due_on }}</p>
                         </div>
                         <a class="link" href="{{ reserve.pk }}"></a>
                     </div>
