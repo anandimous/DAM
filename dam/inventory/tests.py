@@ -140,8 +140,25 @@ class InventoryDetailsTest(TestCase):
         self.client.login(username='example@buffalo.edu', password='password')
 
         response = self.client.get('/inventory/details/1/')
+        self.assertContains(response, 'Reserve')
+        self.assertNotContains(response, 'This item is currently unavailable')
         self.assertNotContains(response, 'You must <a href="/users/log-in/?next=/inventory/details/1/">log in</a>')
 
     def test_anonymous_user_cannot_reserve(self):
         response = self.client.get('/inventory/details/1/')
+        self.assertNotContains(response, 'Reserve')
+        self.assertNotContains(response, 'This item is currently unavailable')
         self.assertContains(response, 'You must <a href="/users/log-in/?next=/inventory/details/1/">log in</a>')
+
+    def test_unavailable_authenticated(self):
+        User.objects.create_user(email='example@buffalo.edu', password='password')
+        self.client.login(username='example@buffalo.edu', password='password')
+
+        Item.objects.create(id=2, quantity=0)
+        response = self.client.get('/inventory/details/2/')
+        self.assertContains(response, 'This item is currently unavailable')
+
+    def test_unavailable_anonymous(self):
+        Item.objects.create(id=2, quantity=0)
+        response = self.client.get('/inventory/details/2/')
+        self.assertContains(response, 'This item is currently unavailable')

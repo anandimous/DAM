@@ -79,7 +79,7 @@
                     <div class="collapsible-header" style="background-color: #e4e4e4">Want this item? <i style="text-align: right;" class="material-icons">expand_more</i></div>
 
                     <div class="collapsible-body">
-                        {% if user.is_authenticated %}
+                        {% if user.is_authenticated and item.available %}
                             <form action="{% url 'loans:reserve' item.id %}" method="post">
                                 {% csrf_token %}
 
@@ -87,7 +87,9 @@
                                     Reserve <i class="material-icons right">send</i>
                                 </button>
                             </form>
-                        {% else %}
+                        {% elif not item.available %}
+                            <p>This item is currently unavailable</p>
+                        {% elif user.is_anonymous %}
                             <p>You must <a href="{% url 'users:log-in' %}?next={{request.path}}">log in</a> to reserve this item</p>
                         {% endif %}
                     </div>

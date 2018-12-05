@@ -13,5 +13,5 @@ def search(request):
 
 
 def item_details(request, item_id):
-    item = get_object_or_404(Item, pk=item_id)
+    item = get_object_or_404(Item.objects.with_availability(), pk=item_id)
     return render(request, 'inventory/details.html', {'item': item})
