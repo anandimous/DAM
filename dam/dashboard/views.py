@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from dam.loans.models import ItemReservation, ItemLoan, Client
+from dam.loans.models import ItemReservation, ItemLoan
 from django.db.models import Q
 
 @login_required
