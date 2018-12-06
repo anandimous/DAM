@@ -37,6 +37,6 @@ class ItemLoan(models.Model):
     client = models.ForeignKey(Client, models.CASCADE)
     approved_at = models.DateTimeField(auto_now_add=True)
     approved_by = models.ForeignKey(settings.AUTH_USER_MODEL, models.CASCADE)
-    due_on = models.DateTimeField(default=get_duration)
+    due_on = models.DateTimeField(null=True)
 
     returned_at = models.DateTimeField(null=True)  # NULL means not returned.
