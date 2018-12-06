@@ -60,9 +60,9 @@ def allres(request):
         res = res.filter(
             Q(item__name__icontains=query)
             | Q(item__description__icontains=query)
-            | Q(client__first_name__icontains=query)
-            | Q(client__last_name__icontains=query)
-            | Q(client__email__icontains=query)
+            | Q(client__user__first_name__icontains=query)
+            | Q(client__user__last_name__icontains=query)
+            | Q(client__user__email__icontains=query)
         )
     return render(request, 'loans/allReservations.html', {'reserves': res})
 
@@ -75,9 +75,9 @@ def allrets(request):
         rets = rets.filter(
             Q(item__name__icontains=query)
             | Q(item__description__icontains=query)
-            | Q(client__first_name__icontains=query)
-            | Q(client__last_name__icontains=query)
-            | Q(client__email__icontains=query)
+            | Q(client__user__first_name__icontains=query)
+            | Q(client__user__last_name__icontains=query)
+            | Q(client__user__email__icontains=query)
         )
     return render(request, 'loans/allReturns.html', {'returns': rets})
 
