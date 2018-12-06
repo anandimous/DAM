@@ -14,20 +14,31 @@
         box-shadow: 0 0 5px rgba(33, 33, 33, 33);
     }
     </style>
+    <script>
+     $(document).ready(function(){
+        $('select').formSelect();
+     });
+    </script>
 {% endblock %}
 
 {% block body %}
     <h1>Inventory</h1>
-    <div class="search">
-        <form method="GET" id="searchForm" action="{% url 'inventory:search' %}"  accept-charset="utf-8">
+
+    <div class="filterForm">
+        <form action="{% url 'inventory:search' %}">
             <div class="row" id="searchRect" style="margin: 0 0 0 0; height: 3em">
-            <input class="searchField col l11 s11" id="searchBox" name="q" type="text" placeholder=" Search by Name or Description" value="{{request.GET.q}}" style="height: inherit; " title="Please fill out this field.">
-                <button class="waves-effect waves-light btn-small searchBtn col l1 s1" type="submit" value="Search" style="padding: 0 0 0 0; height: inherit" title="Search">
-                    <i class="material-icons" style=" vertical-align: middle">search</i>
-                </button>
+                {{ form.query }}
+            </div>
+            <div class="row">
+                {{ form.categories }}
+            </div>
+            <div class = "text-center">
+                <button class="btn btn-primary" type="submit">Filter</button>
             </div>
         </form>
     </div>
+    <br>
+
     {% for item in items %}
         <div class="col s12 m6 l4">
         <div class="card">
