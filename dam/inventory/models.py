@@ -20,7 +20,7 @@ class Item(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
     quantity = models.PositiveIntegerField()
-    image = models.ImageField(upload_to="items/", default="/static/img/placeholder.png")
+    image = models.ImageField(upload_to="items/", default="items/placeholder.png")
 
     objects = ItemManager()
 
