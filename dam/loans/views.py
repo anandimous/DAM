@@ -91,19 +91,19 @@ def allrets(request):
 @login_required
 def reserve_item(request, item_id):
     if request.method == 'POST':
-        try:
-            item = Item.objects.with_availability().get(id=item_id)
-        except Item.DoesNotExist:
-            raise Http404('The selected item is not available.')
-
-        if item.available > 0:
-            client = Client.objects.create(user=request.user)
-            ItemReservation.objects.create(
-                item=item,
-                client=client,
-            )
-            messages.success(request, 'The item has been reserved! You can pick it up from Baldy 19.')
-            return redirect(reverse('inventory:item-details', kwargs={'item_id': item.id}))
-        else:
-            messages.error(request, 'The item you tried to reserve is not available.')
-            return redirect(reverse('inventory:item-details', kwargs={'item_id': item.id}))
+            try: 
+                item = Item.objects.with_availability().get(id=item_id)
+            except Item.DoesNotExist:
+                raise Http404('The selected item is not available.')
+            if item.available > 0:
+                client = Client.objects.create(user=request.user)
+                ItemReservation.objects.create(
+                    item=item,
+                    client=client,
+                    reservation_ends= timezone.now() + timezone.timedelta(days=5)
+                )
+                messages.success(request, 'The item has been reserved! You can pick it up from Baldy 19.')
+                return redirect(reverse('inventory:item-details', kwargs={'item_id': item.id}))
+            else:
+                messages.error(request, 'The item you tried to reserve is not available.')
+                return redirect(reverse('inventory:item-details', kwargs={'item_id': item.id}))

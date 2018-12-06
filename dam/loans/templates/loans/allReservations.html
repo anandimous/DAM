@@ -22,6 +22,8 @@
                             <p>Email: {{ reserve.client.get_email_address }}</p>
                             <p>Name: {{ reserve.client.get_full_name }}</p>
                             <p>Reserved on: {{ reserve.reserved_at }}</p>
+                            <p>Reservation ends: {{ reserve.reservation_ends }}</p>
+
                         </div>
                         <a class="link" href="{{ reserve.pk }}"></a>
                     </div>
