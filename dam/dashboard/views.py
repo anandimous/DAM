@@ -8,18 +8,18 @@ from django.db.models import Q
 def showDash(request):
     user = request.user.email
     res = ItemReservation.objects.filter(is_active=True)
-    query = request.GET.get('q')
+    query = request.GET.get(request)
     if query is not None:
         res = res.filter(
-            Q(client__email=query)
-            |Q(client__first__name=query)
+            Q(client__user__email__exact=query)
+            |Q(client__user__first__name__exact=query)
         )
     loan = ItemLoan.objects.filter(returned_at__isnull=True)
-    query = request.GET.get('q')
+    query = request.GET.get(request)
     if query is not None:
         loan = loan.filter(
-            Q(client__email=query)
-            | Q(client__first__name=query)
+            Q(client__user__email__exact=query)
+            | Q(client__user__first__name__exact=query)
         )
     args = {'reserves': res,
             'returns': loan}
