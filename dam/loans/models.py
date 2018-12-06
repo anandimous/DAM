@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
-
+from dam.inventory.models import Item
+from django.utils import timezone
 
 class Client(models.Model):
     """A client is someone who will be reserving or checking out items."""
@@ -21,9 +22,12 @@ class Client(models.Model):
 
 
 class ItemReservation(models.Model):
+    def get_duration(self):
+        return timezone.now() + timezone.timedelta(days=14)
     item = models.ForeignKey('inventory.Item', models.CASCADE)
     client = models.ForeignKey(Client, models.CASCADE)
     reserved_at = models.DateTimeField(auto_now_add=True)
+    reservation_ends = models.DateTimeField(null=True)
     is_active = models.BooleanField(default=True)
 
 

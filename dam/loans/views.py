@@ -98,6 +98,7 @@ def checkIfItemAvailable(request, item_id):
                 ItemReservation.objects.create(
                     item=item,
                     client=client,
+                    reservation_ends= timezone.now() + timezone.timedelta(days=5)
                 )
                 messages.success(request, 'The item has been reserved! You can pick it up from Baldy 19.')
                 return redirect(reverse('inventory:item-details', kwargs={'item_id': item.id}))
