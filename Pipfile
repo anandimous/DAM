@@ -9,6 +9,7 @@ gunicorn = "*"
 dj-database-url = "*"
 whitenoise = "*"
 "psycopg2" = "*"
+Pillow = "*"
 
 [dev-packages]
 
