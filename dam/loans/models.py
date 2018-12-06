@@ -30,7 +30,7 @@ class ItemReservation(models.Model):
 
 
 class ItemLoan(models.Model):
-    def get_duration():
+    def get_duration(self):
         return timezone.now() + timezone.timedelta(days=14)
 
     item = models.ForeignKey('inventory.Item', models.CASCADE)

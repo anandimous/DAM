@@ -20,7 +20,7 @@ def reservations(request, reservation_id):
 
     if request.method == "POST":
         if "Approve" in request.POST:
-            ItemLoan.objects.create(item=reservation.item, client=reservation.client, approved_by=request.user)
+            ItemLoan.objects.create(item=reservation.item, client=reservation.client, approved_by=request.user, due_on=timezone.now() + timezone.timedelta(days=14))
             reservation.is_active = False
             reservation.due_on = timezone.now() + timezone.timedelta(days=14)
             reservation.save()
