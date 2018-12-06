@@ -13,19 +13,19 @@ from dam.loans.models import ItemReservation, ItemLoan, Client
 @permission_required('loans.change_itemreservation')
 def reservations(request, reservation_id):
     try:
-        reservation = ItemReservation.objects.get(id=reservation_id, is_active=True)
+        reservation = ItemReservation.objects.get(id=reservation_id, reservation_ends__gte=timezone.now())
     except ItemReservation.DoesNotExist:
         raise Http404('Reservation Not Possible!')
 
     if request.method == "POST":
         if "Approve" in request.POST:
             ItemLoan.objects.create(item=reservation.item, client=reservation.client, approved_by=request.user)
-            reservation.is_active = False
+            reservation.reservation_ends = timezone.now()
             reservation.save()
             messages.success(request, 'Loan Successful!')
             return HttpResponseRedirect(reverse('loans:allres'))
         if "Decline" in request.POST:
-            reservation.is_active = False
+            reservation.reservation_ends = timezone.now()
             reservation.save()
             messages.success(request, 'Loan Declined!')
             return HttpResponseRedirect(reverse('loans:allres'))
@@ -54,7 +54,7 @@ def returns(request, loan_id):
 
 @permission_required('loans.view_itemreservation')
 def allres(request):
-    res = ItemReservation.objects.filter(is_active=True)
+    res = ItemReservation.objects.filter(reservation_ends__gte=timezone.now())
     query = request.GET.get('q')
     if query is not None:
         res = res.filter(
@@ -91,19 +91,19 @@ def allrets(request):
 @login_required
 def reserve_item(request, item_id):
     if request.method == 'POST':
-        try:
-            item = Item.objects.with_availability().get(id=item_id)
-        except Item.DoesNotExist:
-            raise Http404('The selected item is not available.')
-
-        if item.available > 0:
-            client = Client.objects.create(user=request.user)
-            ItemReservation.objects.create(
-                item=item,
-                client=client,
-            )
-            messages.success(request, 'The item has been reserved! You can pick it up from Baldy 19.')
-            return redirect(reverse('inventory:item-details', kwargs={'item_id': item.id}))
-        else:
-            messages.error(request, 'The item you tried to reserve is not available.')
-            return redirect(reverse('inventory:item-details', kwargs={'item_id': item.id}))
+            try: 
+                item = Item.objects.with_availability().get(id=item_id)
+            except Item.DoesNotExist:
+                raise Http404('The selected item is not available.')
+            if item.available > 0:
+                client = Client.objects.create(user=request.user)
+                ItemReservation.objects.create(
+                    item=item,
+                    client=client,
+                    reservation_ends=timezone.now() + timezone.timedelta(days=5)
+                )
+                messages.success(request, 'The item has been reserved! You can pick it up from Baldy 19.')
+                return redirect(reverse('inventory:item-details', kwargs={'item_id': item.id}))
+            else:
+                messages.error(request, 'The item you tried to reserve is not available.')
+                return redirect(reverse('inventory:item-details', kwargs={'item_id': item.id}))

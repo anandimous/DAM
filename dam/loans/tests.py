@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from unittest import mock
 
 from django.contrib.auth import get_user_model
@@ -103,6 +103,7 @@ class ReserveItemTests(TestCase):
         Item.objects.create(id=2, quantity=2)
 
         reserved_at = datetime(2018, 12, 7, tzinfo=pytz.utc)
+        reservation_ends = reserved_at + timedelta(days=5)
 
         # Reserve the item.
         self.client.login(username='example@buffalo.edu', password='password')
@@ -122,6 +123,7 @@ class ReserveItemTests(TestCase):
         self.assertEqual(client.user, self.user)
         self.assertTrue(reservation.is_active)
         self.assertEqual(reservation.reserved_at, reserved_at)
+        self.assertEqual(reservation.reservation_ends, reservation_ends)
 
         # Verify that the user got the expected behavior.
         self.assertRedirects(response, '/inventory/details/2/')
