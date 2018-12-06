@@ -6,10 +6,12 @@ class ItemManager(models.Manager):
         quantity = models.F('quantity')
         reservations = models.Count(
             'itemreservation',
+            distinct=True,
             filter=models.Q(itemreservation__is_active=True),
         )
         loans = models.Count(
             'itemloan',
+            distinct=True,
             filter=models.Q(itemloan__returned_at__isnull=True),
         )
         available = quantity - reservations - loans
