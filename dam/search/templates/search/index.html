@@ -59,7 +59,7 @@
 
 {% block logo %}{% endblock %}
     <div class ="searchBlock">
-        <img src="{% static 'img/DAM1.png' %}" alt="DAM" class="center-block" id="imageDAM">
+        <img src="{% static 'css/img/DAM1.png' %}" alt="DAM" class="center-block" id="imageDAM">
         <div class="search">
             <form method="GET" id="searchForm" action="{% url 'inventory:search' %}"  accept-charset="utf-8">
                 <input class="searchField" id="searchBox" name="q" type="text" placeholder=" Search by Name or Description" value="{{request.GET.q}}" required style="background-color:var(--white);" >
