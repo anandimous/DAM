@@ -1,5 +1,6 @@
 from django.db import models
-
+from datetime import datetime, timedelta
+from django.utils import timezone
 
 class ItemManager(models.Manager):
     def with_availability(self):
@@ -20,7 +21,7 @@ class Item(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
     quantity = models.PositiveIntegerField()
-    loan_duration = models.DurationField()
+    loan_duration = models.DurationField(default=timezone.timedelta(days=14))
 
     objects = ItemManager()
 
