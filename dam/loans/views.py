@@ -5,6 +5,7 @@ from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils import timezone
+from datetime import timedelta
 
 from dam.inventory.models import Item
 from dam.loans.models import ItemReservation, ItemLoan, Client
@@ -19,8 +20,9 @@ def reservations(request, reservation_id):
 
     if request.method == "POST":
         if "Approve" in request.POST:
-            ItemLoan.objects.create(item=reservation.item, client=reservation.client, approved_by=request.user)
-            reservation.reservation_ends = timezone.now()
+            ItemLoan.objects.create(item=reservation.item, client=reservation.client, approved_by=request.user, due_on=timezone.now() + timezone.timedelta(days=14))
+            reservation.is_active = False
+            reservation.due_on = timezone.now() + timezone.timedelta(days=14)
             reservation.save()
             messages.success(request, 'Loan Successful!')
             return HttpResponseRedirect(reverse('loans:allres'))
