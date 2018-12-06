@@ -20,23 +20,7 @@
 
     <div id="cardprofile" class="col s12 l8">
         <div class="card">
-            <div class="carousel carousel-slider" id="demo-carousel-slider">
-                {% if item.id == 1 %}
-                    <a class="carousel-item" href="#one!"><img src={% static 'img/laptop-demo-img-1.jpg' %}></a>
-                {% endif %}
-                {% if item.id == 2 %}
-                    <a class="carousel-item" href="#one!"><img src={% static 'img/oculus-demo-img-1.jpg' %}></a>
-                {% endif %}
-                {% if item.id == 3 %}
-                    <a class="carousel-item" href="#one!"><img src={% static 'img/echo-demo-img-1.jpg' %}></a>
-                {% endif %}
-                {% if item.id == 4 %}
-                    <a class="carousel-item" href="#one!"><img src={% static 'img/raspi-demo-img-1.jpg' %}></a>
-                {% endif %}
-                {% if item.id >= 5 %}
-                    <a class="carousel-item" href="#one!"><img src={% static 'img/placeholder.png' %}></a>
-                {% endif %}
-            </div>
+            <a class="carousel-item" href="#one!"><img src="{{ item.image.url }}" alt="Image of the item" style="height: 5%; width: 100%"></a>
             <div class="card-content">
                 <span class="card-title activator grey-text text-darken-4">{{ item.name }}</span>
                 <p>{{ item.description | linebreaksbr }}</p>

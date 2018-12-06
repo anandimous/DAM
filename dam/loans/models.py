@@ -23,9 +23,12 @@ class Client(models.Model):
 
 
 class ItemReservation(models.Model):
+    def get_duration(self):
+        return timezone.now() + timezone.timedelta(days=14)
     item = models.ForeignKey('inventory.Item', models.CASCADE)
     client = models.ForeignKey(Client, models.CASCADE)
     reserved_at = models.DateTimeField(auto_now_add=True)
+    reservation_ends = models.DateTimeField(null=True)
     is_active = models.BooleanField(default=True)
 
 
