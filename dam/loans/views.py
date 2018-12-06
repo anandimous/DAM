@@ -21,6 +21,7 @@ def reservations(request, reservation_id):
         if "Approve" in request.POST:
             ItemLoan.objects.create(item=reservation.item, client=reservation.client, approved_by=request.user, due_on=)
             reservation.is_active = False
+            reservation.due_on = timezone.now() + Item.loan_duration
             reservation.save()
             messages.success(request, 'Loan Successful!')
             return HttpResponseRedirect(reverse('loans:allres'))
