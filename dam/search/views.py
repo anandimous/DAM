@@ -1,4 +1,8 @@
 from django.shortcuts import render
 
+from dam.inventory.forms import CategoryFilterForm
+
+
 def index(request):
-    return render(request, 'search/index.html')
+    form = CategoryFilterForm(request.GET)
+    return render(request, 'search/index.html', {'form': form})
