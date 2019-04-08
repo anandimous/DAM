@@ -7,15 +7,13 @@ from django.utils import timezone
 @login_required
 def showDash(request):
     user = request.user
-    reservations = (
-        ItemReservation.objects
-        .filter(reservation_ends__gte=timezone.now())
-        .filter(Q(client__user=user) | Q(client__email=user.email))
+    reservations = ItemReservation.objects.filter(
+        user=user,
+        reservation_ends__gte=timezone.now(),
     )
-    loans = (
-        ItemLoan.objects
-        .filter(returned_at__isnull=True)
-        .filter(Q(client__user=user) | Q(client__email=user.email))
+    loans = ItemLoan.objects.filter(
+        user=user,
+        returned_at__isnull=True,
     )
     return render(request, 'dashboard/dashboard.html', {
         'reserves': reservations,
