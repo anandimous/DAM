@@ -1,6 +1,16 @@
 from django.db import models
-from datetime import datetime, timedelta
 from django.utils import timezone
+
+
+class Inventory(models.Model):
+    name = models.CharField(max_length=50)
+
+    class Meta:
+        verbose_name_plural = 'inventories'
+
+    def __str__(self):
+        return self.name
+
 
 class ItemManager(models.Manager):
     def with_availability(self):
@@ -20,6 +30,7 @@ class ItemManager(models.Manager):
 
 
 class Item(models.Model):
+    inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     description = models.TextField()
     quantity = models.PositiveIntegerField()
