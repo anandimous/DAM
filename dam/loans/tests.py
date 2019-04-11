@@ -18,10 +18,12 @@ class ReservationPossibleTest(TestCase):
         cls.item_user = User.objects.create(email='borrower@example.com')
         cls.loan_approver = User.objects.create(email='approver@example.com')
 
+        inventory = Inventory.objects.create()
         cls.test_item = Item.objects.create(
             name='Name 1',
             description='Description 1.',
             quantity=10,
+            inventory=inventory,
         )
     # Add some reservations and loans as noise to ensure that only the records
     # for the specific item under test are taken into consideration.
@@ -29,6 +31,7 @@ class ReservationPossibleTest(TestCase):
             name='Name 2',
             description='Description 2.',
             quantity=20,
+            inventory=inventory
         )
         ItemReservation.objects.create(
             item=noise_item,
@@ -76,6 +79,7 @@ class ReserveItemTests(TestCase):
 
     @classmethod
     def setUpTestData(cls):
+        cls.inventory = Inventory.objects.create()
         cls.user = User.objects.create_user(
             email='example@buffalo.edu',
             password='password',
@@ -100,7 +104,7 @@ class ReserveItemTests(TestCase):
 
     def test_valid_and_available(self):
         # Create item to be reserved.
-        Item.objects.create(id=2, quantity=2)
+        Item.objects.create(id=2, quantity=2, inventory=self.inventory)
 
         reserved_at = datetime(2018, 12, 7, tzinfo=pytz.utc)
         reservation_ends = reserved_at + timedelta(days=5)
@@ -128,7 +132,7 @@ class ReserveItemTests(TestCase):
 
     def test_valid_and_unavailable(self):
         # Create item to be reserved.
-        Item.objects.create(id=2, quantity=0)
+        Item.objects.create(id=2, quantity=0, inventory=self.inventory)
 
         # Reserve the item.
         self.client.login(username='example@buffalo.edu', password='password')

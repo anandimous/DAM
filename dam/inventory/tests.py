@@ -16,10 +16,13 @@ class InventoryAvailabilityTest(TestCase):
         cls.item_user = User.objects.create(email='borrower@example.com')
         cls.loan_approver = User.objects.create(email='approver@example.com')
 
+        cls.inventory = Inventory.objects.create()
+
         cls.test_item = Item.objects.create(
             name='Name 1',
             description='Description 1.',
             quantity=10,
+            inventory=cls.inventory,
         )
 
         # Add some reservations and loans as noise to ensure that only the records
@@ -28,6 +31,7 @@ class InventoryAvailabilityTest(TestCase):
             name='Name 2',
             description='Description 2.',
             quantity=20,
+            inventory=cls.inventory,
         )
         ItemReservation.objects.create(
             item=noise_item,
@@ -116,10 +120,12 @@ class InventoryDetailsTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
+        cls.inventory = Inventory.objects.create(name='Test')
         cls.test_item = Item.objects.create(
             name='Name 1',
             description='Description 1.',
             quantity=10,
+            inventory=cls.inventory,
         )
 
     def test_view_uses_correct_template(self):
@@ -151,6 +157,6 @@ class InventoryDetailsTest(TestCase):
         self.assertContains(response, 'You must <a href="/users/log-in/?next=/inventory/details/1/">log in</a>')
 
     def test_unavailable(self):
-        Item.objects.create(id=2, quantity=0)
+        Item.objects.create(id=2, quantity=0, inventory=self.inventory)
         response = self.client.get('/inventory/details/2/')
         self.assertContains(response, 'This item is currently unavailable')
