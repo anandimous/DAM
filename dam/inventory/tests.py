@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.utils import timezone
 
-from dam.inventory.models import Item
+from dam.inventory.models import Inventory, Item
 from dam.loans.models import ItemLoan, ItemReservation
 
 
