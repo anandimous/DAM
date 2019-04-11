@@ -3,7 +3,7 @@ from unittest import mock
 
 from django.contrib.auth import get_user_model
 from django.test import TestCase
-import pytz
+from django.utils import timezone
 
 from dam.inventory.models import Inventory, Item
 from dam.loans.models import Client, ItemLoan, ItemReservation
@@ -52,7 +52,7 @@ class ReservationPossibleTest(TestCase):
             item=noise_item,
             client=cls.item_client,
             approved_by=cls.loan_approver,
-            returned_at=datetime.utcnow(),
+            returned_at=timezone.now(),
         )
 
     def test_see_all_reservations(self):
@@ -107,7 +107,7 @@ class ReserveItemTests(TestCase):
         # Create item to be reserved.
         Item.objects.create(id=2, quantity=2, inventory=self.inventory)
 
-        reserved_at = datetime(2018, 12, 7, tzinfo=pytz.utc)
+        reserved_at = datetime(2018, 12, 7, tzinfo=timezone.utc)
         reservation_ends = reserved_at + timedelta(days=5)
 
         # Reserve the item.
