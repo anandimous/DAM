@@ -3,7 +3,7 @@ from django.test import TestCase
 from django.utils import timezone
 
 from dam.inventory.models import Inventory, Item
-from dam.loans.models import Client, ItemLoan, ItemReservation
+from dam.loans.models import ItemLoan, ItemReservation
 
 
 User = get_user_model()
@@ -13,9 +13,10 @@ class InventoryAvailabilityTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
+        cls.item_user = User.objects.create(email='borrower@example.com')
+        cls.loan_approver = User.objects.create(email='approver@example.com')
+
         cls.inventory = Inventory.objects.create()
-        cls.item_client = Client.objects.create()
-        cls.loan_approver = User.objects.create()
 
         cls.test_item = Item.objects.create(
             name='Name 1',
@@ -34,21 +35,21 @@ class InventoryAvailabilityTest(TestCase):
         )
         ItemReservation.objects.create(
             item=noise_item,
-            client=cls.item_client,
+            user=cls.item_user,
             is_active=False,
         )
         ItemReservation.objects.create(
             item=noise_item,
-            client=cls.item_client,
+            user=cls.item_user,
         )
         ItemLoan.objects.create(
             item=noise_item,
-            client=cls.item_client,
+            user=cls.item_user,
             approved_by=cls.loan_approver,
         )
         ItemLoan.objects.create(
             item=noise_item,
-            client=cls.item_client,
+            user=cls.item_user,
             approved_by=cls.loan_approver,
             returned_at=timezone.now(),
         )
@@ -61,7 +62,7 @@ class InventoryAvailabilityTest(TestCase):
     def test_reservation_active(self):
         ItemReservation.objects.create(
             item=self.test_item,
-            client=self.item_client,
+            user=self.item_user,
             is_active=True,
         )
         item = Item.objects.with_availability().first()
@@ -71,7 +72,7 @@ class InventoryAvailabilityTest(TestCase):
     def test_reservation_inactive(self):
         ItemReservation.objects.create(
             item=self.test_item,
-            client=self.item_client,
+            user=self.item_user,
             is_active=False,
         )
         item = Item.objects.with_availability().first()
@@ -81,7 +82,7 @@ class InventoryAvailabilityTest(TestCase):
     def test_loan_active(self):
         ItemLoan.objects.create(
             item=self.test_item,
-            client=self.item_client,
+            user=self.item_user,
             approved_by=self.loan_approver,
         )
         item = Item.objects.with_availability().first()
@@ -91,7 +92,7 @@ class InventoryAvailabilityTest(TestCase):
     def test_loan_inactive(self):
         ItemLoan.objects.create(
             item=self.test_item,
-            client=self.item_client,
+            user=self.item_user,
             approved_by=self.loan_approver,
             returned_at=timezone.now(),
         )
@@ -102,12 +103,12 @@ class InventoryAvailabilityTest(TestCase):
     def test_reservations_and_loans(self):
         ItemReservation.objects.create(
             item=self.test_item,
-            client=self.item_client,
+            user=self.item_user,
             is_active=True,
         )
         ItemLoan.objects.create(
             item=self.test_item,
-            client=self.item_client,
+            user=self.item_user,
             approved_by=self.loan_approver,
         )
         item = Item.objects.with_availability().first()

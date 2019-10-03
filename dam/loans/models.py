@@ -4,42 +4,25 @@ from dam.inventory.models import Item
 from datetime import datetime, timedelta
 from django.utils import timezone
 
-class Client(models.Model):
-    """A client is someone who will be reserving or checking out items."""
-    email = models.EmailField(max_length=255, blank=True)
-    first_name = models.CharField(max_length=50, blank=True)
-    last_name = models.CharField(max_length=50, blank=True)
-    user = models.ForeignKey('users.User', models.CASCADE, blank=True, null=True)
-
-    def get_email_address(self):
-        if self.user:
-            return self.user.email
-        return self.email
-
-    def get_full_name(self):
-        if self.user:
-            return self.user.get_full_name()
-        return '{} {}'.format(self.first_name, self.last_name)
-
 
 class ItemReservation(models.Model):
-    def get_duration(self):
-        return timezone.now() + timezone.timedelta(days=14)
     item = models.ForeignKey('inventory.Item', models.CASCADE)
-    client = models.ForeignKey(Client, models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, models.CASCADE)
     reserved_at = models.DateTimeField(auto_now_add=True)
     reservation_ends = models.DateTimeField(null=True)
     is_active = models.BooleanField(default=True)
 
-
-class ItemLoan(models.Model):
     def get_duration(self):
         return timezone.now() + timezone.timedelta(days=14)
 
-    item = models.ForeignKey('inventory.Item', models.CASCADE)
-    client = models.ForeignKey(Client, models.CASCADE)
-    approved_at = models.DateTimeField(auto_now_add=True)
-    approved_by = models.ForeignKey(settings.AUTH_USER_MODEL, models.CASCADE)
-    due_on = models.DateTimeField(null=True)
 
+class ItemLoan(models.Model):
+    item = models.ForeignKey('inventory.Item', models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, models.CASCADE, related_name='loans')
+    approved_at = models.DateTimeField(auto_now_add=True)
+    approved_by = models.ForeignKey(settings.AUTH_USER_MODEL, models.CASCADE, related_name='loans_approved')
+    due_on = models.DateTimeField(null=True)
     returned_at = models.DateTimeField(null=True)  # NULL means not returned.
+
+    def get_duration(self):
+        return timezone.now() + timezone.timedelta(days=14)

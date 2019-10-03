@@ -6,7 +6,7 @@ from django.test import TestCase
 import pytz
 
 from dam.inventory.models import Inventory, Item
-from dam.loans.models import Client, ItemLoan, ItemReservation
+from dam.loans.models import ItemLoan, ItemReservation
 
 
 User = get_user_model()
@@ -15,11 +15,10 @@ User = get_user_model()
 class ReservationPossibleTest(TestCase):
     @classmethod
     def setUpTestData(cls):
+        cls.item_user = User.objects.create(email='borrower@example.com')
+        cls.loan_approver = User.objects.create(email='approver@example.com')
+
         inventory = Inventory.objects.create()
-
-        cls.item_client = Client.objects.create()
-        cls.loan_approver = User.objects.create()
-
         cls.test_item = Item.objects.create(
             name='Name 1',
             description='Description 1.',
@@ -36,21 +35,21 @@ class ReservationPossibleTest(TestCase):
         )
         ItemReservation.objects.create(
             item=noise_item,
-            client=cls.item_client,
+            user=cls.item_user,
             is_active=True,
         )
         ItemReservation.objects.create(
             item=noise_item,
-            client=cls.item_client,
+            user=cls.item_user,
         )
         ItemLoan.objects.create(
             item=noise_item,
-            client=cls.item_client,
+            user=cls.item_user,
             approved_by=cls.loan_approver,
         )
         ItemLoan.objects.create(
             item=noise_item,
-            client=cls.item_client,
+            user=cls.item_user,
             approved_by=cls.loan_approver,
             returned_at=datetime.utcnow(),
         )
@@ -68,7 +67,7 @@ class ReservationPossibleTest(TestCase):
     def test_reservation_active(self):
         ItemReservation.objects.create(
             item=self.test_item,
-            client=self.item_client,
+            user=self.item_user,
             is_active=True,
         )
         item = Item.objects.with_availability().first()
@@ -121,11 +120,8 @@ class ReserveItemTests(TestCase):
         # Verify that the correct data was stored.
         self.assertEqual(ItemReservation.objects.count(), 1)
         reservation = ItemReservation.objects.first()
-        self.assertEqual(Client.objects.count(), 1)
-        client = Client.objects.first()
         self.assertEqual(reservation.item_id, 2)
-        self.assertEqual(reservation.client, client)
-        self.assertEqual(client.user, self.user)
+        self.assertEqual(reservation.user, self.user)
         self.assertTrue(reservation.is_active)
         self.assertEqual(reservation.reserved_at, reserved_at)
         self.assertEqual(reservation.reservation_ends, reservation_ends)
@@ -151,39 +147,3 @@ class ReserveItemTests(TestCase):
         # Verify that the user got the expected behavior.
         self.assertRedirects(response, '/inventory/details/2/')
         self.assertContains(response, 'The item you tried to reserve is not available.')
-
-
-class ClientTests(TestCase):
-    def test_get_email_address_direct(self):
-        client = Client.objects.create(
-            first_name='First',
-            last_name='Last',
-            email='first.last@example.com',
-        )
-        self.assertEqual(client.get_email_address(), 'first.last@example.com')
-
-    def test_get_email_address_indirect(self):
-        user = User.objects.create(
-            first_name='First',
-            last_name='Last',
-            email='first.last@example.com',
-        )
-        client = Client.objects.create(user=user)
-        self.assertEqual(client.get_email_address(), 'first.last@example.com')
-
-    def test_get_full_name_direct(self):
-        client = Client.objects.create(
-            first_name='First',
-            last_name='Last',
-            email='first.last@example.com',
-        )
-        self.assertEqual(client.get_full_name(), 'First Last')
-
-    def test_get_full_name_indirect(self):
-        user = User.objects.create(
-            first_name='First',
-            last_name='Last',
-            email='first.last@example.com',
-        )
-        client = Client.objects.create(user=user)
-        self.assertEqual(client.get_full_name(), 'First Last')
