@@ -14,7 +14,6 @@ class Inventory(models.Model):
 
 class ItemManager(models.Manager):
     def with_availability(self):
-        quantity = models.F('quantity')
         reservations = models.Count(
             'itemreservation',
             distinct=True,
@@ -25,7 +24,7 @@ class ItemManager(models.Manager):
             distinct=True,
             filter=models.Q(itemloan__returned_at__isnull=True),
         )
-        available = quantity - reservations - loans
+        available = 1 - reservations - loans
         return super().get_queryset().annotate(available=available)
 
 
@@ -44,7 +43,6 @@ class Item(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=50)
     description = models.TextField()
-    quantity = models.PositiveIntegerField()
     loan_duration = models.DurationField(default=timezone.timedelta(days=14))
     image = models.ImageField(upload_to="items", default="items/placeholder.png")
     item_id = models.CharField(max_length=50, blank=True)
@@ -52,6 +50,16 @@ class Item(models.Model):
     metadata = models.TextField(blank=True)
 
     objects = ItemManager()
+
+    @property
+    def active_reservation(self):
+        reservations = Item.objects.get(pk=self.pk).itemreservation_set.filter(is_active=True)
+        return reservations[0] if reservations else None
+
+    @property
+    def active_loan(self):
+        loans = Item.objects.get(pk=self.pk).itemloan_set.filter(returned_at__isnull=True)
+        return loans[0] if loans else None
 
     def __str__(self):
         return self.name + ' : ' + self.item_id

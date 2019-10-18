@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Inventory{% endblock %}
+
+{% block style %}
+    <script>
+        $(document).ready( function () {
+            $('#inventoryTable').DataTable();
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <h1>Inventory</h1>
+
+    <br>
+
+    <table id="inventoryTable">
+        <thead>
+            <tr>
+                <th>Inventory</th>
+                <th>Item</th>
+                <th>ID</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Pending Reservation</th>
+                <th>Loaned On</th>
+                <th>Loaned To</th>
+                <th>Due On</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.inventory.name }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.item_id }}</td>
+                    <td>{{ item.category }}</td>
+                    <td>
+                        {% if item.available > 0 %}
+                            <span class="new badge green" data-badge-caption="">Available</span>
+                        {% else %}
+                            <span class="new badge red" data-badge-caption="">Unavailable</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if item.active_reservation %}
+                            <span class="new badge green" data-badge-caption="">Yes</span>
+                        {% else %}
+                            <span class="new badge red" data-badge-caption="">No</span>
+                        {% endif %}
+                    </td>
+                    {% if item.active_loan %}
+                        <td>{{ item.active_loan.approved_at }}</td>
+                        <td>{{ item.active_loan.user.get_full_name }}</td>
+                        <td>{{ item.active_loan.due_on }}</td>
+                    {% else %}
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -25,3 +25,8 @@ def search(request):
 def item_details(request, item_id):
     item = get_object_or_404(Item.objects.with_availability(), pk=item_id)
     return render(request, 'inventory/details.html', {'item': item})
+
+
+def get_all_items(request):
+    items = Item.objects.with_availability()
+    return render(request, 'inventory/inventory_table.html', {'items': items})
