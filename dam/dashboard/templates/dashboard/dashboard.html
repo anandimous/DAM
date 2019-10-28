@@ -51,7 +51,10 @@
                 <div class="card-action dashboard-links">
                     {% if perms.loans.view_itemreservation %}<a href="{% url 'loans:allres' %}">Reserve Item List</a>{% endif %}
                     {% if perms.loans.view_itemloan %}<a href="{% url 'loans:allrets' %}">Return Item List</a>{% endif %}
-                    {% if perms.inventory.add_item %}<a href="{% url 'admin:inventory_item_changelist' %}">Add/Remove Item</a>{% endif %}
+                    {% if perms.inventory.add_item %}
+                        <a href="{% url 'admin:inventory_item_changelist' %}">Add/Remove Item</a>
+                        <a href="{% url 'inventory:inventory-list' %}">Inventory List</a>
+                    {% endif %}
                 </div>
                 {% endif %}
             </div>

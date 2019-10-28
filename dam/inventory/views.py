@@ -1,6 +1,6 @@
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
-
+from django.contrib.auth.decorators import permission_required
 from dam.inventory.models import Item
 from dam.inventory.forms import CategoryFilterForm
 
@@ -26,7 +26,7 @@ def item_details(request, item_id):
     item = get_object_or_404(Item.objects.with_availability(), pk=item_id)
     return render(request, 'inventory/details.html', {'item': item})
 
-
+@permission_required('loans.change_itemloan')
 def get_all_items(request):
     items = Item.objects.with_availability()
     return render(request, 'inventory/inventory_table.html', {'items': items})
